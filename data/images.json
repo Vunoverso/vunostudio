@@ -1,0 +1,68 @@
+{
+  "galeria": [
+    {
+      "src": "",
+      "caption": "Fachada ACM completa",
+      "client": "Pizzaria · Praia Grande",
+      "category": "acm",
+      "layout": "tall",
+      "featured": true
+    },
+    {
+      "src": "",
+      "caption": "Google Meu Negócio",
+      "client": "Clínica odontológica · Santos",
+      "category": "digital",
+      "layout": "",
+      "featured": false
+    },
+    {
+      "src": "",
+      "caption": "Instagram gerenciado",
+      "client": "Restaurante · São Vicente",
+      "category": "digital",
+      "layout": "",
+      "featured": false
+    },
+    {
+      "src": "",
+      "caption": "Banner + Lona de fachada",
+      "client": "Loja de roupas · Guarujá",
+      "category": "lona",
+      "layout": "wide",
+      "featured": false
+    },
+    {
+      "src": "",
+      "caption": "Adesivo de vitrine",
+      "client": "Pet shop · Praia Grande",
+      "category": "adesivo",
+      "layout": "",
+      "featured": false
+    },
+    {
+      "src": "",
+      "caption": "Cartão + material gráfico",
+      "client": "Advogado · Santos",
+      "category": "impresso",
+      "layout": "",
+      "featured": false
+    },
+    {
+      "src": "",
+      "caption": "Envelopamento veicular",
+      "client": "Distribuidora · Cubatão",
+      "category": "adesivo",
+      "layout": "",
+      "featured": false
+    },
+    {
+      "src": "",
+      "caption": "Identidade visual completa",
+      "client": "Cafeteria · Santos",
+      "category": "identidade",
+      "layout": "",
+      "featured": false
+    }
+  ]
+}

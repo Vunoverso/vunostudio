@@ -1,0 +1,253 @@
+{
+  "faq": [
+    {
+      "q": "O que está incluso no setup único?",
+      "a": "O setup cobre todo o trabalho de implantação inicial: configuração do Google Meu Negócio, criação e configuração das redes sociais, criação da landing page (nos planos que incluem), instalação do Pixel de rastreamento e estrutura inicial das campanhas. É um trabalho de 6-10 horas cobrado uma única vez — diferente da mensalidade que cobre o trabalho contínuo."
+    },
+    {
+      "q": "Posso cancelar a qualquer momento?",
+      "a": "Para planos de presença digital, o contrato mínimo é de 3 meses. Isso existe porque presença digital leva tempo para gerar resultado — cancelar no mês 1 seria como desistir de uma semente antes de germinar. Após os 3 meses iniciais, o contrato vira mês a mês e você pode cancelar com 30 dias de aviso prévio."
+    },
+    {
+      "q": "A verba de anúncio está inclusa nos planos de tráfego?",
+      "a": "Não — e isso é proposital. A verba de anúncio é paga por você diretamente ao Google ou ao Meta, no cartão da sua empresa. Isso garante que você tem controle total do seu investimento e nunca perdemos a transparência. Nossa taxa é exclusivamente de gestão — o trabalho de criar, configurar, otimizar e reportar as campanhas."
+    },
+    {
+      "q": "Quanto tempo leva para ver resultado?",
+      "a": "Depende do serviço. Google Meu Negócio começa a aparecer nos resultados locais em 1-2 semanas após a configuração completa. Redes sociais levam 60-90 dias para construir uma audiência local relevante. Tráfego pago tem retorno mais rápido — em 2-4 semanas você já vê os primeiros contatos chegando, mas a otimização real acontece depois de 30 dias de dados."
+    },
+    {
+      "q": "Vocês atendem apenas Praia Grande ou toda a Baixada Santista?",
+      "a": "Atendemos toda a Baixada Santista — Praia Grande, Santos, São Vicente, Guarujá, Cubatão, Itanhaém e cidades vizinhas. As visitas presenciais são feitas na empresa do cliente. Para serviços digitais e tráfego pago, atendemos de qualquer lugar com suporte 100% remoto pelo WhatsApp."
+    },
+    {
+      "q": "Posso mudar de plano depois de assinar?",
+      "a": "Sim. Upgrade a qualquer momento — você passa para o plano superior no próximo ciclo de cobrança. Para downgrade, aguardamos o fim do trimestre mínimo. Adicionais podem ser incluídos ou removidos a cada mês conforme sua necessidade."
+    }
+  ],
+  "digital": {
+    "plans": [
+      {
+        "id": "basico",
+        "ribbon": "#C0B8A8",
+        "cat": "Básico",
+        "name": "Presença",
+        "tagline": "Para quem não tem nada ainda e precisa aparecer no Google.",
+        "setup": 500,
+        "price": 297,
+        "featured": false,
+        "features": [
+          { "ok": true, "highlight": "Google Meu Negócio", "text": " configurado e atualizado" },
+          { "ok": true, "highlight": "4 posts/mês", "text": " no Instagram (1 por semana)" },
+          { "ok": true, "text": "Resposta de avaliações Google" },
+          { "ok": true, "text": "Relatório mensal por WhatsApp" },
+          { "ok": true, "text": "Suporte via WhatsApp" },
+          { "ok": false, "text": "Facebook incluído" },
+          { "ok": false, "text": "Landing page" },
+          { "ok": false, "text": "Visita presencial mensal" },
+          { "ok": false, "text": "SEO local" }
+        ]
+      },
+      {
+        "id": "visibilidade",
+        "ribbon": "var(--green)",
+        "cat": "Mais escolhido",
+        "name": "Visibilidade",
+        "tagline": "Para quem quer crescer e ser encontrado na região.",
+        "setup": 800,
+        "price": 497,
+        "featured": true,
+        "features": [
+          { "ok": true, "highlight": "Google + Instagram + Facebook" },
+          { "ok": true, "highlight": "8 posts/mês", "text": " distribuídos (2 por semana)" },
+          { "ok": true, "text": "Resposta de avaliações Google" },
+          { "ok": true, "highlight": "Landing page", "text": " profissional inclusa" },
+          { "ok": true, "text": "Visita ou call mensal" },
+          { "ok": true, "text": "Relatório completo mensal" },
+          { "ok": true, "text": "Suporte prioritário" },
+          { "ok": false, "text": "SEO local ativo" },
+          { "ok": false, "text": "Google Ads incluso" }
+        ]
+      },
+      {
+        "id": "autoridade",
+        "ribbon": "var(--orange)",
+        "cat": "Autoridade",
+        "name": "Domínio Local",
+        "tagline": "Para quem quer ser a referência no bairro e na cidade.",
+        "setup": 1200,
+        "price": 700,
+        "featured": false,
+        "features": [
+          { "ok": true, "text": "Tudo do plano Visibilidade" },
+          { "ok": true, "highlight": "12 posts/mês", "text": " com design (3 por semana)" },
+          { "ok": true, "highlight": "SEO local ativo", "text": " — otimização contínua" },
+          { "ok": true, "highlight": "Visita presencial", "text": " mensal obrigatória" },
+          { "ok": true, "text": "Relatório estratégico com sugestões" },
+          { "ok": true, "text": "Suporte prioritário (resposta em 4h)" },
+          { "ok": true, "text": "Análise de concorrentes local" },
+          { "ok": false, "text": "Google Ads incluso" }
+        ]
+      }
+    ],
+    "addons": [
+      { "name": "Stories diários",    "desc": "20 stories/mês com enquetes",       "price": 200, "period": "/mês"  },
+      { "name": "Produção de Reels",  "desc": "2 reels/mês com edição",            "price": 250, "period": "/mês"  },
+      { "name": "WhatsApp Business",  "desc": "Catálogo + mensagem automática",    "price": 120, "period": "/mês"  },
+      { "name": "Site institucional", "desc": "Até 5 páginas, responsivo, SEO",    "price": 1500, "period": "único" },
+      { "name": "Identidade visual",  "desc": "Logo + paleta + guia de marca",     "price": 900,   "period": "único" },
+      { "name": "TikTok Business",    "desc": "Perfil + reaproveitamento",         "price": 100, "period": "/mês"  }
+    ],
+    "compare": [
+      { "resource": "Google Meu Negócio",        "basico": "yes", "visibilidade": "yes", "autoridade": "yes" },
+      { "resource": "Instagram",                 "basico": "yes", "visibilidade": "yes", "autoridade": "yes" },
+      { "resource": "Facebook",                  "basico": "no",  "visibilidade": "yes", "autoridade": "yes" },
+      { "resource": "Posts por mês",             "basico": "4",   "visibilidade": "8",   "autoridade": "12"  },
+      { "resource": "Landing page",              "basico": "no",  "visibilidade": "yes", "autoridade": "yes" },
+      { "resource": "Resposta de avaliações",    "basico": "yes", "visibilidade": "yes", "autoridade": "yes" },
+      { "resource": "Visita / call mensal",      "basico": "no",  "visibilidade": "yes", "autoridade": "yes" },
+      { "resource": "SEO local ativo",           "basico": "no",  "visibilidade": "no",  "autoridade": "yes" },
+      { "resource": "Visita presencial obrig.",  "basico": "no",  "visibilidade": "no",  "autoridade": "yes" },
+      { "resource": "Análise de concorrentes",   "basico": "no",  "visibilidade": "no",  "autoridade": "yes" },
+      { "resource": "Relatório",                 "basico": "Básico", "visibilidade": "Completo", "autoridade": "Estratégico" },
+      { "resource": "Setup único",               "basico": "R$ 500", "visibilidade": "R$ 800",   "autoridade": "R$ 1.200"    }
+    ]
+  },
+  "visual": {
+    "products": [
+      {
+        "icon": "🖨️",
+        "name": "Gráfica & Impressos",
+        "desc": "Cartão de visita, panfleto, flyer e materiais de PDV. Arte profissional inclusa, impressão de alta qualidade.",
+        "price": "A partir de R$ 80",
+        "unit": "por pedido",
+        "premium": false,
+        "includes": "Arte + impressão inclusas",
+        "items": [
+          "Cartão de visita 100un — R$ 80",
+          "Cartão de visita 500un — R$ 220",
+          "Panfleto A5 500un — R$ 180",
+          "Flyer A4 personalizado — R$ 250",
+          "Arte e diagramação inclusa em tudo"
+        ]
+      },
+      {
+        "icon": "🖼️",
+        "name": "Adesivos & Envelopamento",
+        "desc": "Adesivos para vitrine, parede e veículo. Placas de sinalização interna e externa. Preço por metro quadrado com arte e instalação incluídas.",
+        "price": "R$ 120",
+        "unit": "/m²",
+        "premium": false,
+        "includes": "Arte + instalação inclusas",
+        "items": [
+          "Adesivo recortado para vitrine",
+          "Adesivo impresso para parede",
+          "Envelopamento de veículo",
+          "Placa de sinalização",
+          "Instalação profissional inclusa"
+        ]
+      },
+      {
+        "icon": "🏳️",
+        "name": "Lona & Fachada de Tecido",
+        "desc": "Lona de alta resistência com impressão UV para fachada, toldo e banner. Acabamento profissional com instalação inclusa.",
+        "price": "R$ 240",
+        "unit": "/m²",
+        "premium": false,
+        "includes": "Arte + impressão + instalação",
+        "items": [
+          "Banner avulso para eventos",
+          "Fachada de lona completa",
+          "Toldo com lona personalizada",
+          "Garantia de 1 ano",
+          "Instalação em até 24h"
+        ]
+      },
+      {
+        "icon": "🏗️",
+        "name": "Fachada ACM",
+        "desc": "O serviço mais valorizado. Alumínio composto com acabamento premium, letreiro iluminado e durabilidade de décadas. Transforma completamente a identidade visual do ponto.",
+        "price": "R$ 600",
+        "unit": "/m² (média — varia com complexidade)",
+        "premium": true,
+        "includes": "Projeto + material + instalação",
+        "items": [
+          "Projeto técnico e arte 3D",
+          "Estrutura e material ACM importado",
+          "Letreiro com caixa de luz (opcional)",
+          "Equipe especializada de instalação",
+          "Garantia e suporte pós-obra",
+          "Orçamento personalizado por projeto"
+        ]
+      }
+    ]
+  },
+  "trafego": {
+    "plans": [
+      {
+        "id": "google-ads",
+        "platform": "Google Ads",
+        "platformColor": "#4285F4",
+        "name": "Pesquisa + Maps",
+        "desc": "Para quem já está sendo procurado. Aparece quando a pessoa digita seu serviço no Google. Alta intenção de compra.",
+        "price": 450,
+        "verba": "Mínimo recomendado: R$ 20/dia",
+        "combo": false,
+        "save": null,
+        "features": [
+          { "color": "#4285F4", "text": "Setup de campanha e conta" },
+          { "text": "Pesquisa e seleção de palavras-chave" },
+          { "text": "Criação dos anúncios de texto" },
+          { "text": "Lista de palavras negativas" },
+          { "text": "Configuração Google Local (Maps)" },
+          { "text": "Otimização semanal" },
+          { "text": "Relatório mensal de resultados" }
+        ]
+      },
+      {
+        "id": "meta-ads",
+        "platform": "Meta Ads",
+        "platformColor": "#1877F2",
+        "name": "Instagram + Facebook",
+        "desc": "Para criar demanda nova. Aparece para as pessoas certas do bairro antes de elas pesquisarem. Reconhecimento local acelerado.",
+        "price": 400,
+        "verba": "Mínimo recomendado: R$ 15/dia",
+        "combo": false,
+        "save": null,
+        "features": [
+          { "color": "#1877F2", "text": "Setup de conta e Pixel" },
+          { "text": "Criação de criativos (imagem/vídeo)" },
+          { "text": "Segmentação por bairro e raio" },
+          { "text": "Teste A/B de criativos mensal" },
+          { "text": "Remarketing para quem interagiu" },
+          { "text": "Otimização semanal" },
+          { "text": "Relatório mensal de resultados" }
+        ]
+      },
+      {
+        "id": "combo",
+        "platform": "Combo Recomendado",
+        "platformColor": "var(--green)",
+        "name": "Google + Meta",
+        "desc": "Os dois juntos têm custo de aquisição menor. Meta cria o desejo, Google captura quando a pessoa pesquisa. Resultado superior a qualquer plataforma isolada.",
+        "price": 750,
+        "verba": "Mínimo recomendado: R$ 35/dia no total",
+        "combo": true,
+        "save": "Economia de R$ 100/mês vs contratar separado",
+        "features": [
+          { "text": "Tudo do plano Google Ads" },
+          { "text": "Tudo do plano Meta Ads" },
+          { "text": "Estratégia integrada entre plataformas" },
+          { "text": "Funil completo: awareness → conversão" },
+          { "text": "Relatório unificado mensal" },
+          { "text": "Reunião mensal de estratégia" }
+        ]
+      }
+    ],
+    "infoBoxes": [
+      { "label": "Contrato mínimo", "title": "3 meses", "desc": "O algoritmo precisa de tempo para aprender. Após 3 meses, vira mês a mês." },
+      { "label": "Setup incluso", "title": "Sem taxa extra", "desc": "Configuração de conta, Pixel e estrutura de campanha estão inclusos no primeiro mês." },
+      { "label": "Verba mínima", "title": "R$ 15-20/dia", "desc": "Abaixo disso o algoritmo não tem dados suficientes para otimizar. Abaixo = dinheiro perdido." }
+    ]
+  }
+}

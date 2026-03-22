@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "badge": "Baixada Santista · SP",
+    "titleHtml": "Sua empresa <em>visível</em> onde os clientes estão",
+    "sub": "Gestão completa de presença digital + comunicação visual física. Google, Instagram, fachadas e muito mais — tudo em um único parceiro.",
+    "proofPills": [
+      "Presença digital + visual físico",
+      "Atendimento local e estratégico"
+    ],
+    "buttons": {
+      "primaryText": "Diagnóstico grátis →",
+      "primaryHref": "https://wa.me/55?text=Quero%20um%20diagnóstico%20gratuito",
+      "secondaryText": "Ver serviços",
+      "secondaryHref": "#servicos"
+    },
+    "numbers": [
+      { "value": "3x", "label": "mais cliques no Google" },
+      { "value": "48h", "label": "para entrar no ar" },
+      { "value": "100%", "label": "local e presencial" }
+    ],
+    "visual": {
+      "floatBadge": "+47 visitas essa semana",
+      "topChip": "Perfil otimizado",
+      "bottomChip": "Gestão recorrente",
+      "panelLabel": "Google Meu Negócio — Painel",
+      "businessName": "Pizzaria do Bairro",
+      "businessAddress": "Rua das Flores, 123 · Praia Grande",
+      "score": "4.9 (127 avaliações)",
+      "tags": ["Aberto agora", "Delivery", "Pizza"],
+      "metrics": [
+        { "number": "847", "label": "Visualizações" },
+        { "number": "124", "label": "Cliques rota" },
+        { "number": "47", "label": "Ligações" }
+      ],
+      "insightLabel": "Resumo estratégico",
+      "insightTitle": "Mais descoberta local, mais contato qualificado.",
+      "insightText": "Google, Instagram e comunicação visual alinhados para gerar presença consistente na sua região."
+    }
+  },
+  "cta": {
+    "title": "Pronto para ser encontrado?",
+    "sub": "Diagnóstico gratuito. Sem compromisso. Atendemos presencialmente na Baixada Santista.",
+    "buttonText": "Falar no WhatsApp agora",
+    "buttonHref": "https://wa.me/55?text=Olá!%20Quero%20um%20diagnóstico%20gratuito%20da%20Vuno%20Studio"
+  }
+}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Vuno Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css">
+<!--
+  ⚠ ATENÇÃO: Não publique este arquivo em servidor público.
+  Este painel é apenas para uso local (desenvolvimento).
+  Para alterar a senha, edite a variável ADMIN_PASSWORD no script abaixo.
+-->
+</head>
+<body>
+
+<!-- ═══════════════════════ LOGIN ═══════════════════════════════════════════ -->
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">vuno<em>studio</em></div>
+    <div class="login-badge">painel administrativo</div>
+    <label for="adminEmail">E-mail de acesso</label>
+    <input type="email" id="adminEmail" placeholder="admin@seudominio.com" autocomplete="username">
+    <label for="pwd">Senha de acesso</label>
+    <input type="password" id="pwd" placeholder="••••••••" autocomplete="current-password">
+    <button class="btn-primary" onclick="doLogin()">Entrar no painel</button>
+    <div class="login-err" id="loginErr">Falha no login. Verifique e-mail e senha.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ ADMIN LAYOUT ════════════════════════════════════ -->
+<div id="adminLayout" class="admin">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-logo">vuno<em>studio</em></div>
+      <small>Painel Admin</small>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Conteúdo</div>
+      <div class="nav-item active" onclick="showPanel('contato', this)">
+        <span class="nav-icon">📞</span>
+        <div class="nav-dot"></div>
+        Contato &amp; Links
+      </div>
+      <div class="nav-item" onclick="showPanel('digital', this)">
+        <span class="nav-icon">📱</span>
+        <div class="nav-dot"></div>
+        Planos Digitais
+      </div>
+      <div class="nav-item" onclick="showPanel('visual', this)">
+        <span class="nav-icon">🖼️</span>
+        <div class="nav-dot"></div>
+        Comunicação Visual
+      </div>
+      <div class="nav-item" onclick="showPanel('trafego', this)">
+        <span class="nav-icon">📈</span>
+        <div class="nav-dot"></div>
+        Tráfego Pago
+      </div>
+      <div class="nav-section" style="margin-top:.5rem">Portfólio</div>
+      <div class="nav-item" onclick="showPanel('galeria', this)">
+        <span class="nav-icon">🏗️</span>
+        <div class="nav-dot"></div>
+        Galeria de Trabalhos
+      </div>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="btn-logout" onclick="doLogout()">Sair do painel</button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ══════════════════ CONTATO ══════════════════ -->
+    <div id="panel-contato" class="panel active">
+      <div class="panel-top">
+        <div class="panel-title">Contato &amp; Links</div>
+        <div class="panel-sub">Número de WhatsApp, e-mail e textos dos botões do menu em cada página.</div>
+      </div>
+      <div class="info-box" id="statusContato">Carregando <code>data/content.json</code>…</div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">Botão flutuante WhatsApp — todas as páginas</div></div>
+        <div class="g1">
+          <div class="field"><label>Link completo (href)</label>
+            <input type="url" id="wpp_float_href" placeholder="https://wa.me/55?text=...">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">Rodapé — links de contato</div></div>
+        <div class="g2">
+          <div class="field"><label>WhatsApp — href</label><input type="url" id="footer_wpp_href" placeholder="https://wa.me/55"></div>
+          <div class="field"><label>WhatsApp — texto exibido</label><input type="text" id="footer_wpp_text" placeholder="WhatsApp"></div>
+        </div>
+        <div class="g2">
+          <div class="field"><label>E-mail — href</label><input id="footer_email_href" placeholder="mailto:contato@..."></div>
+          <div class="field"><label>E-mail — texto exibido</label><input type="text" id="footer_email_text" placeholder="contato@vunostudio.com.br"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">Botão CTA no menu — por página</div></div>
+
+        <div class="card-label" style="margin-bottom:.65rem;opacity:.6">Página: Home (index.html)</div>
+        <div class="g2">
+          <div class="field"><label>Texto do botão</label><input type="text" id="cta_index_text" placeholder="Falar no WhatsApp"></div>
+          <div class="field"><label>Link (href)</label><input type="url" id="cta_index_href" placeholder="https://wa.me/55?text=..."></div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="card-label" style="margin-bottom:.65rem;opacity:.6">Página: Serviços (servicos.html)</div>
+        <div class="g2">
+          <div class="field"><label>Texto do botão</label><input type="text" id="cta_servicos_text" placeholder="Orçamento"></div>
+          <div class="field"><label>Link (href)</label><input type="url" id="cta_servicos_href" placeholder="https://wa.me/55?text=..."></div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="card-label" style="margin-bottom:.65rem;opacity:.6">Página: Planos (planos.html)</div>
+        <div class="g2">
+          <div class="field"><label>Texto do botão</label><input type="text" id="cta_planos_text" placeholder="Peça sua cotação"></div>
+          <div class="field"><label>Link (href)</label><input type="url" id="cta_planos_href" placeholder="https://wa.me/55?text=..."></div>
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveContato()">💾 Salvar no Banco</button>
+        <div class="actions-hint">As alterações são salvas diretamente no Supabase e refletidas no site automaticamente.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ DIGITAL ══════════════════ -->
+    <div id="panel-digital" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Planos Digitais</div>
+        <div class="panel-sub">Edite os 3 planos de presença digital: nome, preço, features e adicionais.</div>
+      </div>
+      <div class="info-box" id="statusDigital">Carregando <code>data/planos.json</code>…</div>
+      <div id="digital-plans-wrap"></div>
+
+      <div class="card" style="margin-top:1.5rem">
+        <div class="card-head"><div class="card-label">Serviços Adicionais</div></div>
+        <div id="digital-addons-wrap"></div>
+        <button class="btn-add" onclick="addAddon()">+ Adicionar serviço adicional</button>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn-download" onclick="savePlanos()">💾 Salvar no Banco</button>
+        <div class="actions-hint">As alterações são salvas diretamente no Supabase e refletidas no site automaticamente.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ VISUAL ══════════════════ -->
+    <div id="panel-visual" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Comunicação Visual</div>
+        <div class="panel-sub">Edite os 4 produtos: nome, descrição, preços e itens inclusos.</div>
+      </div>
+      <div class="info-box" id="statusVisual">Aguardando carga de <code>planos</code>…</div>
+      <div id="visual-products-wrap"></div>
+      <button class="btn-add" onclick="addVisualProduct()">+ Adicionar produto visual</button>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="savePlanos()">💾 Salvar no Banco</button>
+        <div class="actions-hint">As alterações são salvas diretamente no Supabase e refletidas no site automaticamente.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ TRÁFEGO ══════════════════ -->
+    <div id="panel-trafego" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Tráfego Pago</div>
+        <div class="panel-sub">Edite os planos de Google Ads, Meta Ads e o Combo.</div>
+      </div>
+      <div class="info-box" id="statusTrafego">Aguardando carga de <code>planos</code>…</div>
+      <div id="trafego-plans-wrap"></div>
+      <button class="btn-add" onclick="addTrafegoPlan()">+ Adicionar plano de tráfego</button>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="savePlanos()">💾 Salvar no Banco</button>
+        <div class="actions-hint">As alterações são salvas diretamente no Supabase e refletidas no site automaticamente.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ GALERIA ══════════════════ -->
+    <div id="panel-galeria" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Galeria de Trabalhos</div>
+        <div class="panel-sub">Adicione, remova e edite as fotos exibidas na página de Serviços.</div>
+      </div>
+      <div class="info-box" id="statusGaleria">Carregando <code>data/images.json</code>…</div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">Itens da galeria</div></div>
+        <div class="gal-list" id="gal-list"></div>
+        <button class="btn-add" onclick="addGalItem()">+ Adicionar foto à galeria</button>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveGaleria()">💾 Salvar no Banco</button>
+        <div class="actions-hint">
+          Coloque as fotos na pasta <code>images/galeria/</code> e preencha o campo "Foto" com o caminho relativo (ex: <code>images/galeria/fachada-acm.jpg</code>).<br>
+          Deixe vazio para exibir o ícone da categoria. As alterações são salvas diretamente no Supabase.
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin-config.js"></script>
+<script src="js/admin-data.js"></script>
+<script src="js/admin-ui.js"></script>
+<script src="js/admin-auth.js"></script>
+</body>
+</html>

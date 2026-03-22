@@ -1,0 +1,256 @@
+{
+  "copy": {
+    "hero": {
+      "tag": "Baixada Santista · SP",
+      "titleHtml": "Tudo que seu negócio<br>precisa para ser <em>visto.</em>",
+      "sub": "Presença digital gerenciada, comunicação visual que vende na rua e tráfego pago que traz o cliente certo. Tudo em um único parceiro."
+    },
+    "digital": {
+      "label": "01 — Presença Digital",
+      "titleHtml": "Google, Instagram e redes.<br>Você não precisa tocar em nada.",
+      "sub": "Cuidamos de toda a presença digital do seu negócio. Você foca no que faz de melhor — a gente cuida do resto.",
+      "addonsTitle": "Serviços adicionais — turbine seu plano"
+    },
+    "visual": {
+      "label": "02 — Comunicação Visual",
+      "titleHtml": "Do cartão de visita<br>à fachada completa.",
+      "sub": "Arte criada por nós, impressão de qualidade, instalação profissional. Atendemos toda a Baixada Santista."
+    },
+    "galeria": {
+      "label": "Nossos Trabalhos",
+      "titleHtml": "Resultados reais,<br>clientes reais.",
+      "sub": "Veja alguns dos trabalhos realizados pela Vuno Studio na Baixada Santista. Cada projeto começa com uma visita presencial."
+    },
+    "trafego": {
+      "label": "03 — Tráfego Pago",
+      "titleHtml": "Anúncios que trazem<br>cliente quando você precisa.",
+      "sub": "Gestão profissional de Google Ads e Meta Ads. Você investe na verba — nós cuidamos da estratégia, otimização e resultados."
+    },
+    "processo": {
+      "label": "04 — Como funciona",
+      "titleHtml": "Da primeira visita<br>ao resultado mensal.",
+      "sub": "Atendimento presencial na Baixada Santista. Você não precisa entender de marketing — só nos contar o que precisa."
+    },
+    "cta": {
+      "label": "Vamos começar?",
+      "titleHtml": "Seu negócio precisa ser<br><em>encontrado agora.</em>",
+      "sub": "Diagnóstico gratuito, sem compromisso. Atendemos presencialmente em Praia Grande, Santos, São Vicente, Guarujá e toda a Baixada Santista.",
+      "mainButtonText": "Falar no WhatsApp",
+      "mainButtonHref": "https://wa.me/55?text=Olá!%20Quero%20um%20diagnóstico%20gratuito",
+      "secButtonText": "Enviar e-mail",
+      "secButtonHref": "mailto:contato@vunostudio.com.br"
+    }
+  },
+  "digital": {
+    "plans": [
+      {
+        "name": "Básico",
+        "desc": "Para quem está começando e precisa estar presente no Google com o essencial.",
+        "featured": false,
+        "features": [
+          "Google Meu Negócio completo",
+          "4 posts/mês no Instagram",
+          "Resposta de avaliações Google",
+          "Relatório mensal por WhatsApp",
+          "Suporte via WhatsApp"
+        ],
+        "ctaText": "Quero saber mais",
+        "ctaHref": "https://wa.me/55?text=Quero%20saber%20mais%20sobre%20o%20plano%20B%C3%A1sico"
+      },
+      {
+        "name": "Presença",
+        "desc": "Para quem quer presença completa em todas as plataformas e gerar resultados consistentes.",
+        "featured": true,
+        "tag": "Mais escolhido",
+        "features": [
+          "Google + Instagram + Facebook",
+          "8 posts/mês com design profissional",
+          "Landing page profissional",
+          "Visita presencial ou call mensal",
+          "Relatório completo mensal",
+          "Suporte prioritário"
+        ],
+        "ctaText": "Quero este plano",
+        "ctaHref": "https://wa.me/55?text=Quero%20saber%20mais%20sobre%20o%20plano%20Presen%C3%A7a"
+      },
+      {
+        "name": "Autoridade",
+        "desc": "Para quem quer dominar a região e ser referência local no seu segmento.",
+        "featured": false,
+        "features": [
+          "Tudo do plano Presença",
+          "12 posts/mês com design",
+          "SEO local ativo",
+          "Visita presencial mensal",
+          "Relatório estratégico",
+          "Sugestões de melhoria contínua"
+        ],
+        "ctaText": "Quero saber mais",
+        "ctaHref": "https://wa.me/55?text=Quero%20saber%20mais%20sobre%20o%20plano%20Autoridade"
+      }
+    ],
+    "addons": [
+      {
+        "icon": "📱",
+        "name": "Stories diários",
+        "desc": "20 stories/mês com enquetes, promoções e engajamento direto com seus seguidores."
+      },
+      {
+        "icon": "💬",
+        "name": "Gestão de WhatsApp Business",
+        "desc": "Catálogo, mensagem automática, link direto e atendimento organizado."
+      },
+      {
+        "icon": "🎬",
+        "name": "Produção de Reels",
+        "desc": "Reels com edição profissional, legenda otimizada e estratégia de alcance."
+      },
+      {
+        "icon": "🎵",
+        "name": "TikTok Business",
+        "desc": "Perfil configurado com reaproveitamento inteligente de conteúdo."
+      },
+      {
+        "icon": "🌐",
+        "name": "Site institucional",
+        "desc": "Até 5 páginas, totalmente responsivo, otimizado para SEO básico."
+      },
+      {
+        "icon": "🎨",
+        "name": "Identidade visual completa",
+        "desc": "Logo, paleta de cores, tipografia e guia completo da sua marca."
+      }
+    ]
+  },
+  "visual": {
+    "products": [
+      {
+        "iconKey": "impressos",
+        "imageLabel": "Impressos",
+        "name": "Impressos & Gráfica",
+        "desc": "Cartão de visita, panfleto, flyer e materiais de ponto de venda com arte profissional inclusa.",
+        "items": [
+          "Cartão de visita personalizado",
+          "Panfleto e flyer com design",
+          "Material para ponto de venda",
+          "Arte e diagramação inclusa"
+        ],
+        "tags": ["Arte inclusa", "Entrega rápida"],
+        "premium": false
+      },
+      {
+        "iconKey": "adesivos",
+        "imageLabel": "Adesivos",
+        "name": "Adesivos & Envelopamento",
+        "desc": "Adesivos para vitrine, parede, veículo e fachada. Sinalização interna e externa.",
+        "items": [
+          "Adesivo de vitrine recortado",
+          "Envelopamento de veículo",
+          "Placa de identificação",
+          "Instalação inclusa"
+        ],
+        "tags": ["Arte inclusa", "Instalação inclusa"],
+        "premium": false
+      },
+      {
+        "iconKey": "banners",
+        "imageLabel": "Banners",
+        "name": "Banners & Fachada de Lona",
+        "desc": "Lona de alta qualidade com impressão UV, acabamento profissional e instalação em fachada ou toldo.",
+        "items": [
+          "Banner avulso para eventos",
+          "Fachada de lona completa",
+          "Toldo com lona personalizada",
+          "Arte, impressão e instalação"
+        ],
+        "tags": ["Instalação rápida", "Garantia 1 ano"],
+        "premium": false
+      },
+      {
+        "iconKey": "acm",
+        "imageLabel": "Fachada ACM",
+        "name": "Fachada ACM",
+        "desc": "ACM de alumínio com letreiro, iluminação e acabamento de alto padrão. Transforma completamente a visibilidade do negócio.",
+        "items": [
+          "Projeto e arte 3D",
+          "Estrutura e material ACM",
+          "Letreiro com caixa de luz (opcional)",
+          "Instalação por equipe especializada",
+          "Garantia e suporte pós-obra"
+        ],
+        "tags": ["Projeto incluso", "Alta complexidade", "Orçamento personalizado"],
+        "premium": true,
+        "badge": "Premium"
+      }
+    ]
+  },
+  "trafego": {
+    "cards": [
+      {
+        "variant": "google",
+        "platform": "Google Ads",
+        "name": "Rede de Pesquisa + Maps",
+        "desc": "Seu negócio aparece quando alguém pesquisa pelo seu serviço. Alta intenção de compra — o cliente já quer, você só precisa aparecer.",
+        "features": [
+          "Configuração de campanha e palavras-chave",
+          "Anúncios de pesquisa + Google Maps",
+          "Palavras negativas e otimização semanal",
+          "Relatório mensal com resultados reais",
+          "Setup inicial incluso"
+        ]
+      },
+      {
+        "variant": "meta",
+        "platform": "Meta Ads",
+        "name": "Instagram + Facebook",
+        "desc": "Aparece para as pessoas certas do bairro mesmo sem estarem procurando. Cria demanda e traz clientes novos.",
+        "features": [
+          "Criação de campanhas e criativos",
+          "Segmentação por bairro e raio",
+          "Teste A/B de criativos mensal",
+          "Remarketing para quem já interagiu",
+          "Relatório mensal com resultados"
+        ]
+      }
+    ],
+    "combo": {
+      "label": "Combo recomendado",
+      "name": "Google + Meta — Presença Completa",
+      "desc": "Captura quem já pesquisa e cria demanda em quem ainda não conhece. Os dois juntos têm custo de aquisição menor que separados.",
+      "buttonText": "Quero o combo",
+      "buttonHref": "https://wa.me/55?text=Quero%20saber%20sobre%20o%20combo%20de%20tr%C3%A1fego%20pago"
+    }
+  },
+  "processo": {
+    "steps": [
+      {
+        "num": "01",
+        "icon": "🔍",
+        "name": "Diagnóstico gratuito",
+        "desc": "Analisamos sua presença atual no Google e redes. Você vê exatamente o que está faltando.",
+        "time": "Sem compromisso"
+      },
+      {
+        "num": "02",
+        "icon": "🤝",
+        "name": "Visita presencial",
+        "desc": "Vamos até você. Entendemos o negócio, o público e tiramos fotos reais.",
+        "time": "Na sua empresa"
+      },
+      {
+        "num": "03",
+        "icon": "⚡",
+        "name": "Ativação em 48h",
+        "desc": "Google atualizado, redes configuradas, materiais pedidos, campanha no ar.",
+        "time": "48h após a visita"
+      },
+      {
+        "num": "04",
+        "icon": "📊",
+        "name": "Resultado todo mês",
+        "desc": "Relatório mensal com números reais: visualizações, cliques, ligações e retorno.",
+        "time": "Todo dia 5 do mês"
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "global": {
+    "whatsappFloat": {
+      "href": "https://wa.me/55?text=Ol%C3%A1!%20Quero%20falar%20com%20a%20Vuno%20Studio"
+    },
+    "footer": {
+      "whatsapp": {
+        "href": "https://wa.me/55",
+        "text": "WhatsApp"
+      },
+      "email": {
+        "href": "mailto:contato@vunostudio.com.br",
+        "text": "contato@vunostudio.com.br"
+      }
+    }
+  },
+  "pages": {
+    "index": {
+      "navCta": {
+        "href": "https://wa.me/55?text=Ol%C3%A1,%20quero%20saber%20mais%20sobre%20a%20Vuno%20Studio",
+        "text": "Falar no WhatsApp"
+      }
+    },
+    "servicos": {
+      "navCta": {
+        "href": "https://wa.me/55?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20da%20Vuno%20Studio",
+        "text": "Orçamento"
+      }
+    },
+    "planos": {
+      "navCta": {
+        "href": "https://wa.me/55?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20planos",
+        "text": "Peça sua cotação"
+      }
+    }
+  }
+}

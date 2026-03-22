@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════════
+   Vuno Studio — Global (compartilhado)
+   Muda aqui → reflete em todas as páginas
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* Paleta principal */
+  --ink: #0A0A0A;
+  --ink2: #1A1A1A;
+  --cream: #FAFAF5;
+  --sand: #F5F0E8;
+  --green: #1D9E75;
+  --green2: #0F6E56;
+  --greenl: #E8F7F1;
+  --orange: #E8622A;
+  --orangel: #FEF0E8;
+  --muted: #6B6B5E;
+  --border: rgba(10,10,10,.1);
+
+  /* Aliases p/ compatibilidade com style.css (index) */
+  --verde: var(--green);
+  --verde-dark: var(--green2);
+  --verde-light: var(--greenl);
+  --preto: var(--ink);
+  --cinza: var(--muted);
+  --cinza-light: #F5F5F2;
+  --branco: var(--cream);
+  --laranja: var(--orange);
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(250,250,245,.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .3s;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--ink); text-decoration: none;
+  letter-spacing: -.04em;
+  -webkit-text-stroke: .4px var(--ink);
+}
+.nav-logo em { color: var(--green); font-style: italic; font-weight: 800; -webkit-text-stroke-color: var(--green); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  font-size: .85rem; font-weight: 600; color: var(--muted);
+  text-decoration: none; letter-spacing: .04em; text-transform: uppercase;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--green); }
+.nav-cta {
+  background: var(--ink); color: var(--cream);
+  padding: .6rem 1.5rem; border-radius: 2px;
+  font-size: .82rem; font-weight: 700; text-decoration: none;
+  letter-spacing: .04em; text-transform: uppercase;
+  transition: all .2s;
+}
+.nav-cta:hover { background: var(--green); }
+
+/* ─── SEÇÃO BASE ─── */
+section { padding: 7rem 3rem; }
+.section-label {
+  font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--green); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15; margin-bottom: 1rem;
+}
+.section-sub {
+  font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 560px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink); padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.foot-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem; font-weight: 800;
+  color: white; text-decoration: none;
+  letter-spacing: -.04em;
+  -webkit-text-stroke: .4px white;
+}
+.foot-logo em { color: var(--green); font-style: italic; font-weight: 800; -webkit-text-stroke-color: var(--green); }
+.foot-info { font-size: .82rem; color: rgba(255,255,255,.3); }
+.foot-contact { font-size: .82rem; color: rgba(255,255,255,.5); }
+.foot-contact a { color: var(--green); text-decoration: none; }
+.foot-links { display: flex; gap: 1.5rem; }
+.foot-links a {
+  font-size: .82rem; color: rgba(255,255,255,.4);
+  text-decoration: none; transition: color .2s;
+}
+.foot-links a:hover { color: var(--green); }
+
+/* ─── WHATSAPP FLOAT ─── */
+.wpp-float {
+  position: fixed; right: 22px; bottom: 22px;
+  width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #27d467, #16a34a);
+  color: white; z-index: 999; text-decoration: none;
+  box-shadow: 0 16px 36px rgba(22,163,74,.35);
+  transition: transform .2s, box-shadow .2s;
+}
+.wpp-float:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 20px 44px rgba(22,163,74,.42);
+}
+.wpp-float svg { fill: currentColor; }
+
+/* ─── ANIMAÇÕES ─── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── RESPONSIVO BASE ─── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  section { padding: 5rem 1.5rem; }
+}
+
+@media (max-width: 540px) {
+  .wpp-float { right: 16px; bottom: 16px; width: 56px; height: 56px; }
+}
