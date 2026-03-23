@@ -31,6 +31,44 @@ nav { animation: fadeDown .6s ease both; }
   50% { opacity: 0.9; transform: scale(1.05); }
 }
 
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(20px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3); }
+  50% { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0, 217, 255, 0.5); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes slideInBounce {
+  0% { transform: translateX(-50px); opacity: 0; }
+  60% { transform: translateX(10px); }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 20px rgba(0, 217, 255, 0.5),
+      0 0 40px rgba(0, 217, 255, 0.3),
+      2px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  50% { 
+    text-shadow: 
+      0 0 40px rgba(0, 217, 255, 0.8),
+      0 0 80px rgba(0, 217, 255, 0.5),
+      2px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+}
+
+
 /* Carousel Container */
 .hero-carousel {
   position: relative;
@@ -136,12 +174,6 @@ nav { animation: fadeDown .6s ease both; }
   animation: float 6s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(20px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
-}
-
 .hero-orb-left {
   width: 350px;
   height: 350px;
@@ -183,11 +215,6 @@ nav { animation: fadeDown .6s ease both; }
   border: 2px solid rgba(0, 217, 255, 0.3);
 }
 
-@keyframes pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3); }
-  50% { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0, 217, 255, 0.5); }
-}
-
 .hero-badge::before { 
   content: ''; 
   width: 8px; 
@@ -198,11 +225,8 @@ nav { animation: fadeDown .6s ease both; }
   animation: blink 2s ease-in-out infinite;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
+/* Aplicar estilos do .hero também ao .hero-slide */
+.hero-slide h1,
 .hero h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(2.8rem, 5.5vw, 5rem);
@@ -217,13 +241,8 @@ nav { animation: fadeDown .6s ease both; }
   letter-spacing: -0.02em;
 }
 
-@keyframes slideInBounce {
-  0% { transform: translateX(-50px); opacity: 0; }
-  60% { transform: translateX(10px); }
-  100% { transform: translateX(0); opacity: 1; }
-}
-
-.hero h1 em { 
+.hero-slide h1 em,
+.hero h1 em {
   font-style: normal;
   color: #00d9ff;
   font-weight: 900;
@@ -236,21 +255,7 @@ nav { animation: fadeDown .6s ease both; }
   position: relative;
 }
 
-@keyframes glow {
-  0%, 100% { 
-    text-shadow: 
-      0 0 20px rgba(0, 217, 255, 0.5),
-      0 0 40px rgba(0, 217, 255, 0.3),
-      2px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-  50% { 
-    text-shadow: 
-      0 0 40px rgba(0, 217, 255, 0.8),
-      0 0 80px rgba(0, 217, 255, 0.5),
-      2px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-}
-
+.hero-slide p,
 .hero p {
   font-size: 1.15rem; 
   color: #1A1A1A; 

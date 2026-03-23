@@ -28,7 +28,7 @@ function renderHeroSlide(slide) {
   const visual = slide.visual || {};
   
   return `
-    <div class="hero-slide hero">
+    <div class="hero-slide">
       <div class="hero-content">
         <div class="hero-badge">${slide.badge || ''}</div>
         <h1>${slide.titleHtml || ''}</h1>
