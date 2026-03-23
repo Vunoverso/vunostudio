@@ -26,6 +26,8 @@ function renderPlans() {
 
 // ─── DIGITAL PLANS ───
 function renderDigitalPlans() {
+  if (!planosData || !planosData.digital) return;
+  
   const digitalData = planosData.digital;
   const plansWrap = document.querySelector('#cat-digital .digital-plans');
   
@@ -62,6 +64,8 @@ function renderDigitalPlans() {
 }
 
 function renderAddons() {
+  if (!planosData || !planosData.digital || !planosData.digital.addons) return;
+  
   const addonsData = planosData.digital.addons;
   let addonsContainer = document.querySelector('#cat-digital [style*="margin-top:2.5rem"]');
   
@@ -91,6 +95,8 @@ function renderAddons() {
 }
 
 function renderCompareTable(digitalData) {
+  if (!digitalData || !digitalData.compare) return;
+  
   let compareWrap = document.querySelector('#cat-digital [style*="margin-top:2rem"]:last-of-type');
   
   // Se não existe, criar
@@ -138,6 +144,8 @@ function renderCompareTable(digitalData) {
 
 // ─── VISUAL PRODUCTS ───
 function renderVisualProducts() {
+  if (!planosData || !planosData.visual || !planosData.visual.products) return;
+  
   const visualData = planosData.visual.products;
   const visualWrap = document.querySelector('#cat-visual .visual-plans');
   
@@ -161,11 +169,13 @@ function renderVisualProducts() {
 
 // ─── TRAFFIC PLANS ───
 function renderTrafficPlans() {
+  if (!planosData || !planosData.trafego) return;
+  
   const trafData = planosData.trafego;
   
   // Plans
   const trafficPlansWrap = document.querySelector('#cat-trafego .traf-plans');
-  if (trafficPlansWrap) {
+  if (trafficPlansWrap && trafData.plans) {
     trafficPlansWrap.innerHTML = trafData.plans.map(plan => `
       <div class="tplan ${plan.combo ? 'combo' : ''}">
         <div class="tplan-plat" style="color:${plan.platformColor}">${plan.platform}</div>
@@ -200,7 +210,7 @@ function renderTrafficPlans() {
     }
   }
   
-  if (infoBoxesWrap) {
+  if (infoBoxesWrap && trafData.infoBoxes) {
     infoBoxesWrap.innerHTML = trafData.infoBoxes.map((box, idx) => `
       <div class="info-box" ${idx > 0 ? 'style="border-left:1px solid var(--border)"' : ''}>
         <div class="info-box-label">${box.label}</div>
@@ -213,6 +223,8 @@ function renderTrafficPlans() {
 
 // ─── FAQ ───
 function renderFaq() {
+  if (!planosData || !planosData.faq) return;
+  
   const faqData = planosData.faq;
   const faqContainer = document.querySelector('.faq-section .faq-inner');
   
