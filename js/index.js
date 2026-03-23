@@ -51,6 +51,9 @@ function renderHero(heroData) {
       `<div class="num-item"><div class="num-val">${n.value}</div><div class="num-lbl">${n.label}</div></div>`
     ).join('');
   }
+
+  const img = document.getElementById('heroImage');
+  if (img && d.heroImageSrc) img.src = d.heroImageSrc;
 }
 
 function renderCta(cta) {

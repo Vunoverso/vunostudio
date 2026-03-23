@@ -43,9 +43,9 @@
     <nav class="sidebar-nav">
       <div class="nav-section">Conteúdo</div>
       <div class="nav-item active" onclick="showPanel('hero', this)">
-        <span class="nav-icon">🎠</span>
+        <span class="nav-icon">�</span>
         <div class="nav-dot"></div>
-        Hero Carousel
+        Hero — Conteúdo
       </div>
       <div class="nav-item" onclick="showPanel('contato', this)">
         <span class="nav-icon">📞</span>
@@ -82,21 +82,64 @@
   <!-- MAIN -->
   <main class="main">
 
-    <!-- ══════════════════ HERO CAROUSEL ══════════════════ -->
+    <!-- ══════════════════ HERO ══════════════════ -->
     <div id="panel-hero" class="panel active">
       <div class="panel-top">
-        <div class="panel-title">Hero Carousel</div>
-        <div class="panel-sub">Gerencie os slides do carousel da homepage. Arraste para reordenar.</div>
+        <div class="panel-title">Hero — Conteúdo Principal</div>
+        <div class="panel-sub">Texto, botões e imagem do bloco principal da homepage.</div>
       </div>
       <div class="info-box" id="statusHero">Carregando <code>data/index.json</code>…</div>
 
-      <div id="hero-slides-container"></div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Textos</div></div>
+        <div class="field"><label>Badge (texto pequeno acima do título)</label>
+          <input type="text" id="hero_badge" placeholder="Baixada Santista · SP">
+        </div>
+        <div class="field"><label>Título — use &lt;em&gt;palavra&lt;/em&gt; para destaque em ciano</label>
+          <input type="text" id="hero_title" placeholder="Sua empresa precisa ser &lt;em&gt;vista&lt;/em&gt; — na rua e no digital">
+        </div>
+        <div class="field"><label>Subtítulo</label>
+          <textarea id="hero_sub" rows="2" placeholder="Organizamos sua presença completa: fachada, identidade e online."></textarea>
+        </div>
+        <div class="card-label" style="margin-top:.75rem">Proof Pills</div>
+        <div id="hero-proof-pills-group"></div>
+        <button class="btn-add-mini" onclick="addHeroProofPill()">+ Adicionar pill</button>
+      </div>
 
-      <button class="btn-add" onclick="addHeroSlide()" style="margin-top: 1rem">+ Adicionar novo slide</button>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Botões</div></div>
+        <div class="g2">
+          <div class="field"><label>Botão principal — texto</label>
+            <input type="text" id="hero_btn_primary_text" placeholder="Organizar minha empresa →">
+          </div>
+          <div class="field"><label>Botão principal — link</label>
+            <input type="url" id="hero_btn_primary_href" placeholder="https://wa.me/55...">
+          </div>
+        </div>
+        <div class="g2">
+          <div class="field"><label>Botão secundário — texto</label>
+            <input type="text" id="hero_btn_secondary_text" placeholder="Ver projetos">
+          </div>
+          <div class="field"><label>Botão secundário — link</label>
+            <input type="url" id="hero_btn_secondary_href" placeholder="#servicos">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">Imagem (lado direito)</div></div>
+        <div class="field"><label>Caminho ou URL da imagem</label>
+          <input type="text" id="hero_image_src" placeholder="images/hero/foto.jpg" oninput="previewHeroImage()">
+        </div>
+        <div class="hero-img-preview-wrap" id="hero_img_preview_wrap">
+          <img id="hero_img_preview" src="" alt="Pré-visualização" style="display:none">
+          <span id="hero_img_preview_empty">Nenhuma imagem definida ainda</span>
+        </div>
+      </div>
 
       <div class="actions-bar">
-        <button class="btn-download" onclick="saveHeroSlides()">💾 Salvar no Banco</button>
-        <div class="actions-hint">As alterações são salvas diretamente no Supabase e refletidas no site automaticamente.</div>
+        <button class="btn-download" onclick="saveHero()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Salvo no Supabase e refletido na homepage automaticamente.</div>
       </div>
     </div>
 

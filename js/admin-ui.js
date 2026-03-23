@@ -358,230 +358,68 @@ function addGalItem() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// POPULATE: HERO CAROUSEL
+// POPULATE: HERO
 // ═══════════════════════════════════════════════════════════════════════════
 
+function populateHero(d) {
+  const hero = Array.isArray(d.hero) ? d.hero[0] : (d.hero || {});
+  sv('hero_badge',               hero.badge          || '');
+  sv('hero_title',               hero.titleHtml      || '');
+  sv('hero_img_src_field',       hero.heroImageSrc   || '');
+  const subEl = document.getElementById('hero_sub');
+  if (subEl) subEl.value = hero.sub || '';
+  const btnPriText  = document.getElementById('hero_btn_primary_text');
+  const btnPriHref  = document.getElementById('hero_btn_primary_href');
+  const btnSecText  = document.getElementById('hero_btn_secondary_text');
+  const btnSecHref  = document.getElementById('hero_btn_secondary_href');
+  const imgSrc      = document.getElementById('hero_image_src');
+  if (btnPriText)  btnPriText.value  = hero.buttons?.primaryText    || '';
+  if (btnPriHref)  btnPriHref.value  = hero.buttons?.primaryHref    || '';
+  if (btnSecText)  btnSecText.value  = hero.buttons?.secondaryText  || '';
+  if (btnSecHref)  btnSecHref.value  = hero.buttons?.secondaryHref  || '';
+  if (imgSrc)      imgSrc.value      = hero.heroImageSrc            || '';
+
+  const pillsGroup = document.getElementById('hero-proof-pills-group');
+  if (pillsGroup) {
+    pillsGroup.innerHTML = '';
+    (hero.proofPills || []).forEach(p => {
+      const inp = document.createElement('input');
+      inp.type = 'text'; inp.className = 'proof-pill-input';
+      inp.value = p; inp.placeholder = 'Proof pill';
+      pillsGroup.appendChild(inp);
+    });
+  }
+
+  previewHeroImage();
+}
+
+function addHeroProofPill() {
+  const group = document.getElementById('hero-proof-pills-group');
+  const inp = document.createElement('input');
+  inp.type = 'text'; inp.className = 'proof-pill-input'; inp.placeholder = 'Nova pill';
+  group.appendChild(inp);
+}
+
+function previewHeroImage() {
+  const srcEl   = document.getElementById('hero_image_src');
+  const img     = document.getElementById('hero_img_preview');
+  const empty   = document.getElementById('hero_img_preview_empty');
+  if (!srcEl || !img) return;
+  const val = srcEl.value.trim();
+  if (val) {
+    img.src = val;
+    img.style.display = 'block';
+    if (empty) empty.style.display = 'none';
+  } else {
+    img.style.display = 'none';
+    if (empty) empty.style.display = 'block';
+  }
+}
+
+// ─── STUB para não quebrar chamadas antigas ─────────────────────────────────
 function populateHeroSlides(slides) {
-  const container = document.getElementById('hero-slides-container');
-  container.innerHTML = '';
-  
-  if (!Array.isArray(slides) || slides.length === 0) {
-    container.innerHTML = '<div class="info-box">Nenhum slide encontrado. Clique em "+ Adicionar novo slide" para começar.</div>';
-    return;
-  }
-  
-  slides.forEach((slide, idx) => {
-    container.appendChild(buildHeroSlideCard(slide, idx));
-  });
+  // mantido para compatibilidade — hero agora é form simples
 }
 
-function buildHeroSlideCard(slide, idx) {
-  const card = document.createElement('div');
-  card.className = 'hero-slide-card card';
-  card.dataset.index = idx;
-  
-  const proofPillsHtml = (slide.proofPills || []).map((pill, i) => 
-    '<input type="text" class="proof-pill-input" value="' + esc(pill) + '" placeholder="Proof pill ' + (i+1) + '">'
-  ).join('');
-  
-  const numbersHtml = (slide.numbers || []).map(num =>
-    '<div class="number-row">' +
-      '<input type="text" class="number-value" value="' + esc(num.value) + '" placeholder="3x">' +
-      '<input type="text" class="number-label" value="' + esc(num.label) + '" placeholder="mais cliques">' +
-      '<button class="btn-remove-mini" onclick="this.closest(\'.number-row\').remove()">✕</button>' +
-    '</div>'
-  ).join('');
-  
-  const tagsHtml = (slide.visual?.tags || []).map((tag, i) =>
-    '<input type="text" class="tag-input" value="' + esc(tag) + '" placeholder="Tag ' + (i+1) + '">'
-  ).join('');
-  
-  const metricsHtml = (slide.visual?.metrics || []).map(metric =>
-    '<div class="metric-row">' +
-      '<input type="text" class="metric-number" value="' + esc(metric.number) + '" placeholder="847">' +
-      '<input type="text" class="metric-label" value="' + esc(metric.label) + '" placeholder="Visualizações">' +
-      '<button class="btn-remove-mini" onclick="this.closest(\'.metric-row\').remove()">✕</button>' +
-    '</div>'
-  ).join('');
-  
-  card.innerHTML = 
-    '<div class="card-head">' +
-      '<div class="card-label">Slide ' + (idx + 1) + '</div>' +
-      '<button class="btn-collapse" onclick="toggleSlideCard(this)">▼</button>' +
-      '<button class="btn-remove-row" onclick="removeHeroSlide(this)">✕ Remover</button>' +
-    '</div>' +
-    '<div class="slide-body">' +
-      '<div class="field"><label>Badge superior</label>' +
-        '<input type="text" class="slide-badge" value="' + esc(slide.badge || '') + '" placeholder="Baixada Santista · SP">' +
-      '</div>' +
-      '<div class="field"><label>Título (pode usar &lt;em&gt; para destaque)</label>' +
-        '<input type="text" class="slide-title" value="' + esc(slide.titleHtml || '') + '" placeholder="Sua empresa &lt;em&gt;visível&lt;/em&gt; onde os clientes estão">' +
-      '</div>' +
-      '<div class="field"><label>Subtítulo</label>' +
-        '<textarea class="slide-sub" rows="2" placeholder="Descrição do slide">' + esc(slide.sub || '') + '</textarea>' +
-      '</div>' +
-      
-      '<div class="divider"></div>' +
-      '<div class="card-label">Proof Pills</div>' +
-      '<div class="proof-pills-group">' + proofPillsHtml + '</div>' +
-      '<button class="btn-add-mini" onclick="addProofPill(this)">+ Proof pill</button>' +
-      
-      '<div class="divider"></div>' +
-      '<div class="card-label">Botões</div>' +
-      '<div class="g2">' +
-        '<div class="field"><label>Botão primário - texto</label>' +
-          '<input type="text" class="btn-primary-text" value="' + esc(slide.buttons?.primaryText || '') + '" placeholder="Diagnóstico grátis →">' +
-        '</div>' +
-        '<div class="field"><label>Botão primário - link</label>' +
-          '<input type="url" class="btn-primary-href" value="' + esc(slide.buttons?.primaryHref || '') + '" placeholder="https://wa.me/55...">' +
-        '</div>' +
-      '</div>' +
-      '<div class="g2">' +
-        '<div class="field"><label>Botão secundário - texto</label>' +
-          '<input type="text" class="btn-secondary-text" value="' + esc(slide.buttons?.secondaryText || '') + '" placeholder="Ver serviços">' +
-        '</div>' +
-        '<div class="field"><label>Botão secundário - link</label>' +
-          '<input type="url" class="btn-secondary-href" value="' + esc(slide.buttons?.secondaryHref || '') + '" placeholder="#servicos">' +
-        '</div>' +
-      '</div>' +
-      
-      '<div class="divider"></div>' +
-      '<div class="card-label">Numbers (números de impacto)</div>' +
-      '<div class="numbers-group">' + numbersHtml + '</div>' +
-      '<button class="btn-add-mini" onclick="addNumberRow(this)">+ Number</button>' +
-      
-      '<div class="divider"></div>' +
-      '<div class="card-label">Visual (painel direito)</div>' +
-      '<div class="g2">' +
-        '<div class="field"><label>Float badge</label>' +
-          '<input type="text" class="visual-float-badge" value="' + esc(slide.visual?.floatBadge || '') + '" placeholder="+47 visitas essa semana">' +
-        '</div>' +
-        '<div class="field"><label>Top chip</label>' +
-          '<input type="text" class="visual-top-chip" value="' + esc(slide.visual?.topChip || '') + '" placeholder="Perfil otimizado">' +
-        '</div>' +
-      '</div>' +
-      '<div class="g2">' +
-        '<div class="field"><label>Bottom chip</label>' +
-          '<input type="text" class="visual-bottom-chip" value="' + esc(slide.visual?.bottomChip || '') + '" placeholder="Gestão recorrente">' +
-        '</div>' +
-        '<div class="field"><label>Panel label</label>' +
-          '<input type="text" class="visual-panel-label" value="' + esc(slide.visual?.panelLabel || '') + '" placeholder="Google Meu Negócio — Painel">' +
-        '</div>' +
-      '</div>' +
-      '<div class="g2">' +
-        '<div class="field"><label>Business name</label>' +
-          '<input type="text" class="visual-business-name" value="' + esc(slide.visual?.businessName || '') + '" placeholder="Pizzaria do Bairro">' +
-        '</div>' +
-        '<div class="field"><label>Business address</label>' +
-          '<input type="text" class="visual-business-address" value="' + esc(slide.visual?.businessAddress || '') + '" placeholder="Rua das Flores, 123 · Praia Grande">' +
-        '</div>' +
-      '</div>' +
-      '<div class="field"><label>Score</label>' +
-        '<input type="text" class="visual-score" value="' + esc(slide.visual?.score || '') + '" placeholder="4.9 (127 avaliações)">' +
-      '</div>' +
-      
-      '<div class="card-label" style="margin-top:.75rem">Tags</div>' +
-      '<div class="tags-group">' + tagsHtml + '</div>' +
-      '<button class="btn-add-mini" onclick="addTag(this)">+ Tag</button>' +
-      
-      '<div class="card-label" style="margin-top:.75rem">Metrics</div>' +
-      '<div class="metrics-group">' + metricsHtml + '</div>' +
-      '<button class="btn-add-mini" onclick="addMetric(this)">+ Metric</button>' +
-      
-      '<div class="divider"></div>' +
-      '<div class="card-label">Insight (card inferior)</div>' +
-      '<div class="field"><label>Insight label</label>' +
-        '<input type="text" class="visual-insight-label" value="' + esc(slide.visual?.insightLabel || '') + '" placeholder="Resumo estratégico">' +
-      '</div>' +
-      '<div class="field"><label>Insight title</label>' +
-        '<input type="text" class="visual-insight-title" value="' + esc(slide.visual?.insightTitle || '') + '" placeholder="Mais descoberta local, mais contato qualificado.">' +
-      '</div>' +
-      '<div class="field"><label>Insight text</label>' +
-        '<textarea class="visual-insight-text" rows="2" placeholder="Texto descritivo">' + esc(slide.visual?.insightText || '') + '</textarea>' +
-      '</div>' +
-    '</div>';
-  
-  return card;
-}
 
-function toggleSlideCard(btn) {
-  const card = btn.closest('.hero-slide-card');
-  card.classList.toggle('collapsed');
-  btn.textContent = card.classList.contains('collapsed') ? '▶' : '▼';
-}
-
-function removeHeroSlide(btn) {
-  if (confirm('Remover este slide?')) {
-    btn.closest('.hero-slide-card').remove();
-  }
-}
-
-function addHeroSlide() {
-  const container = document.getElementById('hero-slides-container');
-  const emptySlide = {
-    badge: '',
-    titleHtml: '',
-    sub: '',
-    proofPills: ['', ''],
-    buttons: { primaryText: '', primaryHref: '', secondaryText: '', secondaryHref: '' },
-    numbers: [{ value: '', label: '' }, { value: '', label: '' }, { value: '', label: '' }],
-    visual: {
-      floatBadge: '',
-      topChip: '',
-      bottomChip: '',
-      panelLabel: '',
-      businessName: '',
-      businessAddress: '',
-      score: '',
-      tags: ['', '', ''],
-      metrics: [{ number: '', label: '' }, { number: '', label: '' }, { number: '', label: '' }],
-      insightLabel: '',
-      insightTitle: '',
-      insightText: ''
-    }
-  };
-  
-  const slides = Array.from(container.querySelectorAll('.hero-slide-card'));
-  container.appendChild(buildHeroSlideCard(emptySlide, slides.length));
-}
-
-function addProofPill(btn) {
-  const group = btn.previousElementSibling;
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.className = 'proof-pill-input';
-  input.placeholder = 'Nova proof pill';
-  group.appendChild(input);
-}
-
-function addNumberRow(btn) {
-  const group = btn.previousElementSibling;
-  const row = document.createElement('div');
-  row.className = 'number-row';
-  row.innerHTML =
-    '<input type="text" class="number-value" placeholder="Valor">' +
-    '<input type="text" class="number-label" placeholder="Label">' +
-    '<button class="btn-remove-mini" onclick="this.closest(\'.number-row\').remove()">✕</button>';
-  group.appendChild(row);
-}
-
-function addTag(btn) {
-  const group = btn.previousElementSibling;
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.className = 'tag-input';
-  input.placeholder = 'Nova tag';
-  group.appendChild(input);
-}
-
-function addMetric(btn) {
-  const group = btn.previousElementSibling;
-  const row = document.createElement('div');
-  row.className = 'metric-row';
-  row.innerHTML =
-    '<input type="text" class="metric-number" placeholder="847">' +
-    '<input type="text" class="metric-label" placeholder="Label">' +
-    '<button class="btn-remove-mini" onclick="this.closest(\'.metric-row\').remove()">✕</button>';
-  group.appendChild(row);
-}
 
