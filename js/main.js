@@ -16,6 +16,55 @@ function applyContentConfig(content) {
   });
 }
 
+function setMetaByName(name, content) {
+  if (!content) return;
+  const el = document.querySelector('meta[name="' + name + '"]');
+  if (el) el.setAttribute('content', content);
+}
+
+function setMetaByProperty(prop, content) {
+  if (!content) return;
+  const el = document.querySelector('meta[property="' + prop + '"]');
+  if (el) el.setAttribute('content', content);
+}
+
+function getCurrentPageKey() {
+  const page = document.body && document.body.dataset ? document.body.dataset.page : '';
+  if (page) return page;
+
+  const path = (location.pathname || '').toLowerCase();
+  if (path.endsWith('/servicos.html')) return 'servicos';
+  if (path.endsWith('/planos.html')) return 'planos';
+  return 'index';
+}
+
+function applySeoConfig(config) {
+  const seo = config && config.seo;
+  if (!seo) return;
+
+  const pageKey = getCurrentPageKey();
+  const pageSeo = seo.pages && seo.pages[pageKey] ? seo.pages[pageKey] : null;
+  if (!pageSeo) return;
+
+  if (pageSeo.title) {
+    document.title = pageSeo.title;
+    setMetaByProperty('og:title', pageSeo.title);
+    setMetaByName('twitter:title', pageSeo.title);
+  }
+  if (pageSeo.description) {
+    setMetaByName('description', pageSeo.description);
+    setMetaByProperty('og:description', pageSeo.description);
+    setMetaByName('twitter:description', pageSeo.description);
+  }
+  if (pageSeo.keywords) {
+    setMetaByName('keywords', pageSeo.keywords);
+  }
+  if (seo.ogImage) {
+    setMetaByProperty('og:image', seo.ogImage);
+    setMetaByName('twitter:image', seo.ogImage);
+  }
+}
+
 async function loadContentConfig() {
   try {
     const content = await window.loadSiteData('content', 'data/content.json');
@@ -27,6 +76,18 @@ async function loadContentConfig() {
 }
 
 loadContentConfig();
+
+async function loadSeoConfig() {
+  try {
+    const config = await window.loadSiteData('config', 'data/config.json');
+    if (!config) return;
+    applySeoConfig(config);
+  } catch (err) {
+    console.warn('seo config load failed', err);
+  }
+}
+
+loadSeoConfig();
 
 // Scroll reveal
 const observer = new IntersectionObserver((entries) => {

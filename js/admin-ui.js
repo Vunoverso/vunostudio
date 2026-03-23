@@ -63,6 +63,29 @@ function showPanel(id, el) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: CONFIG
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateConfig(d) {
+  const seo = d && d.seo ? d.seo : {};
+  const pages = seo.pages || {};
+  sv('config_business_name', seo.businessName || '');
+  sv('config_og_image', seo.ogImage || '');
+
+  sv('seo_index_title', pages.index?.title || '');
+  sv('seo_index_description', pages.index?.description || '');
+  sv('seo_index_keywords', pages.index?.keywords || '');
+
+  sv('seo_servicos_title', pages.servicos?.title || '');
+  sv('seo_servicos_description', pages.servicos?.description || '');
+  sv('seo_servicos_keywords', pages.servicos?.keywords || '');
+
+  sv('seo_planos_title', pages.planos?.title || '');
+  sv('seo_planos_description', pages.planos?.description || '');
+  sv('seo_planos_keywords', pages.planos?.keywords || '');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // POPULATE: CONTATO
 // ═══════════════════════════════════════════════════════════════════════════
 

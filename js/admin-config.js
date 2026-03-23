@@ -7,6 +7,22 @@ const ADMIN_CONFIG = {
   // Painéis de navegação sidebar
   panels: [
     {
+      id: 'config',
+      name: 'Configurações do Site',
+      icon: '⚙️',
+      section: 'Conteúdo',
+      sectionIndex: 0,
+      description: 'SEO básico, nome do negócio e imagem social usada no compartilhamento.'
+    },
+    {
+      id: 'hero',
+      name: 'Hero — Conteúdo',
+      icon: '🏠',
+      section: 'Conteúdo',
+      sectionIndex: 0,
+      description: 'Texto, botões e imagem do bloco principal da homepage.'
+    },
+    {
       id: 'contato',
       name: 'Contato & Links',
       icon: '📞',

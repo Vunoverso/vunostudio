@@ -42,6 +42,11 @@
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">Conteúdo</div>
+      <div class="nav-item" onclick="showPanel('config', this)">
+        <span class="nav-icon">⚙️</span>
+        <div class="nav-dot"></div>
+        Configurações do Site
+      </div>
       <div class="nav-item active" onclick="showPanel('hero', this)">
         <span class="nav-icon">�</span>
         <div class="nav-dot"></div>
@@ -81,6 +86,53 @@
 
   <!-- MAIN -->
   <main class="main">
+
+    <!-- ══════════════════ CONFIG ══════════════════ -->
+    <div id="panel-config" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Configurações do Site</div>
+        <div class="panel-sub">Gerencie SEO básico, nome do negócio e imagem social usada no compartilhamento.</div>
+      </div>
+      <div class="info-box" id="statusConfig">Carregando <code>data/config.json</code>…</div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">SEO Global</div></div>
+        <div class="g2">
+          <div class="field"><label>Nome do negócio</label>
+            <input type="text" id="config_business_name" placeholder="Vuno Studio">
+          </div>
+          <div class="field"><label>Imagem social (OG/Twitter)</label>
+            <input type="text" id="config_og_image" placeholder="https://www.vunostudio.com.br/og-image.svg">
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">SEO — Home</div></div>
+        <div class="field"><label>Título</label><input type="text" id="seo_index_title" placeholder="Vuno Studio | Presença Digital e Comunicação Visual na Baixada Santista"></div>
+        <div class="field"><label>Descrição</label><textarea id="seo_index_description" rows="3" placeholder="Organizamos sua presença digital e visual..."></textarea></div>
+        <div class="field"><label>Palavras-chave</label><textarea id="seo_index_keywords" rows="3" placeholder="presença digital, comunicação visual, google perfil da empresa..."></textarea></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">SEO — Serviços</div></div>
+        <div class="field"><label>Título</label><input type="text" id="seo_servicos_title" placeholder="Serviços de Presença Digital e Comunicação Visual | Vuno Studio"></div>
+        <div class="field"><label>Descrição</label><textarea id="seo_servicos_description" rows="3" placeholder="Conheça os serviços da Vuno Studio..."></textarea></div>
+        <div class="field"><label>Palavras-chave</label><textarea id="seo_servicos_keywords" rows="3" placeholder="servicos de marketing digital, presença digital..."></textarea></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">SEO — Planos</div></div>
+        <div class="field"><label>Título</label><input type="text" id="seo_planos_title" placeholder="Planos de Presença Digital, Visual e Tráfego | Vuno Studio"></div>
+        <div class="field"><label>Descrição</label><textarea id="seo_planos_description" rows="3" placeholder="Veja os planos da Vuno Studio..."></textarea></div>
+        <div class="field"><label>Palavras-chave</label><textarea id="seo_planos_keywords" rows="3" placeholder="planos marketing digital, plano presença digital..."></textarea></div>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveConfig()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Esses dados atualizam título, descrição, keywords e imagem social das páginas públicas.</div>
+      </div>
+    </div>
 
     <!-- ══════════════════ HERO ══════════════════ -->
     <div id="panel-hero" class="panel active">

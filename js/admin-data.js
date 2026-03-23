@@ -7,6 +7,7 @@
 let _content = null;
 let _planos = null;
 let _images = null;
+let _config = null;
 
 // ─── Utilitários ─────────────────────────────────────────────────────────────
 
@@ -109,6 +110,11 @@ async function loadFromSupabase(key, fallbackUrl, statusId, callback) {
 // ─── Carregamento inicial ─────────────────────────────────────────────────────
 
 function loadAll() {
+  loadFromSupabase('config', 'data/config.json', 'statusConfig', function(d) {
+    _config = d;
+    populateConfig(d);
+  });
+
   loadHeroData();
   
   loadFromSupabase('content', 'data/content.json', 'statusContato', function(d) {
@@ -147,6 +153,32 @@ function collectContato() {
       index: { navCta: { text: gv('cta_index_text'), href: gv('cta_index_href') } },
       servicos: { navCta: { text: gv('cta_servicos_text'), href: gv('cta_servicos_href') } },
       planos: { navCta: { text: gv('cta_planos_text'), href: gv('cta_planos_href') } }
+    }
+  };
+}
+
+function collectConfig() {
+  return {
+    seo: {
+      businessName: gv('config_business_name'),
+      ogImage: gv('config_og_image'),
+      pages: {
+        index: {
+          title: gv('seo_index_title'),
+          description: gv('seo_index_description'),
+          keywords: gv('seo_index_keywords')
+        },
+        servicos: {
+          title: gv('seo_servicos_title'),
+          description: gv('seo_servicos_description'),
+          keywords: gv('seo_servicos_keywords')
+        },
+        planos: {
+          title: gv('seo_planos_title'),
+          description: gv('seo_planos_description'),
+          keywords: gv('seo_planos_keywords')
+        }
+      }
     }
   };
 }
@@ -262,6 +294,11 @@ function collectGaleria() {
 
 async function saveContato() {
   await saveToSupabase('content', collectContato());
+}
+
+async function saveConfig() {
+  await saveToSupabase('config', collectConfig());
+  toast('✅ Configurações salvas! Recarregue as páginas públicas para conferir o SEO.');
 }
 
 async function savePlanos() {

@@ -1,0 +1,23 @@
+{
+  "seo": {
+    "businessName": "Vuno Studio",
+    "ogImage": "https://www.vunostudio.com.br/og-image.svg",
+    "pages": {
+      "index": {
+        "title": "Vuno Studio | Presença Digital e Comunicação Visual na Baixada Santista",
+        "description": "Organizamos sua presença digital e visual: Google Perfil da Empresa, Instagram, fachadas, placas e identidade visual. Atendimento na Baixada Santista.",
+        "keywords": "presença digital, comunicação visual, google perfil da empresa, gestão de instagram, fachada comercial, identidade visual, marketing local, baixada santista, santos, praia grande, são vicente, guaruja"
+      },
+      "servicos": {
+        "title": "Serviços de Presença Digital e Comunicação Visual | Vuno Studio",
+        "description": "Conheça os serviços da Vuno Studio: presença digital, comunicação visual e tráfego pago com atendimento local na Baixada Santista.",
+        "keywords": "servicos de marketing digital, presença digital, comunicação visual, google perfil da empresa, instagram comercial, tráfego pago, baixada santista"
+      },
+      "planos": {
+        "title": "Planos de Presença Digital, Visual e Tráfego | Vuno Studio",
+        "description": "Veja os planos da Vuno Studio para presença digital, comunicação visual e tráfego pago. Valores transparentes e foco em resultado real.",
+        "keywords": "planos marketing digital, plano presença digital, plano tráfego pago, comunicação visual preços, gestão de google perfil, baixada santista"
+      }
+    }
+  }
+}
