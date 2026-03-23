@@ -42,7 +42,12 @@
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">Conteúdo</div>
-      <div class="nav-item active" onclick="showPanel('contato', this)">
+      <div class="nav-item active" onclick="showPanel('hero', this)">
+        <span class="nav-icon">🎠</span>
+        <div class="nav-dot"></div>
+        Hero Carousel
+      </div>
+      <div class="nav-item" onclick="showPanel('contato', this)">
         <span class="nav-icon">📞</span>
         <div class="nav-dot"></div>
         Contato &amp; Links
@@ -77,8 +82,26 @@
   <!-- MAIN -->
   <main class="main">
 
+    <!-- ══════════════════ HERO CAROUSEL ══════════════════ -->
+    <div id="panel-hero" class="panel active">
+      <div class="panel-top">
+        <div class="panel-title">Hero Carousel</div>
+        <div class="panel-sub">Gerencie os slides do carousel da homepage. Arraste para reordenar.</div>
+      </div>
+      <div class="info-box" id="statusHero">Carregando <code>data/index.json</code>…</div>
+
+      <div id="hero-slides-container"></div>
+
+      <button class="btn-add" onclick="addHeroSlide()" style="margin-top: 1rem">+ Adicionar novo slide</button>
+
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveHeroSlides()">💾 Salvar no Banco</button>
+        <div class="actions-hint">As alterações são salvas diretamente no Supabase e refletidas no site automaticamente.</div>
+      </div>
+    </div>
+
     <!-- ══════════════════ CONTATO ══════════════════ -->
-    <div id="panel-contato" class="panel active">
+    <div id="panel-contato" class="panel">
       <div class="panel-top">
         <div class="panel-title">Contato &amp; Links</div>
         <div class="panel-sub">Número de WhatsApp, e-mail e textos dos botões do menu em cada página.</div>

@@ -109,6 +109,8 @@ async function loadFromSupabase(key, fallbackUrl, statusId, callback) {
 // ─── Carregamento inicial ─────────────────────────────────────────────────────
 
 function loadAll() {
+  loadHeroData();
+  
   loadFromSupabase('content', 'data/content.json', 'statusContato', function(d) {
     _content = d;
     populateContato(d);
@@ -269,3 +271,91 @@ async function savePlanos() {
 async function saveGaleria() {
   await saveToSupabase('images', collectGaleria());
 }
+
+// ─── Hero Carousel ────────────────────────────────────────────────────────────
+
+let _index = null;
+
+/**
+ * Carregar data/index.json (hero slides + cta)
+ */
+function loadHeroData() {
+  loadFromSupabase('index', 'data/index.json', 'statusHero', function(d) {
+    _index = d;
+    populateHeroSlides(d.hero || []);
+  });
+}
+
+/**
+ * Coletar dados do formulário de hero slides
+ */
+function collectHeroSlides() {
+  const slidesContainer = document.getElementById('hero-slides-container');
+  const slideCards = Array.from(slidesContainer.querySelectorAll('.hero-slide-card'));
+  
+  const slides = slideCards.map(card => {
+    // Coletar proof pills
+    const pillInputs = Array.from(card.querySelectorAll('.proof-pill-input'));
+    const proofPills = pillInputs.map(input => input.value.trim()).filter(v => v);
+    
+    // Coletar numbers
+    const numberRows = Array.from(card.querySelectorAll('.number-row'));
+    const numbers = numberRows.map(row => ({
+      value: row.querySelector('.number-value').value,
+      label: row.querySelector('.number-label').value
+    }));
+    
+    // Coletar tags
+    const tagInputs = Array.from(card.querySelectorAll('.tag-input'));
+    const tags = tagInputs.map(input => input.value.trim()).filter(v => v);
+    
+    // Coletar metrics
+    const metricRows = Array.from(card.querySelectorAll('.metric-row'));
+    const metrics = metricRows.map(row => ({
+      number: row.querySelector('.metric-number').value,
+      label: row.querySelector('.metric-label').value
+    }));
+    
+    return {
+      badge: card.querySelector('.slide-badge').value,
+      titleHtml: card.querySelector('.slide-title').value,
+      sub: card.querySelector('.slide-sub').value,
+      proofPills: proofPills,
+      buttons: {
+        primaryText: card.querySelector('.btn-primary-text').value,
+        primaryHref: card.querySelector('.btn-primary-href').value,
+        secondaryText: card.querySelector('.btn-secondary-text').value,
+        secondaryHref: card.querySelector('.btn-secondary-href').value
+      },
+      numbers: numbers,
+      visual: {
+        floatBadge: card.querySelector('.visual-float-badge').value,
+        topChip: card.querySelector('.visual-top-chip').value,
+        bottomChip: card.querySelector('.visual-bottom-chip').value,
+        panelLabel: card.querySelector('.visual-panel-label').value,
+        businessName: card.querySelector('.visual-business-name').value,
+        businessAddress: card.querySelector('.visual-business-address').value,
+        score: card.querySelector('.visual-score').value,
+        tags: tags,
+        metrics: metrics,
+        insightLabel: card.querySelector('.visual-insight-label').value,
+        insightTitle: card.querySelector('.visual-insight-title').value,
+        insightText: card.querySelector('.visual-insight-text').value
+      }
+    };
+  });
+  
+  return {
+    hero: slides,
+    cta: _index?.cta || {}
+  };
+}
+
+/**
+ * Salvar hero slides
+ */
+async function saveHeroSlides() {
+  await saveToSupabase('index', collectHeroSlides());
+  toast('✅ Slides do hero salvos! Recarregue a homepage para ver as alterações.');
+}
+

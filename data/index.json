@@ -1,42 +1,120 @@
 {
-  "hero": {
-    "badge": "Baixada Santista · SP",
-    "titleHtml": "Sua empresa <em>visível</em> onde os clientes estão",
-    "sub": "Gestão completa de presença digital + comunicação visual física. Google, Instagram, fachadas e muito mais — tudo em um único parceiro.",
-    "proofPills": [
-      "Presença digital + visual físico",
-      "Atendimento local e estratégico"
-    ],
-    "buttons": {
-      "primaryText": "Diagnóstico grátis →",
-      "primaryHref": "https://wa.me/55?text=Quero%20um%20diagnóstico%20gratuito",
-      "secondaryText": "Ver serviços",
-      "secondaryHref": "#servicos"
-    },
-    "numbers": [
-      { "value": "3x", "label": "mais cliques no Google" },
-      { "value": "48h", "label": "para entrar no ar" },
-      { "value": "100%", "label": "local e presencial" }
-    ],
-    "visual": {
-      "floatBadge": "+47 visitas essa semana",
-      "topChip": "Perfil otimizado",
-      "bottomChip": "Gestão recorrente",
-      "panelLabel": "Google Meu Negócio — Painel",
-      "businessName": "Pizzaria do Bairro",
-      "businessAddress": "Rua das Flores, 123 · Praia Grande",
-      "score": "4.9 (127 avaliações)",
-      "tags": ["Aberto agora", "Delivery", "Pizza"],
-      "metrics": [
-        { "number": "847", "label": "Visualizações" },
-        { "number": "124", "label": "Cliques rota" },
-        { "number": "47", "label": "Ligações" }
+  "hero": [
+    {
+      "badge": "Baixada Santista · SP",
+      "titleHtml": "Sua empresa <em>visível</em> onde os clientes estão",
+      "sub": "Gestão completa de presença digital + comunicação visual física. Google, Instagram, fachadas e muito mais — tudo em um único parceiro.",
+      "proofPills": [
+        "Presença digital + visual físico",
+        "Atendimento local e estratégico"
       ],
-      "insightLabel": "Resumo estratégico",
-      "insightTitle": "Mais descoberta local, mais contato qualificado.",
-      "insightText": "Google, Instagram e comunicação visual alinhados para gerar presença consistente na sua região."
+      "buttons": {
+        "primaryText": "Diagnóstico grátis →",
+        "primaryHref": "https://wa.me/55?text=Quero%20um%20diagnóstico%20gratuito",
+        "secondaryText": "Ver serviços",
+        "secondaryHref": "#servicos"
+      },
+      "numbers": [
+        { "value": "3x", "label": "mais cliques no Google" },
+        { "value": "48h", "label": "para entrar no ar" },
+        { "value": "100%", "label": "local e presencial" }
+      ],
+      "visual": {
+        "floatBadge": "+47 visitas essa semana",
+        "topChip": "Perfil otimizado",
+        "bottomChip": "Gestão recorrente",
+        "panelLabel": "Google Meu Negócio — Painel",
+        "businessName": "Pizzaria do Bairro",
+        "businessAddress": "Rua das Flores, 123 · Praia Grande",
+        "score": "4.9 (127 avaliações)",
+        "tags": ["Aberto agora", "Delivery", "Pizza"],
+        "metrics": [
+          { "number": "847", "label": "Visualizações" },
+          { "number": "124", "label": "Cliques rota" },
+          { "number": "47", "label": "Ligações" }
+        ],
+        "insightLabel": "Resumo estratégico",
+        "insightTitle": "Mais descoberta local, mais contato qualificado.",
+        "insightText": "Google, Instagram e comunicação visual alinhados para gerar presença consistente na sua região."
+      }
+    },
+    {
+      "badge": "Presença Digital Completa",
+      "titleHtml": "Do <em>zero</em> ao primeiro cliente em 48h",
+      "sub": "Criação de perfis, configuração profissional e primeiros posts. Seu negócio online enquanto você foca no atendimento.",
+      "proofPills": [
+        "Google Meu Negócio configurado",
+        "Instagram e Facebook ativos"
+      ],
+      "buttons": {
+        "primaryText": "Quero começar →",
+        "primaryHref": "https://wa.me/55?text=Quero%20come%C3%A7ar%20minha%20presen%C3%A7a%20digital",
+        "secondaryText": "Ver planos",
+        "secondaryHref": "planos.html"
+      },
+      "numbers": [
+        { "value": "R$ 297", "label": "por mês" },
+        { "value": "4 posts", "label": "por semana" },
+        { "value": "0", "label": "setup único" }
+      ],
+      "visual": {
+        "floatBadge": "Plano Presença",
+        "topChip": "Setup em 48h",
+        "bottomChip": "Sem taxa de abertura",
+        "panelLabel": "Instagram — Painel de Métricas",
+        "businessName": "Salão Beleza Nova",
+        "businessAddress": "Av. Principal, 456 · Santos",
+        "score": "4.8 (89 avaliações)",
+        "tags": ["Novo no bairro", "Agendamento online", "Promoção"],
+        "metrics": [
+          { "number": "1.2k", "label": "Seguidores" },
+          { "number": "68", "label": "Curtidas/semana" },
+          { "number": "23", "label": "DMs recebidas" }
+        ],
+        "insightLabel": "Resultado em 30 dias",
+        "insightTitle": "Presença consolidada, primeiros clientes chegando.",
+        "insightText": "Perfis profissionais, conteúdo estratégico e atendimento otimizado para converter visitantes em clientes."
+      }
+    },
+    {
+      "badge": "Comunicação Visual Física",
+      "titleHtml": "<em>Fachadas</em> que vendem 24h por dia",
+      "sub": "ACM, letras caixa, adesivos e impressos. Sua marca visível na rua, atraindo clientes que passam todo dia em frente ao seu negócio.",
+      "proofPills": [
+        "Projeto + Produção + Instalação",
+        "Orçamento sem compromisso"
+      ],
+      "buttons": {
+        "primaryText": "Pedir orçamento →",
+        "primaryHref": "https://wa.me/55?text=Quero%20or%C3%A7amento%20de%20comunica%C3%A7%C3%A3o%20visual",
+        "secondaryText": "Ver produtos",
+        "secondaryHref": "servicos.html#visual"
+      },
+      "numbers": [
+        { "value": "7 dias", "label": "prazo médio" },
+        { "value": "5 anos", "label": "garantia ACM" },
+        { "value": "100%", "label": "produção local" }
+      ],
+      "visual": {
+        "floatBadge": "Orçamento em 24h",
+        "topChip": "Projeto incluso",
+        "bottomChip": "Instalação garantida",
+        "panelLabel": "Projetos — Galeria",
+        "businessName": "Mercadinho Preço Bom",
+        "businessAddress": "Rua Comércio, 789 · São Vicente",
+        "score": "5.0 (34 instalações)",
+        "tags": ["ACM Premium", "Letras caixa LED", "Adesivos"],
+        "metrics": [
+          { "number": "12m²", "label": "Fachada renovada" },
+          { "number": "+40%", "label": "Visibilidade" },
+          { "number": "48h", "label": "Instalação" }
+        ],
+        "insightLabel": "Resultado comprovado",
+        "insightTitle": "Fachada nova, movimento na porta.",
+        "insightText": "Identidade visual profissional que destaca seu negócio na rua e atrai olhares de quem passa."
+      }
     }
-  },
+  ],
   "cta": {
     "title": "Pronto para ser encontrado?",
     "sub": "Diagnóstico gratuito. Sem compromisso. Atendemos presencialmente na Baixada Santista.",

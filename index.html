@@ -40,93 +40,32 @@
 <script src="js/nav.js"></script>
 
 <main>
-<!-- HERO -->
+<!-- HERO CAROUSEL -->
 <section class="hero-section">
   <div class="hero-orb hero-orb-left"></div>
   <div class="hero-orb hero-orb-right"></div>
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">Baixada Santista · SP</div>
-      <h1>Sua empresa <em>visível</em> onde os clientes estão</h1>
-      <p>Gestão completa de presença digital + comunicação visual física. Google, Instagram, fachadas e muito mais — tudo em um único parceiro.</p>
-      <div class="hero-proof">
-        <div class="proof-pill">Presença digital + visual físico</div>
-        <div class="proof-pill">Atendimento local e estratégico</div>
-      </div>
-      <div class="hero-btns">
-        <a href="https://wa.me/55?text=Quero%20um%20diagnóstico%20gratuito" class="btn-primary" target="_blank">Diagnóstico grátis →</a>
-        <a href="#servicos" class="btn-sec">Ver serviços</a>
-      </div>
-      <div class="hero-nums">
-        <div class="num-item">
-          <div class="num-val">3x</div>
-          <div class="num-lbl">mais cliques no Google</div>
-        </div>
-        <div class="num-item">
-          <div class="num-val">48h</div>
-          <div class="num-lbl">para entrar no ar</div>
-        </div>
-        <div class="num-item">
-          <div class="num-val">100%</div>
-          <div class="num-lbl">local e presencial</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="float-badge">+47 visitas essa semana</div>
-      <div class="visual-chip chip-top">Perfil otimizado</div>
-      <div class="visual-chip chip-bottom">Gestão recorrente</div>
-      <div class="mockup-card">
-        <div class="mockup-header">
-          <div class="mockup-dots">
-            <div class="mockup-dot" style="background:#FF5F57"></div>
-            <div class="mockup-dot" style="background:#FFBD2E"></div>
-            <div class="mockup-dot" style="background:#28C840"></div>
-          </div>
-          <span class="mockup-label">Google Meu Negócio — Painel</span>
-        </div>
-        <div class="mockup-body">
-          <div class="google-card">
-            <div class="gc-top">
-              <div class="gc-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="10" r="4" fill="#1D9E75"/>
-                  <path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 8 14 8 14s8-8.75 8-14c0-4.42-3.58-8-8-8z" fill="rgba(29,158,117,.3)"/>
-                </svg>
-              </div>
-              <div>
-                <div class="gc-name">Pizzaria do Bairro</div>
-                <div class="gc-addr">Rua das Flores, 123 · Praia Grande</div>
-              </div>
-            </div>
-            <div class="gc-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-              <span class="gc-score">4.9 (127 avaliações)</span>
-            </div>
-            <div class="gc-tags">
-              <span class="gc-tag">Aberto agora</span>
-              <span class="gc-tag">Delivery</span>
-              <span class="gc-tag">Pizza</span>
-            </div>
-          </div>
-          <div class="metric-row">
-            <div class="metric-box"><div class="metric-num">847</div><div class="metric-txt">Visualizações</div></div>
-            <div class="metric-box"><div class="metric-num">124</div><div class="metric-txt">Cliques rota</div></div>
-            <div class="metric-box"><div class="metric-num">47</div><div class="metric-txt">Ligações</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="insight-card">
-        <div class="insight-label">Resumo estratégico</div>
-        <div class="insight-title">Mais descoberta local, mais contato qualificado.</div>
-        <p>Google, Instagram e comunicação visual alinhados para gerar presença consistente na sua região.</p>
-      </div>
-    </div>
+  
+  <!-- Carousel Wrapper -->
+  <div class="hero-carousel">
+    <!-- Slides serão injetados aqui pelo JS -->
+    <div class="hero-slides" id="heroSlides"></div>
+    
+    <!-- Controles -->
+    <button class="hero-nav hero-prev" aria-label="Slide anterior">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button class="hero-nav hero-next" aria-label="Próximo slide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+    
+    <!-- Indicadores -->
+    <div class="hero-dots" id="heroDots"></div>
   </div>
 </section>
-
-<!-- restante do markup (mantido do original) -->
 
 <!-- CTA FINAL -->
 <section class="cta-final" id="contato">
