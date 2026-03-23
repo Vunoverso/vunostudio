@@ -40,24 +40,252 @@
 <script src="js/nav.js"></script>
 
 <main>
-<!-- HERO CAROUSEL -->
-<section class="hero-section">
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="hero-section" id="hero">
   <div class="hero-orb hero-orb-left"></div>
   <div class="hero-orb hero-orb-right"></div>
-  
-  <!-- Carousel Wrapper -->
-  <div class="hero-carousel">
-    <!-- Slides serão injetados aqui pelo JS -->
-    <div class="hero-slides" id="heroSlides"></div>
-    
-    <!-- Indicadores -->
-    <div class="hero-dots" id="heroDots"></div>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge" id="heroBadge">Baixada Santista · SP</div>
+      <h1 id="heroTitle">Sua empresa precisa ser <em>vista</em> — na rua e no digital</h1>
+      <p id="heroSub">Organizamos sua presença completa: Google, Instagram, fachadas e identidade visual. Sem frescura, sem promessa vazia.</p>
+      <div class="hero-proof" id="heroProof">
+        <div class="proof-pill">Presença digital estruturada</div>
+        <div class="proof-pill">Comunicação visual real</div>
+      </div>
+      <div class="hero-btns" id="heroBtns">
+        <a href="https://wa.me/55?text=Olá!%20Quero%20organizar%20minha%20empresa%20com%20a%20Vuno%20Studio" class="btn-primary" target="_blank" id="heroBtnPrimary">Quero organizar minha empresa →</a>
+        <a href="#servicos" class="btn-sec" id="heroBtnSecondary">Ver como funciona</a>
+      </div>
+      <div class="hero-nums" id="heroNums">
+        <div class="num-item"><div class="num-val">48h</div><div class="num-lbl">para entrar no ar</div></div>
+        <div class="num-item"><div class="num-val">3x</div><div class="num-lbl">mais encontrado</div></div>
+        <div class="num-item"><div class="num-val">100%</div><div class="num-lbl">local e presencial</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="float-badge">+47 visitas essa semana</div>
+      <div class="visual-chip chip-top">Perfil otimizado</div>
+      <div class="mockup-card">
+        <div class="mockup-header">
+          <div class="mockup-dots">
+            <div class="mockup-dot" style="background:#FF5F57"></div>
+            <div class="mockup-dot" style="background:#FFBD2E"></div>
+            <div class="mockup-dot" style="background:#28C840"></div>
+          </div>
+          <span class="mockup-label">Google Meu Negócio — Painel</span>
+        </div>
+        <div class="mockup-body">
+          <div class="google-card">
+            <div class="gc-top">
+              <div class="gc-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="10" r="4" fill="#1D9E75"/>
+                  <path d="M12 2C7.58 2 4 5.58 4 10c0 5.25 8 14 8 14s8-8.75 8-14c0-4.42-3.58-8-8-8z" fill="rgba(29,158,117,.3)"/>
+                </svg>
+              </div>
+              <div>
+                <div class="gc-name">Pizzaria do Bairro</div>
+                <div class="gc-addr">Rua das Flores, 123 · Praia Grande</div>
+              </div>
+            </div>
+            <div class="gc-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+              <span class="gc-score">4.9 (127 avaliações)</span>
+            </div>
+            <div class="gc-tags">
+              <span class="gc-tag">Aberto agora</span>
+              <span class="gc-tag">Delivery</span>
+              <span class="gc-tag">Pizza</span>
+            </div>
+            <div class="metric-row">
+              <div class="metric-box"><div class="metric-num">847</div><div class="metric-txt">Visualizações</div></div>
+              <div class="metric-box"><div class="metric-num">124</div><div class="metric-txt">Cliques rota</div></div>
+              <div class="metric-box"><div class="metric-num">47</div><div class="metric-txt">Ligações</div></div>
+            </div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-label">Resumo estratégico</div>
+            <div class="insight-title">Mais descoberta local, mais contato qualificado.</div>
+            <p>Google, redes e visual alinhados para gerar presença consistente no seu bairro.</p>
+          </div>
+        </div>
+      </div>
+      <div class="visual-chip chip-bottom">Gestão recorrente</div>
+    </div>
   </div>
 </section>
 
-<!-- CTA FINAL -->
+<!-- ═══════════════════════════════════════════════
+     PROBLEMA — fundo escuro
+════════════════════════════════════════════════ -->
+<section class="sec-problema">
+  <div class="sec-wrap">
+    <span class="eyebrow eyebrow-cyan">O problema real</span>
+    <h2 class="sec-title-dark">A maioria das empresas perde clientes<br>porque está <em>mal apresentada</em></h2>
+    <p class="sec-sub-dark">Não é questão de produto ruim. É questão de presença. Empresas boas ficam invisíveis por erros simples que ninguém corrigiu.</p>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-icon">📍</div>
+        <h3>Invisível no Google</h3>
+        <p>Perfil desatualizado, horário errado, endereço incorreto. O cliente busca no celular e vai direto para o concorrente.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">📱</div>
+        <h3>Redes sem padrão</h3>
+        <p>Bio sem sentido, posts aleatórios, identidade inconsistente. Passa desconfiança antes mesmo de falar com você.</p>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">🏪</div>
+        <h3>Fachada sem impacto</h3>
+        <p>Letreiro velho, sem padrão visual na rua. O cliente passa em frente e entra no estabelecimento ao lado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     POSICIONAMENTO — fundo branco
+════════════════════════════════════════════════ -->
+<section class="sec-posic">
+  <div class="sec-posic-inner">
+    <div class="posic-text">
+      <span class="eyebrow eyebrow-verde">Nossa abordagem</span>
+      <h2>Não somos agência.<br><em>Organizamos sua empresa.</em></h2>
+      <p>Enquanto agências vendem posts e métricas de vaidade, nós estruturamos como sua empresa aparece no mundo — digital e físico.</p>
+      <p>Resultado real: empresa encontrada, empresa confiável, empresa que fecha negócio.</p>
+    </div>
+    <div class="pos-quote">
+      <blockquote>"A gente não vende post.<br>A gente organiza como sua empresa aparece no território."</blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PILARES / SERVIÇOS — fundo azul claro
+════════════════════════════════════════════════ -->
+<section class="sec-pilares" id="servicos">
+  <div class="sec-wrap">
+    <span class="eyebrow eyebrow-verde">Três pilares</span>
+    <h2 class="sec-title">Tudo que sua empresa precisa para ser levada a sério</h2>
+    <div class="pilares-grid">
+
+      <div class="pilar-card">
+        <div class="pilar-header pilar-hd-dig">
+          <span class="pilar-num">01</span>
+          <span class="pilar-label">Presença Digital</span>
+        </div>
+        <div class="pilar-body">
+          <p>Organizamos como sua empresa aparece online — Google, Instagram e Facebook com informações corretas, visual consistente e conteúdo com objetivo.</p>
+          <ul class="pilar-list">
+            <li>Google Perfil completo e otimizado</li>
+            <li>Instagram e Facebook estruturados</li>
+            <li>Conteúdo estratégico (não volumoso)</li>
+            <li>WhatsApp integrado e funcionando</li>
+          </ul>
+          <a href="planos.html" class="pilar-cta">Ver planos digitais →</a>
+        </div>
+      </div>
+
+      <div class="pilar-card pilar-card-dark">
+        <div class="pilar-header pilar-hd-vis">
+          <span class="pilar-num">02</span>
+          <span class="pilar-label">Comunicação Visual</span>
+        </div>
+        <div class="pilar-body">
+          <p>Deixamos sua empresa visível na rua. Fachadas, placas e adesivos com projeto, produção e instalação 100% local.</p>
+          <ul class="pilar-list">
+            <li>Fachadas em ACM e letras caixa</li>
+            <li>Adesivos e recortes em vinil</li>
+            <li>Sinalização interna e externa</li>
+            <li>Projeto + produção + instalação</li>
+          </ul>
+          <a href="servicos.html" class="pilar-cta">Ver produtos gráficos →</a>
+        </div>
+      </div>
+
+      <div class="pilar-card">
+        <div class="pilar-header pilar-hd-mar">
+          <span class="pilar-num">03</span>
+          <span class="pilar-label">Estrutura de Marca</span>
+        </div>
+        <div class="pilar-body">
+          <p>Padronizamos identidade para gerar confiança. Cores, fontes e artes-base alinhadas em digital e físico.</p>
+          <ul class="pilar-list">
+            <li>Identidade visual básica</li>
+            <li>Artes base para redes sociais</li>
+            <li>Material impresso padronizado</li>
+            <li>Consistência online + offline</li>
+          </ul>
+          <a href="planos.html" class="pilar-cta">Ver planos →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROCESSO — fundo escuro
+════════════════════════════════════════════════ -->
+<section class="sec-processo">
+  <div class="sec-wrap">
+    <span class="eyebrow eyebrow-cyan">Como funciona</span>
+    <h2 class="sec-title-dark">Do diagnóstico ao resultado em <em>poucos dias</em></h2>
+    <div class="processo-grid">
+      <div class="passo">
+        <div class="passo-num">01</div>
+        <h4>Diagnóstico grátis</h4>
+        <p>Analisamos Google, redes e fachada. Em 15 minutos você sabe o que está prejudicando sua visibilidade.</p>
+      </div>
+      <div class="passo-sep">→</div>
+      <div class="passo">
+        <div class="passo-num">02</div>
+        <h4>Pacote fechado</h4>
+        <p>Sem proposta vaga. Você recebe um plano claro com tudo que será feito, prazo e valor. Sem surpresa.</p>
+      </div>
+      <div class="passo-sep">→</div>
+      <div class="passo">
+        <div class="passo-num">03</div>
+        <h4>Execução em até 10 dias</h4>
+        <p>Google, perfis, artes e fachada — tudo com checklist padronizado. Rápido, organizado, entregue.</p>
+      </div>
+      <div class="passo-sep">→</div>
+      <div class="passo">
+        <div class="passo-num">04</div>
+        <h4>Empresa organizada</h4>
+        <p>Visível, confiável e preparada. Com opção de manutenção mensal para manter o padrão em dia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     NÚMEROS — fundo verde
+════════════════════════════════════════════════ -->
+<section class="sec-numeros">
+  <div class="sec-wrap">
+    <div class="numeros-grid">
+      <div class="nb"><div class="nb-val">48h</div><div class="nb-lbl">tempo médio de setup</div></div>
+      <div class="nb-sep"></div>
+      <div class="nb"><div class="nb-val">3x</div><div class="nb-lbl">mais visibilidade no Google</div></div>
+      <div class="nb-sep"></div>
+      <div class="nb"><div class="nb-val">100%</div><div class="nb-lbl">produção local e presencial</div></div>
+      <div class="nb-sep"></div>
+      <div class="nb"><div class="nb-val">5 anos</div><div class="nb-lbl">garantia em fachadas ACM</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CTA FINAL
+════════════════════════════════════════════════ -->
 <section class="cta-final" id="contato">
-  <h2>Pronto para ser encontrado?</h2>
+  <h2>Pronto para organizar sua empresa?</h2>
   <p>Diagnóstico gratuito. Sem compromisso. Atendemos presencialmente na Baixada Santista.</p>
   <a href="https://wa.me/55?text=Olá!%20Quero%20um%20diagnóstico%20gratuito%20da%20Vuno%20Studio" class="cta-white" target="_blank">
     <span class="cta-icon" aria-hidden="true">
@@ -65,9 +293,10 @@
         <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.54 2 2.07 6.46 2.07 11.95c0 1.76.46 3.48 1.33 5L2 22l5.18-1.36a9.9 9.9 0 0 0 4.84 1.23h.01c5.49 0 9.96-4.46 9.96-9.95 0-2.66-1.03-5.16-2.94-7.01Zm-7.02 15.28h-.01a8.3 8.3 0 0 1-4.23-1.16l-.3-.18-3.08.81.82-3-.2-.31a8.26 8.26 0 0 1-1.28-4.39c0-4.58 3.73-8.31 8.32-8.31 2.22 0 4.31.86 5.88 2.44a8.24 8.24 0 0 1 2.43 5.87c0 4.58-3.73 8.31-8.35 8.31Zm4.56-6.23c-.25-.13-1.47-.73-1.7-.81-.23-.09-.39-.13-.56.12-.17.25-.64.81-.79.98-.14.17-.29.19-.54.07-.25-.13-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.52.12-.12.25-.29.37-.43.12-.14.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.77-1.84-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.06 0 1.22.89 2.39 1.01 2.56.12.16 1.75 2.68 4.24 3.76.59.26 1.06.42 1.42.54.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.47-.29Z"/>
       </svg>
     </span>
-    <span class="cta-white-text">Falar no WhatsApp agora</span>
+    <span class="cta-white-text" id="ctaButtonText">Falar no WhatsApp agora</span>
   </a>
 </section>
+
 </main>
 
 <!-- FOOTER -->
