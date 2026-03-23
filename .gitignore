@@ -25,6 +25,7 @@ yarn.lock
 *.tmp
 *.temp
 .cache/
+og-image.png
 
 # Configurações sensíveis (se houver)
 .env
