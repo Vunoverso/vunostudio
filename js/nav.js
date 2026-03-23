@@ -61,6 +61,11 @@
     '<header id="site-header">\n' +
     '  <nav id="nav">\n' +
     '    <a href="index.html" class="nav-logo">vuno<em>studio</em></a>\n' +
+    '    <button class="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">\n' +
+    '      <span></span>\n' +
+    '      <span></span>\n' +
+    '      <span></span>\n' +
+    '    </button>\n' +
     '    <ul class="nav-links">\n' +
     '        ' + linksHTML + '\n' +
     '    </ul>\n' +
@@ -80,8 +85,38 @@
     document.body.insertAdjacentHTML('afterbegin', navHTML);
   }
 
-  // ── Marcar link ativo ─────────────────────────────────────
+  // ── Menu Hamburger (Mobile) ───────────────────────────────
   setTimeout(function() {
+    var hamburger = document.querySelector('.nav-hamburger');
+    var navLinksElement = document.querySelector('.nav-links');
+    var nav = document.getElementById('nav');
+    
+    if (hamburger && navLinksElement) {
+      hamburger.addEventListener('click', function() {
+        var isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+        
+        hamburger.setAttribute('aria-expanded', !isOpen);
+        hamburger.classList.toggle('active');
+        navLinksElement.classList.toggle('active');
+        nav.classList.toggle('menu-open');
+        
+        // Bloquear scroll quando menu aberto
+        document.body.style.overflow = isOpen ? '' : 'hidden';
+      });
+      
+      // Fechar menu ao clicar em um link
+      navLinksElement.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          hamburger.classList.remove('active');
+          navLinksElement.classList.remove('active');
+          nav.classList.remove('menu-open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+    
+    // ── Marcar link ativo ─────────────────────────────────────
     var currentPage = location.pathname.split('/').pop() || 'index.html';
     var navLinkElements = document.querySelectorAll('.nav-links a');
     
