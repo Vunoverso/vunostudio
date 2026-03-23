@@ -79,4 +79,36 @@
     // fallback: inserir no início do body
     document.body.insertAdjacentHTML('afterbegin', navHTML);
   }
+
+  // ── Marcar link ativo ─────────────────────────────────────
+  setTimeout(function() {
+    var currentPage = location.pathname.split('/').pop() || 'index.html';
+    var navLinkElements = document.querySelectorAll('.nav-links a');
+    
+    navLinkElements.forEach(function(link) {
+      var href = link.getAttribute('href');
+      
+      // Marca como ativo se:
+      // 1. O href é igual à página atual
+      // 2. Estamos na home e o link é para a home
+      // 3. O link aponta para a página atual (sem #)
+      if (href === currentPage || 
+          (currentPage === 'index.html' && href === 'index.html') ||
+          (href.indexOf(currentPage) === 0 && href.indexOf('#') === -1)) {
+        link.classList.add('active');
+      }
+      
+      // Caso especial: se estamos em servicos.html e o link é "Digital"
+      if (page === 'servicos' && href === '#digital') {
+        link.classList.add('active');
+      }
+      
+      // Caso especial: se estamos em index.html e o link é para home
+      if (page === 'index' && (href === '#contato' || href.indexOf('index.html') !== -1)) {
+        if (href === '#contato' && location.hash === '') {
+          link.classList.add('active');
+        }
+      }
+    });
+  }, 0);
 })();
