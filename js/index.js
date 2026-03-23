@@ -145,30 +145,8 @@ function renderHeroCarousel(heroData) {
     });
   });
   
-  // Event listeners para navegação
-  const prevBtn = document.querySelector('.hero-prev');
-  const nextBtn = document.querySelector('.hero-next');
-  
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      stopAutoplay();
-      prevSlide();
-      startAutoplay();
-    });
-  }
-  
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      stopAutoplay();
-      nextSlide();
-      startAutoplay();
-    });
-  }
-  
   // Ocultar controles se houver apenas 1 slide
   if (slides.length <= 1) {
-    if (prevBtn) prevBtn.style.display = 'none';
-    if (nextBtn) nextBtn.style.display = 'none';
     dotsContainer.style.display = 'none';
   } else {
     // Iniciar autoplay
