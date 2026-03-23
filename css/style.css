@@ -229,10 +229,23 @@ nav { animation: fadeDown .6s ease both; }
   padding: .9rem 2rem;
   font-size: .95rem; font-weight: 600;
   text-decoration: none; border: 1.5px solid rgba(0,0,0,.15);
+  border-radius: 999px;
   letter-spacing: .04em; text-transform: uppercase;
-  transition: all .2s;
+  transition: all .22s ease;
 }
-.btn-sec:hover { border-color: var(--preto); }
+.btn-sec:hover {
+  border-color: var(--preto);
+  background: rgba(255,255,255,.65);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+.btn-sec:focus-visible,
+.btn-primary:focus-visible,
+.cta-white:focus-visible,
+.pilar-cta:focus-visible {
+  outline: 2px solid rgba(0, 217, 255, .65);
+  outline-offset: 3px;
+}
 .hero-nums {
   display: flex; gap: 2.5rem; margin-top: 3rem;
   animation: fadeUp .8s .6s ease both;
@@ -857,11 +870,41 @@ nav { animation: fadeDown .6s ease both; }
 .pilar-list li::before { content: '→'; color: #1D9E75; font-size: .8rem; flex-shrink: 0; margin-top: 2px; }
 .pilar-card-dark .pilar-list li { color: rgba(255,255,255,.65); border-color: rgba(255,255,255,.06); }
 .pilar-cta {
-  display: inline-block; font-size: .82rem; font-weight: 700;
-  color: #1D9E75; text-decoration: none; letter-spacing: .04em;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: .82rem;
+  font-weight: 800;
+  color: #0F6E56;
+  text-decoration: none;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .62rem .9rem;
+  border: 1px solid rgba(29,158,117,.24);
+  border-radius: 999px;
+  background: rgba(29,158,117,.08);
+  transition: all .2s ease;
 }
-.pilar-cta:hover { text-decoration: underline; }
-.pilar-card-dark .pilar-cta { color: #00d9ff; }
+.pilar-cta::after {
+  content: '→';
+  transition: transform .2s ease;
+}
+.pilar-cta:hover {
+  transform: translateY(-2px);
+  background: rgba(29,158,117,.15);
+  border-color: rgba(29,158,117,.42);
+  box-shadow: 0 8px 24px rgba(29,158,117,.16);
+}
+.pilar-cta:hover::after { transform: translateX(3px); }
+.pilar-card-dark .pilar-cta {
+  color: #00d9ff;
+  background: rgba(0,217,255,.10);
+  border-color: rgba(0,217,255,.35);
+}
+.pilar-card-dark .pilar-cta:hover {
+  background: rgba(0,217,255,.18);
+  box-shadow: 0 8px 24px rgba(0,217,255,.2);
+}
 
 /* ─── PROCESSO (dark) ─── */
 .sec-processo {
