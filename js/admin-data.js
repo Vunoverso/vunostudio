@@ -276,7 +276,10 @@ function collectPlanos() {
   return {
     digital: { plans, addons, compare },
     visual: { products },
-    trafego: { plans: trafPlans }
+    trafego: { plans: trafPlans },
+    faq: Array.from(document.querySelectorAll('#faq-edit-list .faq-edit-row')).map(function(row) {
+      return { q: (row.querySelector('.faq-q-input') || {}).value || '', a: (row.querySelector('.faq-a-input') || {}).value || '' };
+    })
   };
 }
 
@@ -345,6 +348,14 @@ function collectHero() {
       titleHtml:      (document.getElementById('hero_title')              || {}).value || '',
       sub:            (document.getElementById('hero_sub')                || {}).value || '',
       heroImageSrc:   (document.getElementById('hero_image_src')         || {}).value || '',
+      numbers: Array.from(
+        document.querySelectorAll('#hero-numbers-list .num-row')
+      ).map(function(r) {
+        return {
+          value: (r.querySelector('.num-value') || {}).value || '',
+          label: (r.querySelector('.num-label') || {}).value || ''
+        };
+      }),
       proofPills,
       buttons: {
         primaryText:   (document.getElementById('hero_btn_primary_text')  || {}).value || '',

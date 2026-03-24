@@ -416,6 +416,12 @@ function populateHero(d) {
     });
   }
 
+    // Popula lista de números hero
+  const numList = document.getElementById('hero-numbers-list');
+  if (numList) {
+    numList.innerHTML = '';
+    (hero.numbers || []).forEach(function(n) { numList.appendChild(buildNumRow(n)); });
+  }
   previewHeroImage();
 }
 
