@@ -7,19 +7,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.vunostudio.com.br/index.html</loc>
+    <loc>https://www.vunostudio.com.br/servicos</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.vunostudio.com.br/servicos.html</loc>
-    <lastmod>2026-03-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.vunostudio.com.br/planos.html</loc>
+    <loc>https://www.vunostudio.com.br/planos</loc>
     <lastmod>2026-03-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

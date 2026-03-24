@@ -14,22 +14,22 @@
   // ── Links por página ──────────────────────────────────────
   var navLinks = {
     index: [
-      { href: 'servicos.html',        text: 'Serviços' },
-      { href: 'planos.html',          text: 'Planos' },
-      { href: 'servicos.html#visual', text: 'Gráfica' },
+      { href: '/servicos',        text: 'Serviços' },
+      { href: '/planos',          text: 'Planos' },
+      { href: '/servicos#visual', text: 'Gráfica' },
       { href: '#contato',             text: 'Contato' }
     ],
     servicos: [
       { href: '#digital',  text: 'Digital' },
       { href: '#visual',   text: 'Visual' },
-      { href: 'planos.html', text: 'Planos' },
+      { href: '/planos', text: 'Planos' },
       { href: '#galeria',  text: 'Galeria' },
       { href: '#processo', text: 'Como funciona' }
     ],
     planos: [
-      { href: 'index.html',           text: 'Home' },
-      { href: 'servicos.html',        text: 'Serviços' },
-      { href: 'servicos.html#visual', text: 'Gráfica' },
+      { href: '/',           text: 'Home' },
+      { href: '/servicos',        text: 'Serviços' },
+      { href: '/servicos#visual', text: 'Gráfica' },
       { href: '#faq',                 text: 'Dúvidas' }
     ]
   };
@@ -60,7 +60,7 @@
   var navHTML =
     '<header id="site-header">\n' +
     '  <nav id="nav">\n' +
-    '    <a href="index.html" class="nav-logo">vuno<em>studio</em></a>\n' +
+    '    <a href="/" class="nav-logo">vuno<em>studio</em></a>\n' +
     '    <button class="nav-hamburger" aria-label="Abrir menu" aria-expanded="false">\n' +
     '      <span></span>\n' +
     '      <span></span>\n' +
@@ -117,19 +117,25 @@
     }
     
     // ── Marcar link ativo ─────────────────────────────────────
-    var currentPage = location.pathname.split('/').pop() || 'index.html';
+    var currentPath = location.pathname || '/';
+    function normalizePath(pathname) {
+      if (!pathname) return '/';
+      var p = pathname.toLowerCase();
+      if (p.endsWith('/index.html')) p = p.slice(0, -11) || '/';
+      if (p.endsWith('.html')) p = p.slice(0, -5);
+      if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
+      return p || '/';
+    }
+    var normalizedCurrent = normalizePath(currentPath);
     var navLinkElements = document.querySelectorAll('.nav-links a');
     
     navLinkElements.forEach(function(link) {
       var href = link.getAttribute('href');
       
-      // Marca como ativo se:
-      // 1. O href é igual à página atual
-      // 2. Estamos na home e o link é para a home
-      // 3. O link aponta para a página atual (sem #)
-      if (href === currentPage || 
-          (currentPage === 'index.html' && href === 'index.html') ||
-          (href.indexOf(currentPage) === 0 && href.indexOf('#') === -1)) {
+      var hrefPath = href.split('#')[0];
+      var normalizedHref = normalizePath(hrefPath);
+
+      if (href.charAt(0) !== '#' && normalizedHref === normalizedCurrent) {
         link.classList.add('active');
       }
       
@@ -139,7 +145,7 @@
       }
       
       // Caso especial: se estamos em index.html e o link é para home
-      if (page === 'index' && (href === '#contato' || href.indexOf('index.html') !== -1)) {
+      if (page === 'index' && (href === '#contato' || href === '/')) {
         if (href === '#contato' && location.hash === '') {
           link.classList.add('active');
         }

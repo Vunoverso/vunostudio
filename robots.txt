@@ -1,4 +1,22 @@
+# Regras gerais
 User-agent: *
 Allow: /
 
+# Permitir ChatGPT indexar seu site
+User-agent: GPTBot
+Allow: /
+
+# Permitir ChatGPT acessar ao vivo
+User-agent: ChatGPT-User
+Allow: /
+
+# Permitir Google AI
+User-agent: Google-Extended
+Allow: /
+
+# Permitir Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Sitemap principal
 Sitemap: https://www.vunostudio.com.br/sitemap.xml
