@@ -38,8 +38,8 @@ nav { animation: fadeDown .6s ease both; }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3); }
-  50% { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0, 217, 255, 0.5); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
 }
 
 @keyframes blink {
@@ -54,18 +54,8 @@ nav { animation: fadeDown .6s ease both; }
 }
 
 @keyframes glow {
-  0%, 100% { 
-    text-shadow: 
-      0 0 20px rgba(0, 217, 255, 0.5),
-      0 0 40px rgba(0, 217, 255, 0.3),
-      2px 2px 0 rgba(0, 0, 0, 0.05);
-  }
-  50% { 
-    text-shadow: 
-      0 0 40px rgba(0, 217, 255, 0.8),
-      0 0 80px rgba(0, 217, 255, 0.5),
-      2px 2px 0 rgba(0, 0, 0, 0.05);
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.78; }
 }
 
 
@@ -159,23 +149,22 @@ nav { animation: fadeDown .6s ease both; }
 
 .hero h1 em {
   font-style: normal;
-  color: #0079a8;
+  color: #004f73;
   font-weight: 900;
   text-shadow: 
-    0 0 16px rgba(0, 121, 168, 0.24),
-    0 0 28px rgba(0, 121, 168, 0.14),
-    1px 1px 0 rgba(0, 0, 0, 0.12);
+    1px 1px 0 rgba(0, 0, 0, 0.10),
+    0 0 12px rgba(0, 79, 115, 0.12);
   display: inline-block;
   animation: glow 3s ease-in-out infinite;
+  will-change: opacity;
   position: relative;
 }
 
 @media(max-width: 640px) {
   .hero h1 em {
-    color: #00688f;
+    color: #003d5c;
     text-shadow:
-      0 0 10px rgba(0, 104, 143, 0.16),
-      1px 1px 0 rgba(0, 0, 0, 0.16);
+      1px 1px 0 rgba(0, 0, 0, 0.14);
   }
 }
 
@@ -934,7 +923,7 @@ nav { animation: fadeDown .6s ease both; }
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.2rem;
 }
-.passo h4 {
+.passo h3 {
   font-size: .95rem; font-weight: 700; color: white;
   margin-bottom: .6rem; font-family: 'Montserrat', sans-serif;
 }
