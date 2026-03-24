@@ -38,8 +38,8 @@ nav { animation: fadeDown .6s ease both; }
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.03); }
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3); }
+  50% { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0, 217, 255, 0.5); }
 }
 
 @keyframes blink {
@@ -54,8 +54,18 @@ nav { animation: fadeDown .6s ease both; }
 }
 
 @keyframes glow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.78; }
+  0%, 100% { 
+    text-shadow: 
+      0 0 20px rgba(0, 217, 255, 0.5),
+      0 0 40px rgba(0, 217, 255, 0.3),
+      2px 2px 0 rgba(0, 0, 0, 0.05);
+  }
+  50% { 
+    text-shadow: 
+      0 0 40px rgba(0, 217, 255, 0.8),
+      0 0 80px rgba(0, 217, 255, 0.5),
+      2px 2px 0 rgba(0, 0, 0, 0.05);
+  }
 }
 
 
@@ -115,7 +125,7 @@ nav { animation: fadeDown .6s ease both; }
   letter-spacing: .05em;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  animation: fadeUp .8s .2s ease both;
+  animation: fadeUp .8s .2s ease both, pulse 2s ease-in-out infinite 2s;
   position: relative;
   z-index: 3;
   box-shadow: 0 8px 32px rgba(0, 217, 255, 0.3),
@@ -139,7 +149,7 @@ nav { animation: fadeDown .6s ease both; }
   font-weight: 800;
   line-height: 1.12;
   margin-bottom: 1.8rem;
-  animation: slideInBounce 1s .3s ease both;
+  animation: fadeUp .8s .3s ease both, slideInBounce 1s .3s ease both;
   color: #0A0A0A;
   text-shadow: 
     2px 2px 0 rgba(0, 217, 255, 0.1),
@@ -149,22 +159,23 @@ nav { animation: fadeDown .6s ease both; }
 
 .hero h1 em {
   font-style: normal;
-  color: #004f73;
+  color: #0079a8;
   font-weight: 900;
   text-shadow: 
-    1px 1px 0 rgba(0, 0, 0, 0.10),
-    0 0 12px rgba(0, 79, 115, 0.12);
+    0 0 16px rgba(0, 121, 168, 0.24),
+    0 0 28px rgba(0, 121, 168, 0.14),
+    1px 1px 0 rgba(0, 0, 0, 0.12);
   display: inline-block;
   animation: glow 3s ease-in-out infinite;
-  will-change: opacity;
   position: relative;
 }
 
 @media(max-width: 640px) {
   .hero h1 em {
-    color: #003d5c;
+    color: #00688f;
     text-shadow:
-      1px 1px 0 rgba(0, 0, 0, 0.14);
+      0 0 10px rgba(0, 104, 143, 0.16),
+      1px 1px 0 rgba(0, 0, 0, 0.16);
   }
 }
 
@@ -732,7 +743,7 @@ nav { animation: fadeDown .6s ease both; }
   margin-bottom: 1.2rem; display: block;
 }
 .eyebrow-cyan  { color: #00b8d4; }
-.eyebrow-verde { color: #0F6E56; }
+.eyebrow-verde { color: #1D9E75; }
 
 /* ─── PROBLEMA (dark) ─── */
 .sec-problema {
@@ -789,7 +800,7 @@ nav { animation: fadeDown .6s ease both; }
   margin-bottom: 1.5rem; letter-spacing: -.02em;
   color: #0A0A0A;
 }
-.sec-posic h2 em { font-style: normal; color: #0F6E56; }
+.sec-posic h2 em { font-style: normal; color: #1D9E75; }
 .sec-posic p {
   font-size: 1.05rem; color: #6B6B5E;
   line-height: 1.7; margin-bottom: 1rem;
@@ -845,7 +856,7 @@ nav { animation: fadeDown .6s ease both; }
   font-family: 'DM Serif Display', serif;
   font-size: 1.8rem; opacity: .3; color: #0A0A0A;
 }
-.pilar-hd-vis .pilar-num { color: rgba(255,255,255,.9); opacity: 1; }
+.pilar-hd-vis .pilar-num { color: white; }
 .pilar-label {
   font-size: .78rem; font-weight: 800;
   letter-spacing: .1em; text-transform: uppercase; color: #6B6B5E;
@@ -923,7 +934,7 @@ nav { animation: fadeDown .6s ease both; }
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto 1.2rem;
 }
-.passo h3 {
+.passo h4 {
   font-size: .95rem; font-weight: 700; color: white;
   margin-bottom: .6rem; font-family: 'Montserrat', sans-serif;
 }
@@ -935,7 +946,7 @@ nav { animation: fadeDown .6s ease both; }
 
 /* ─── NÚMEROS (verde) ─── */
 .sec-numeros {
-  background: #0F6E56;
+  background: #1D9E75;
   padding: 4rem 2rem;
 }
 .numeros-grid {
@@ -950,7 +961,7 @@ nav { animation: fadeDown .6s ease both; }
   font-size: clamp(2.5rem, 4vw, 3.5rem);
   font-weight: 900; color: white; line-height: 1;
 }
-.nb-lbl { font-size: .85rem; color: #FFFFFF; margin-top: .4rem; font-weight: 600; }
+.nb-lbl { font-size: .85rem; color: rgba(255,255,255,.85); margin-top: .4rem; font-weight: 500; }
 .nb-sep { width: 1px; height: 60px; background: rgba(255,255,255,.25); margin: 0 2rem; }
 
 /* RESPONSIVE */
