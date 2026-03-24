@@ -94,6 +94,12 @@
       <div class="nav-item" onclick="showPanel('galeria', this)">
         <span class="nav-icon">🏗️</span>
         <div class="nav-dot"></div>
+      <div class="nav-section" style="margin-top:.5rem">Blog</div>
+      <div class="nav-item" onclick="showPanel('blog', this)">
+        <span class="nav-icon">✍️</span>
+        <div class="nav-dot"></div>
+        Blog — Posts
+      </div>
         Galeria de Trabalhos
       </div>
     </nav>
@@ -468,6 +474,23 @@
           Coloque as fotos na pasta <code>images/galeria/</code> e preencha o campo "Foto" com o caminho relativo (ex: <code>images/galeria/fachada-acm.jpg</code>).<br>
           Deixe vazio para exibir o ícone da categoria. As alterações são salvas diretamente no Supabase.
         </div>
+      </div>
+    </div>
+
+  
+
+    <!-- ================== BLOG ================== -->
+    <div id="panel-blog" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Blog — Posts</div>
+        <div class="panel-sub">Crie, edite e remova artigos do blog. O conteúdo suporta HTML: &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;strong&gt;, &lt;a&gt;, &lt;blockquote&gt;.</div>
+      </div>
+      <div class="info-box" id="statusBlog">Carregando <code>data/blog.json</code>…</div>
+      <div id="blog-posts-wrap"></div>
+      <button class="btn-add" onclick="addBlogPost()">+ Novo artigo</button>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveBlog()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Slug = URL amigável do post (ex: <code>como-aparecer-google-maps</code>). O conteúdo HTML é renderizado diretamente na página do artigo.</div>
       </div>
     </div>
 

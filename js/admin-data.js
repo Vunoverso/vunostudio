@@ -9,6 +9,7 @@ let _planos = null;
 let _images = null;
 let _config = null;
 let _servicos = null;
+let _blog    = null;
 
 // ─── Utilitários ─────────────────────────────────────────────────────────────
 
@@ -142,6 +143,10 @@ function loadAll() {
     _servicos = d;
     populateServicosCopy((d && d.copy) || {});
     populateProcesso((d && d.processo && d.processo.steps) || []);
+  });
+  loadFromSupabase('blog', 'data/blog.json', 'statusBlog', function(d) {
+    _blog = d;
+    populateBlogPosts((d && d.posts) || []);
   });
 }
 
@@ -449,4 +454,31 @@ function collectServicos() {
 async function saveServicosCopy() {
   await saveToSupabase('servicos', collectServicos());
   toast('✅ Textos de Serviços salvos!');
+}
+
+
+/**
+ * Coletar dados do formulario: Blog
+ */
+function collectBlog() {
+  var posts = Array.from(document.querySelectorAll('#blog-posts-wrap .blog-post-card')).map(function(card) {
+    return {
+      slug:        (card.querySelector('.bp-slug')     || {}).value || '',
+      title:       (card.querySelector('.bp-title')    || {}).value || '',
+      excerpt:     (card.querySelector('.bp-excerpt')  || {}).value || '',
+      content:     (card.querySelector('.bp-content')  || {}).value || '',
+      cover:       (card.querySelector('.bp-cover')    || {}).value || '',
+      category:    (card.querySelector('.bp-category') || {}).value || 'Presenca Digital',
+      author:      (card.querySelector('.bp-author')   || {}).value || 'Vuno Studio',
+      publishedAt: (card.querySelector('.bp-date')     || {}).value || '',
+      readTime:    (card.querySelector('.bp-readtime') || {}).value || '',
+      featured:    (card.querySelector('.bp-featured') || {}).checked || false
+    };
+  });
+  return { posts: posts };
+}
+
+async function saveBlog() {
+  await saveToSupabase('blog', collectBlog());
+  toast('✅ Blog salvo!');
 }

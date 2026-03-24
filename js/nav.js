@@ -5,10 +5,10 @@
    ═══════════════════════════════════════════════════════════ */
 
 (function () {
-  // ── Detectar página ────────────────────────────────────────
-  var path = location.pathname.split('/').pop() || 'index.html';
+  var path = location.pathname;
   var page = 'index';
-  if (path.indexOf('servicos') !== -1) page = 'servicos';
+  if (path.indexOf('/blog') !== -1) page = 'blog';
+  else if (path.indexOf('servicos') !== -1) page = 'servicos';
   else if (path.indexOf('planos') !== -1) page = 'planos';
 
   // ── Links por página ──────────────────────────────────────
@@ -16,21 +16,26 @@
     index: [
       { href: '/servicos',        text: 'Serviços' },
       { href: '/planos',          text: 'Planos' },
-      { href: '/servicos#visual', text: 'Gráfica' },
-      { href: '#contato',             text: 'Contato' }
+      { href: '/blog',            text: 'Blog' },
+      { href: '#contato',         text: 'Contato' }
     ],
     servicos: [
       { href: '#digital',  text: 'Digital' },
       { href: '#visual',   text: 'Visual' },
       { href: '/planos', text: 'Planos' },
-      { href: '#galeria',  text: 'Galeria' },
-      { href: '#processo', text: 'Como funciona' }
+      { href: '/blog',   text: 'Blog' },
+      { href: '#galeria',  text: 'Galeria' }
     ],
     planos: [
       { href: '/',           text: 'Home' },
-      { href: '/servicos',        text: 'Serviços' },
-      { href: '/servicos#visual', text: 'Gráfica' },
-      { href: '#faq',                 text: 'Dúvidas' }
+      { href: '/servicos',   text: 'Serviços' },
+      { href: '/blog',       text: 'Blog' },
+      { href: '#faq',        text: 'Dúvidas' }
+    ],
+    blog: [
+      { href: '/',         text: 'Home' },
+      { href: '/servicos', text: 'Serviços' },
+      { href: '/planos',   text: 'Planos' }
     ]
   };
 
@@ -38,14 +43,16 @@
   var ctaDefaults = {
     index:    { text: 'Falar no WhatsApp', href: 'https://wa.me/55?text=Ol%C3%A1,%20quero%20saber%20mais%20sobre%20a%20Vuno%20Studio' },
     servicos: { text: 'Orçamento',         href: 'https://wa.me/55?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20da%20Vuno%20Studio' },
-    planos:   { text: 'Peça sua cotação',  href: 'https://wa.me/55?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20planos' }
+    planos:   { text: 'Peça sua cotação',  href: 'https://wa.me/55?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20planos' },
+    blog:     { text: 'Falar no WhatsApp', href: 'https://wa.me/55?text=Ol%C3%A1!%20Quero%20falar%20com%20a%20Vuno%20Studio' }
   };
 
   // ── data-content paths ────────────────────────────────────
   var ctaContentPath = {
     index:    'pages.index.navCta',
     servicos: 'pages.servicos.navCta',
-    planos:   'pages.planos.navCta'
+    planos:   'pages.planos.navCta',
+    blog:     'pages.index.navCta'
   };
 
   // ── Montar HTML ───────────────────────────────────────────

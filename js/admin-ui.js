@@ -597,3 +597,60 @@ function addFaqItem() {
   const list = document.getElementById('faq-edit-list');
   if (list) list.appendChild(buildFaqRow({ q: '', a: '' }));
 }
+
+
+// ==========================================================
+// BLOG
+// ==========================================================
+
+var BLOG_CATEGORIES = ['Presenca Digital', 'Comunicacao Visual', 'Trafego Pago', 'Dicas Gerais'];
+
+function populateBlogPosts(posts) {
+  var wrap = document.getElementById('blog-posts-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  (posts || []).forEach(function(post) { wrap.appendChild(buildBlogPostCard(post)); });
+  setStatus('statusBlog', true);
+}
+
+function buildBlogPostCard(post) {
+  post = post || {};
+  var d = document.createElement('div');
+  d.className = 'card blog-post-card';
+  var catOpts = BLOG_CATEGORIES.map(function(c) {
+    return '<option value="' + c + '"' + (post.category === c ? ' selected' : '') + '>' + c + '</option>';
+  }).join('');
+  d.innerHTML =
+    '<div class="card-head">' +
+      '<div class="card-label">' + esc(post.title || 'Novo Artigo') + '</div>' +
+      (post.featured ? '<span class="badge badge-green">Destaque</span>' : '') +
+    '</div>' +
+    '<div class="g2">' +
+      fld('Titulo do artigo', 'bp-title', post.title, 'Como aparecer no Google Maps...') +
+      fld('Slug (URL)', 'bp-slug', post.slug, 'como-aparecer-google-maps') +
+    '</div>' +
+    '<div class="g1"><div class="field"><label>Resumo / excerpt</label>' +
+      '<textarea class="bp-excerpt" rows="2">' + esc(post.excerpt || '') + '</textarea></div></div>' +
+    '<div class="g1"><div class="field"><label>Conteudo HTML (use &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;strong&gt;, &lt;a&gt;, &lt;blockquote&gt;)</label>' +
+      '<textarea class="bp-content" rows="12">' + esc(post.content || '') + '</textarea></div></div>' +
+    '<div class="g3">' +
+      fld('Imagem de capa (URL ou caminho)', 'bp-cover', post.cover, 'images/blog/nome.jpg') +
+      '<div class="field"><label>Categoria</label><select class="bp-category">' + catOpts + '</select></div>' +
+      fld('Tempo de leitura', 'bp-readtime', post.readTime, '4 min') +
+    '</div>' +
+    '<div class="g3">' +
+      fld('Autor', 'bp-author', post.author || 'Vuno Studio', 'Vuno Studio') +
+      fld('Data de publicacao', 'bp-date', post.publishedAt, '2026-03-24', 'date') +
+      '<div class="field" style="display:flex;align-items:center;gap:.6rem;padding-top:1.4rem">' +
+        '<input type="checkbox" class="bp-featured" id="bpf-' + Math.random().toString(36).slice(2) + '"' + (post.featured ? ' checked' : '') + ' style="width:18px;flex-shrink:0">' +
+        '<label style="font-size:.8rem;font-weight:600;cursor:pointer;margin:0">Artigo em destaque</label>' +
+      '</div>' +
+    '</div>' +
+    '<button class="btn-remove" style="margin-top:.5rem" onclick="this.closest(\'.card\').remove()">Remover artigo</button>';
+  return d;
+}
+
+function addBlogPost() {
+  var wrap = document.getElementById('blog-posts-wrap');
+  if (wrap) wrap.prepend(buildBlogPostCard({ title: '', slug: '', excerpt: '', content: '', cover: '', category: 'Presenca Digital', author: 'Vuno Studio', publishedAt: new Date().toISOString().slice(0,10), readTime: '3 min', featured: false }));
+}
