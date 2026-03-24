@@ -358,19 +358,22 @@ function buildGalRow(item) {
     '<div class="field"><label>Cliente</label>' +
       '<input type="text" class="gal-client" value="' + esc(item.client) + '" placeholder="Pizzaria · Praia Grande">' +
     '</div>' +
-    '<div class="field"><label>Categoria</label>' +
-      '<select class="gal-cat">' +
-        mkOpt(ADMIN_CONFIG.galeriaCategories, item.category) +
-      '</select>' +
-    '</div>' +
-    '<div class="field"><label>Layout</label>' +
-      '<select class="gal-layout">' +
-        '<option value=""' + (item.layout === '' ? ' selected' : '') + '>normal</option>' +
-        '<option value="tall"' + (item.layout === 'tall' ? ' selected' : '') + '>tall — alto</option>' +
-        '<option value="wide"' + (item.layout === 'wide' ? ' selected' : '') + '>wide — largo</option>' +
-      '</select>' +
-    '</div>' +
-    '<button class="btn-remove-row" onclick="this.closest(\'.gal-row\').remove()">✕</button>';
+    '<div class="gal-row-bottom">' +
+      '<div class="field"><label>Categoria</label>' +
+        '<select class="gal-cat">' +
+          mkOpt(ADMIN_CONFIG.galeriaCategories, item.category) +
+        '</select>' +
+      '</div>' +
+      '<div class="field"><label>Layout</label>' +
+        '<select class="gal-layout">' +
+          '<option value=""' + (item.layout === '' ? ' selected' : '') + '>normal</option>' +
+          '<option value="tall"' + (item.layout === 'tall' ? ' selected' : '') + '>tall — alto</option>' +
+          '<option value="wide"' + (item.layout === 'wide' ? ' selected' : '') + '>wide — largo</option>' +
+        '</select>' +
+      '</div>' +
+      '<div></div>' +
+      '<button class="btn-remove-row" style="margin-bottom:0" onclick="this.closest(\'.gal-row\').remove()">✕</button>' +
+    '</div>';
   return d;
 }
 
@@ -444,5 +447,147 @@ function populateHeroSlides(slides) {
   // mantido para compatibilidade — hero agora é form simples
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// HERO NUMBERS
+// ═══════════════════════════════════════════════════════════════════════════
 
+function buildNumRow(n) {
+  const d = document.createElement('div');
+  d.className = 'num-row';
+  d.innerHTML =
+    '<div class="field"><label>Valor</label>' +
+      '<input type="text" class="num-value" value="' + esc(n.value || '') + '" placeholder="48h">' +
+    '</div>' +
+    '<div class="field"><label>Label</label>' +
+      '<input type="text" class="num-label" value="' + esc(n.label || '') + '" placeholder="para entrar no ar">' +
+    '</div>' +
+    '<button class="btn-remove-row" style="align-self:flex-end" onclick="this.closest(\'.num-row\').remove()">✕</button>';
+  return d;
+}
 
+function addHeroNumber() {
+  const list = document.getElementById('hero-numbers-list');
+  if (list) list.appendChild(buildNumRow({ value: '', label: '' }));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: SERVIÇOS — TEXTOS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateServicosCopy(copy) {
+  if (!copy) return;
+  const h = copy.hero || {};
+  sv('sv_hero_tag',   h.tag       || '');
+  sv('sv_hero_title', h.titleHtml || '');
+  sv('sv_hero_sub',   h.sub       || '');
+
+  const d = copy.digital || {};
+  sv('sv_digital_label',   d.label      || '');
+  sv('sv_digital_title',   d.titleHtml  || '');
+  sv('sv_digital_sub',     d.sub        || '');
+  sv('sv_digital_addons',  d.addonsTitle|| '');
+
+  const v = copy.visual || {};
+  sv('sv_visual_label',  v.label     || '');
+  sv('sv_visual_title',  v.titleHtml || '');
+  sv('sv_visual_sub',    v.sub       || '');
+
+  const g = copy.galeria || {};
+  sv('sv_galeria_label',  g.label     || '');
+  sv('sv_galeria_title',  g.titleHtml || '');
+  sv('sv_galeria_sub',    g.sub       || '');
+
+  const t = copy.trafego || {};
+  sv('sv_trafego_label',  t.label     || '');
+  sv('sv_trafego_title',  t.titleHtml || '');
+  sv('sv_trafego_sub',    t.sub       || '');
+
+  const p = copy.processo || {};
+  sv('sv_processo_label',  p.label     || '');
+  sv('sv_processo_title',  p.titleHtml || '');
+  sv('sv_processo_sub',    p.sub       || '');
+
+  const c = copy.cta || {};
+  sv('sv_cta_label',         c.label          || '');
+  sv('sv_cta_title',         c.titleHtml      || '');
+  sv('sv_cta_sub',           c.sub            || '');
+  sv('sv_cta_btn_main_text', c.mainButtonText || '');
+  sv('sv_cta_btn_main_href', c.mainButtonHref || '');
+  sv('sv_cta_btn_sec_text',  c.secButtonText  || '');
+  sv('sv_cta_btn_sec_href',  c.secButtonHref  || '');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: PROCESSO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateProcesso(steps) {
+  const list = document.getElementById('processo-steps-list');
+  if (!list) return;
+  list.innerHTML = '';
+  (steps || []).forEach(s => list.appendChild(buildProcessoRow(s)));
+  setStatus('statusProcesso', true);
+}
+
+function buildProcessoRow(step) {
+  const d = document.createElement('div');
+  d.className = 'processo-row';
+  d.innerHTML =
+    '<div class="field"><label>Num</label>' +
+      '<input type="text" class="ps-num" value="' + esc(step.num || '') + '" placeholder="01">' +
+    '</div>' +
+    '<div class="field"><label>Ícone</label>' +
+      '<input type="text" class="ps-icon" value="' + esc(step.icon || '') + '" placeholder="🔍">' +
+    '</div>' +
+    '<div class="field"><label>Nome da etapa</label>' +
+      '<input type="text" class="ps-name" value="' + esc(step.name || '') + '" placeholder="Diagnóstico gratuito">' +
+    '</div>' +
+    '<div class="field"><label>Tempo / badge</label>' +
+      '<input type="text" class="ps-time" value="' + esc(step.time || '') + '" placeholder="Sem compromisso">' +
+    '</div>' +
+    '<div class="processo-row-bottom">' +
+      '<div class="field"><label>Descrição</label>' +
+        '<input type="text" class="ps-desc" value="' + esc(step.desc || '') + '" placeholder="Analisamos sua presença atual...">' +
+      '</div>' +
+      '<button class="btn-remove-row" style="margin-bottom:0" onclick="this.closest(\'.processo-row\').remove()">✕</button>' +
+    '</div>';
+  return d;
+}
+
+function addProcessoStep() {
+  const list = document.getElementById('processo-steps-list');
+  if (list) list.appendChild(buildProcessoRow({ num: '', icon: '', name: '', desc: '', time: '' }));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: FAQ
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateFaq(faq) {
+  const list = document.getElementById('faq-edit-list');
+  if (!list) return;
+  list.innerHTML = '';
+  (faq || []).forEach(item => list.appendChild(buildFaqRow(item)));
+  setStatus('statusFaq', true);
+}
+
+function buildFaqRow(item) {
+  const d = document.createElement('div');
+  d.className = 'faq-edit-row';
+  d.innerHTML =
+    '<div class="field faq-q-field"><label>Pergunta</label>' +
+      '<input type="text" class="faq-q-input" value="' + esc(item.q || '') + '" placeholder="O que está incluso no setup único?">' +
+    '</div>' +
+    '<div class="field"><label>Resposta</label>' +
+      '<textarea class="faq-a-input" rows="3">' + esc(item.a || '') + '</textarea>' +
+    '</div>' +
+    '<div class="faq-row-footer">' +
+      '<button class="btn-remove-mini" onclick="this.closest(\'.faq-edit-row\').remove()">✕ Remover</button>' +
+    '</div>';
+  return d;
+}
+
+function addFaqItem() {
+  const list = document.getElementById('faq-edit-list');
+  if (list) list.appendChild(buildFaqRow({ q: '', a: '' }));
+}

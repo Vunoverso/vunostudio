@@ -8,6 +8,7 @@ let _content = null;
 let _planos = null;
 let _images = null;
 let _config = null;
+let _servicos = null;
 
 // ─── Utilitários ─────────────────────────────────────────────────────────────
 
@@ -129,11 +130,18 @@ function loadAll() {
     populateDigital(d.digital);
     populateVisual(d.visual);
     populateTrafego(d.trafego);
+    populateFaq(d.faq || []);
   });
 
   loadFromSupabase('images', 'data/images.json', 'statusGaleria', function(d) {
     _images = d;
     populateGaleria(d);
+  });
+
+  loadFromSupabase('servicos', 'data/servicos.json', 'statusServicosCopy', function(d) {
+    _servicos = d;
+    populateServicosCopy((d && d.copy) || {});
+    populateProcesso((d && d.processo && d.processo.steps) || []);
   });
 }
 
@@ -361,3 +369,73 @@ async function saveHero() {
 }
 async function saveHeroSlides() { await saveHero(); }
 
+/**
+ * Coletar dados do formulário: Serviços (copy + processo)
+ */
+function collectServicos() {
+  const copy = {
+    hero: {
+      tag:       gv('sv_hero_tag'),
+      titleHtml: gv('sv_hero_title'),
+      sub:       gv('sv_hero_sub')
+    },
+    digital: {
+      label:       gv('sv_digital_label'),
+      titleHtml:   gv('sv_digital_title'),
+      sub:         gv('sv_digital_sub'),
+      addonsTitle: gv('sv_digital_addons')
+    },
+    visual: {
+      label:     gv('sv_visual_label'),
+      titleHtml: gv('sv_visual_title'),
+      sub:       gv('sv_visual_sub')
+    },
+    galeria: {
+      label:     gv('sv_galeria_label'),
+      titleHtml: gv('sv_galeria_title'),
+      sub:       gv('sv_galeria_sub')
+    },
+    trafego: {
+      label:     gv('sv_trafego_label'),
+      titleHtml: gv('sv_trafego_title'),
+      sub:       gv('sv_trafego_sub')
+    },
+    processo: {
+      label:     gv('sv_processo_label'),
+      titleHtml: gv('sv_processo_title'),
+      sub:       gv('sv_processo_sub')
+    },
+    cta: {
+      label:          gv('sv_cta_label'),
+      titleHtml:      gv('sv_cta_title'),
+      sub:            gv('sv_cta_sub'),
+      mainButtonText: gv('sv_cta_btn_main_text'),
+      mainButtonHref: gv('sv_cta_btn_main_href'),
+      secButtonText:  gv('sv_cta_btn_sec_text'),
+      secButtonHref:  gv('sv_cta_btn_sec_href')
+    }
+  };
+
+  const steps = Array.from(
+    document.querySelectorAll('#processo-steps-list .processo-row')
+  ).map(function(row) {
+    return {
+      num:  row.querySelector('.ps-num').value.trim(),
+      icon: row.querySelector('.ps-icon').value.trim(),
+      name: row.querySelector('.ps-name').value.trim(),
+      desc: row.querySelector('.ps-desc').value.trim(),
+      time: row.querySelector('.ps-time').value.trim()
+    };
+  });
+
+  // Preserva o restante do objeto servicos original (digital, visual, trafego)
+  return Object.assign({}, _servicos || {}, {
+    copy: copy,
+    processo: Object.assign({}, (_servicos && _servicos.processo) || {}, { steps: steps })
+  });
+}
+
+async function saveServicosCopy() {
+  await saveToSupabase('servicos', collectServicos());
+  toast('✅ Textos de Serviços salvos!');
+}
