@@ -159,15 +159,24 @@ nav { animation: fadeDown .6s ease both; }
 
 .hero h1 em {
   font-style: normal;
-  color: #00d9ff;
+  color: #0079a8;
   font-weight: 900;
   text-shadow: 
-    0 0 30px rgba(0, 217, 255, 0.6),
-    0 0 60px rgba(0, 217, 255, 0.3),
-    2px 2px 0 rgba(0, 0, 0, 0.05);
+    0 0 16px rgba(0, 121, 168, 0.24),
+    0 0 28px rgba(0, 121, 168, 0.14),
+    1px 1px 0 rgba(0, 0, 0, 0.12);
   display: inline-block;
   animation: glow 3s ease-in-out infinite;
   position: relative;
+}
+
+@media(max-width: 640px) {
+  .hero h1 em {
+    color: #00688f;
+    text-shadow:
+      0 0 10px rgba(0, 104, 143, 0.16),
+      1px 1px 0 rgba(0, 0, 0, 0.16);
+  }
 }
 
 .hero p {
