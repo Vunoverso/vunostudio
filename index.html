@@ -33,10 +33,11 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Syne:wght@400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap"></noscript>
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/global.min.css">
+  <link rel="stylesheet" href="css/style.min.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -66,8 +67,8 @@
 <body data-page="index">
 
 <!-- NAV -->
-<div id="nav-mount"></div>
-<script src="js/nav.js"></script>
+<div id="nav-mount" style="height:60px"></div>
+<script src="js/nav.js" defer></script>
 
 <main>
 
@@ -95,7 +96,7 @@
     <div class="hero-visual">
       <div class="hero-image-card">
         <div class="hero-image-top">Projeto em destaque</div>
-        <img id="heroImage" class="hero-image" src="og-image.svg" alt="Projeto de presença digital e comunicação visual" loading="eager" decoding="async">
+        <img id="heroImage" class="hero-image" src="og-image.svg" alt="Projeto de presença digital e comunicação visual" loading="eager" decoding="async" fetchpriority="high">
       </div>
     </div>
   </div>
