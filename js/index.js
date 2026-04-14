@@ -64,15 +64,21 @@ function renderCta(cta) {
   setHref('.cta-white', cta.buttonHref);
 }
 
+function _normUrl(url) {
+  if (!url) return '';
+  return /^https?:\/\//i.test(url) ? url : 'https://' + url;
+}
+
 function renderProjects(projects) {
   const carousel = document.getElementById('projCarousel');
   if (!carousel || !Array.isArray(projects) || !projects.length) return;
 
   carousel.innerHTML = projects.map(function(p) {
+    var url = _normUrl(p.url);
     var domain = '';
-    try { domain = new URL(p.url).hostname.replace(/^www\./, ''); } catch(e) { domain = p.url || ''; }
-    var faviconSrc = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(p.url) + '&sz=64';
-    var screenshotSrc = p.image || ('https://s0.wp.com/mshots/v1/' + encodeURIComponent(p.url) + '?w=600&h=338');
+    try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch(e) { domain = url || ''; }
+    var faviconSrc = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(url) + '&sz=64';
+    var screenshotSrc = p.image || ('https://s0.wp.com/mshots/v1/' + encodeURIComponent(url) + '?w=600&h=338');
 
     return '<div class="proj-card">' +
       '<div class="proj-browser-bar">' +
@@ -96,7 +102,7 @@ function renderProjects(projects) {
         (p.tag ? '<span class="proj-tag">' + p.tag + '</span>' : '') +
         '<div class="proj-title">' + (p.title || domain) + '</div>' +
         (p.desc ? '<p class="proj-desc">' + p.desc + '</p>' : '') +
-        '<a class="proj-link" href="' + p.url + '" target="_blank" rel="noopener">Ver site →</a>' +
+        '<a class="proj-link" href="' + url + '" target="_blank" rel="noopener">Ver site →</a>' +
       '</div>' +
     '</div>';
   }).join('');

@@ -333,11 +333,20 @@ let _index = null;
 /**
  * Carregar data/index.json (hero slides + cta)
  */
+var _DEFAULT_PROJECTS = [
+  { id: 'vunourbano', title: 'Vuno Urbano', url: 'https://www.vunourbano.com.br', desc: 'Leitura urbana do seu bairro', tag: 'Site Urbano', image: '' },
+  { id: 'barmate', title: 'Barmate', url: 'https://barmate.vercel.app/', desc: 'Gestão para bares e restaurantes', tag: 'Aplicativo web', image: '' },
+  { id: 'vunotrader', title: 'Vuno Trader', url: 'https://vunotrader.vercel.app/', desc: 'Plataforma de análise e trading', tag: 'Plataforma', image: '' }
+];
+
 function loadHeroData() {
   loadFromSupabase('index', 'data/index.json', 'statusHero', function(d) {
     _index = d;
     populateHero(d);
-    populateProjects((d && d.projects) || []);
+    // Se Supabase não tiver projetos, usa lista padrão
+    var projs = (d && d.projects && d.projects.length) ? d.projects : _DEFAULT_PROJECTS;
+    populateProjects(projs);
+    setStatus('statusProjetos', true);
   });
 }
 
@@ -382,9 +391,11 @@ function collectHeroSlides() { return collectHero(); }
 /**
  * Coletar lista de projetos do formulário
  */
+function _normUrlAdmin(u) { return (u && !/^https?:\/\//i.test(u)) ? 'https://' + u : (u || ''); }
+
 function collectProjectsList() {
   return Array.from(document.querySelectorAll('#proj-list .gal-row')).map(function(row) {
-    var urlVal = (row.querySelector('.proj-url') || {}).value || '';
+    var urlVal = _normUrlAdmin((row.querySelector('.proj-url') || {}).value || '');
     var domain = '';
     try { domain = new URL(urlVal).hostname.replace(/^www\./, ''); } catch(e) { domain = urlVal; }
     var id = domain.replace(/[^a-z0-9]/gi, '');
@@ -400,12 +411,14 @@ function collectProjectsList() {
 }
 
 /**
- * Salvar hero + projetos juntos no banco
+ * Salvar projetos preservando hero/cta existentes
  */
 async function saveProjetos() {
-  const current = collectHero();
-  current.projects = collectProjectsList();
-  await saveToSupabase('index', current);
+  // Clona _index sem modificar hero/cta — só atualiza projects
+  const data = JSON.parse(JSON.stringify(_index || {}));
+  data.projects = collectProjectsList();
+  _index = data;
+  await saveToSupabase('index', data);
   toast('✅ Sites em destaque salvos! Recarregue a home para ver.');
 }
 
