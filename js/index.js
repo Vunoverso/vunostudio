@@ -71,16 +71,17 @@ function _normUrl(url) {
 
 function renderProjects(projects) {
   const carousel = document.getElementById('projCarousel');
+  const dotsWrap = document.getElementById('projDots');
   if (!carousel || !Array.isArray(projects) || !projects.length) return;
 
-  carousel.innerHTML = projects.map(function(p) {
+  // Build cards
+  carousel.innerHTML = projects.map(function(p, i) {
     var url = _normUrl(p.url);
     var domain = '';
     try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch(e) { domain = url || ''; }
-    var faviconSrc = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(url) + '&sz=64';
-    var screenshotSrc = p.image || ('https://s0.wp.com/mshots/v1/' + encodeURIComponent(url) + '?w=600&h=338');
+    var screenshotSrc = p.image || ('https://s0.wp.com/mshots/v1/' + encodeURIComponent(url) + '?w=800&h=600');
 
-    return '<div class="proj-card">' +
+    return '<div class="proj-slide' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '">' +
       '<div class="proj-browser-bar">' +
         '<span class="proj-browser-dot"></span>' +
         '<span class="proj-browser-dot"></span>' +
@@ -88,24 +89,43 @@ function renderProjects(projects) {
         '<span class="proj-browser-url">' + domain + '</span>' +
       '</div>' +
       '<div class="proj-preview">' +
-        '<div class="proj-preview-placeholder" id="proj-ph-' + (p.id || domain) + '">' +
-          '<img class="proj-favicon" src="' + faviconSrc + '" alt="" onerror="this.style.display=\'none\'">' +
-          '<span class="proj-domain">' + domain + '</span>' +
-        '</div>' +
-        '<img src="' + screenshotSrc + '" alt="Screenshot de ' + (p.title || domain) + '"' +
-          ' style="position:absolute;inset:0;z-index:1"' +
-          ' class="loading"' +
-          ' onload="this.classList.remove(\'loading\');var ph=document.getElementById(\'proj-ph-' + (p.id || domain) + '\');if(ph)ph.style.display=\'none\';"' +
-          ' onerror="this.style.display=\'none\';">' +
+        '<img src="' + screenshotSrc + '" alt="' + (p.title || domain) + '"' +
+          ' onload="this.classList.add(\'loaded\')"' +
+          ' onerror="this.style.display=\'none\'">' +
       '</div>' +
-      '<div class="proj-info">' +
-        (p.tag ? '<span class="proj-tag">' + p.tag + '</span>' : '') +
-        '<div class="proj-title">' + (p.title || domain) + '</div>' +
-        (p.desc ? '<p class="proj-desc">' + p.desc + '</p>' : '') +
-        '<a class="proj-link" href="' + url + '" target="_blank" rel="noopener">Ver site →</a>' +
-      '</div>' +
+      '<a class="proj-overlay" href="' + url + '" target="_blank" rel="noopener">' +
+        '<span class="proj-overlay-name">' + (p.title || domain) + '</span>' +
+        (p.tag ? '<span class="proj-overlay-tag">' + p.tag + '</span>' : '') +
+      '</a>' +
     '</div>';
   }).join('');
+
+  // Dots
+  if (dotsWrap && projects.length > 1) {
+    dotsWrap.innerHTML = projects.map(function(_, i) {
+      return '<button class="proj-dot' + (i === 0 ? ' active' : '') + '" data-idx="' + i + '"></button>';
+    }).join('');
+    dotsWrap.addEventListener('click', function(e) {
+      var btn = e.target.closest('.proj-dot');
+      if (btn) _goToSlide(+btn.dataset.idx);
+    });
+  }
+
+  // Auto-rotate
+  var _cur = 0;
+  var _timer = setInterval(function() { _goToSlide((_cur + 1) % projects.length); }, 4500);
+
+  function _goToSlide(idx) {
+    _cur = idx;
+    carousel.querySelectorAll('.proj-slide').forEach(function(s) {
+      s.classList.toggle('active', +s.dataset.idx === idx);
+    });
+    if (dotsWrap) dotsWrap.querySelectorAll('.proj-dot').forEach(function(d) {
+      d.classList.toggle('active', +d.dataset.idx === idx);
+    });
+    clearInterval(_timer);
+    _timer = setInterval(function() { _goToSlide((_cur + 1) % projects.length); }, 4500);
+  }
 }
 
 async function loadIndexData() {
