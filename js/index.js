@@ -64,6 +64,44 @@ function renderCta(cta) {
   setHref('.cta-white', cta.buttonHref);
 }
 
+function renderProjects(projects) {
+  const carousel = document.getElementById('projCarousel');
+  if (!carousel || !Array.isArray(projects) || !projects.length) return;
+
+  carousel.innerHTML = projects.map(function(p) {
+    var domain = '';
+    try { domain = new URL(p.url).hostname.replace(/^www\./, ''); } catch(e) { domain = p.url || ''; }
+    var faviconSrc = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(p.url) + '&sz=64';
+    var screenshotSrc = p.image || ('https://s0.wp.com/mshots/v1/' + encodeURIComponent(p.url) + '?w=600&h=338');
+
+    return '<div class="proj-card">' +
+      '<div class="proj-browser-bar">' +
+        '<span class="proj-browser-dot"></span>' +
+        '<span class="proj-browser-dot"></span>' +
+        '<span class="proj-browser-dot"></span>' +
+        '<span class="proj-browser-url">' + domain + '</span>' +
+      '</div>' +
+      '<div class="proj-preview">' +
+        '<div class="proj-preview-placeholder" id="proj-ph-' + (p.id || domain) + '">' +
+          '<img class="proj-favicon" src="' + faviconSrc + '" alt="" onerror="this.style.display=\'none\'">' +
+          '<span class="proj-domain">' + domain + '</span>' +
+        '</div>' +
+        '<img src="' + screenshotSrc + '" alt="Screenshot de ' + (p.title || domain) + '"' +
+          ' style="position:absolute;inset:0;z-index:1"' +
+          ' class="loading"' +
+          ' onload="this.classList.remove(\'loading\');var ph=document.getElementById(\'proj-ph-' + (p.id || domain) + '\');if(ph)ph.style.display=\'none\';"' +
+          ' onerror="this.style.display=\'none\';">' +
+      '</div>' +
+      '<div class="proj-info">' +
+        (p.tag ? '<span class="proj-tag">' + p.tag + '</span>' : '') +
+        '<div class="proj-title">' + (p.title || domain) + '</div>' +
+        (p.desc ? '<p class="proj-desc">' + p.desc + '</p>' : '') +
+        '<a class="proj-link" href="' + p.url + '" target="_blank" rel="noopener">Ver site →</a>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
 async function loadIndexData() {
   if (!document.getElementById('hero')) return;
 
@@ -72,6 +110,7 @@ async function loadIndexData() {
     if (!data) return;
     renderHero(data.hero);
     renderCta(data.cta);
+    renderProjects(data.projects || []);
   } catch (error) {
     console.warn('index data load failed', error);
   }

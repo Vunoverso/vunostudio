@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
 <!--
   ⚠ ATENÇÃO: Não publique este arquivo em servidor público.
   Este painel é apenas para uso local (desenvolvimento).
@@ -95,6 +96,11 @@
         <span class="nav-icon">🏗️</span>
         <div class="nav-dot"></div>
         Galeria de Trabalhos
+      </div>
+      <div class="nav-item" onclick="showPanel('projetos', this)">
+        <span class="nav-icon">🌐</span>
+        <div class="nav-dot"></div>
+        Sites em Destaque
       </div>
       <div class="nav-section" style="margin-top:.5rem">Blog</div>
       <div class="nav-item" onclick="showPanel('blog', this)">
@@ -479,18 +485,76 @@
 
   
 
+    <!-- ================== PROJETOS ================== -->
+    <div id="panel-projetos" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Sites em Destaque</div>
+        <div class="panel-sub">Gerencie os sites de clientes exibidos no carrossel da home page.</div>
+      </div>
+      <div class="info-box" id="statusProjetos">Carregando projetos…</div>
+
+      <div class="card">
+        <div class="card-head"><div class="card-label">Sites no carrossel</div></div>
+        <div class="proj-list" id="proj-list"></div>
+        <button class="btn-add" onclick="addProjItem()">+ Adicionar site</button>
+        <div class="actions-hint" style="margin-top:.5rem">
+          Deixe o campo <strong>Imagem</strong> vazio para usar screenshot automático. O campo <strong>Tag</strong> aparece como badge colorido (ex: "Site institucional").
+        </div>
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveProjetos()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Salvo com o Hero no Supabase. Recarregue a home para ver as alterações.</div>
+      </div>
+    </div>
+
     <!-- ================== BLOG ================== -->
     <div id="panel-blog" class="panel">
       <div class="panel-top">
         <div class="panel-title">Blog — Posts</div>
-        <div class="panel-sub">Crie, edite e remova artigos do blog. O conteúdo suporta HTML: &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;strong&gt;, &lt;a&gt;, &lt;blockquote&gt;.</div>
+        <div class="panel-sub">Gerencie os artigos do blog. Clique em <strong>+ Novo artigo</strong> para criar ou em <strong>Editar</strong> para modificar um post existente.</div>
       </div>
       <div class="info-box" id="statusBlog">Carregando <code>data/blog.json</code>…</div>
+
+      <!-- EDITOR (oculto por padrão) -->
+      <div id="blog-editor" style="display:none">
+        <div class="blog-editor-header">
+          <span id="blog-editor-label">Novo Artigo</span>
+          <button class="btn-remove-mini" onclick="closeBlogEditor()">✕ Cancelar</button>
+        </div>
+        <div class="g2">
+          <div class="field"><label>Título do artigo</label><input type="text" class="bp-title" placeholder="Como aparecer no Google Maps..."></div>
+          <div class="field"><label>Slug (URL)</label><input type="text" class="bp-slug" placeholder="como-aparecer-google-maps"></div>
+        </div>
+        <div class="g1"><div class="field"><label>Resumo / excerpt</label><textarea class="bp-excerpt" rows="2"></textarea></div></div>
+        <div class="g1"><div class="field"><label>Conteúdo</label>
+          <div id="quill-editor-wrap"><div id="quill-editor"></div></div>
+          <textarea class="bp-content" style="display:none"></textarea>
+        </div></div>
+        <div class="g3">
+          <div class="field"><label>Imagem de capa (URL ou caminho)</label><input type="text" class="bp-cover" placeholder="images/blog/nome.jpg"></div>
+          <div class="field"><label>Categoria</label><select class="bp-category"></select></div>
+          <div class="field"><label>Tempo de leitura</label><input type="text" class="bp-readtime" placeholder="4 min"></div>
+        </div>
+        <div class="g3">
+          <div class="field"><label>Autor</label><input type="text" class="bp-author" placeholder="Vuno Studio"></div>
+          <div class="field"><label>Data de publicação</label><input type="date" class="bp-date"></div>
+          <div class="field" style="display:flex;align-items:center;gap:.6rem;padding-top:1.4rem">
+            <input type="checkbox" class="bp-featured" id="bp-featured-main" style="width:18px;flex-shrink:0;accent-color:var(--green)">
+            <label for="bp-featured-main" style="font-size:.8rem;font-weight:600;cursor:pointer;margin:0;opacity:1;text-transform:none;letter-spacing:0">Artigo em destaque</label>
+          </div>
+        </div>
+        <input type="hidden" id="blog-editor-idx" value="-1">
+        <button class="btn-download" style="margin-top:.5rem" onclick="saveBlogEditor()">💾 Salvar artigo</button>
+      </div>
+
+      <!-- LISTA DE POSTS -->
       <div id="blog-posts-wrap"></div>
+
       <button class="btn-add" onclick="addBlogPost()">+ Novo artigo</button>
       <div class="actions-bar">
         <button class="btn-download" onclick="saveBlog()">💾 Salvar no Banco</button>
-        <div class="actions-hint">Slug = URL amigável do post (ex: <code>como-aparecer-google-maps</code>). O conteúdo HTML é renderizado diretamente na página do artigo.</div>
+        <div class="actions-hint">Slug = URL amigável do post (ex: <code>como-aparecer-google-maps</code>). Clique em <strong>Salvar no Banco</strong> após criar ou editar artigos.</div>
       </div>
     </div>
 
@@ -500,6 +564,7 @@
 <div id="toast" class="toast"></div>
 
 <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-config.js"></script>
 <script src="js/supabase-client.js"></script>

@@ -120,5 +120,31 @@
     "sub": "Diagnóstico gratuito. Sem compromisso. Atendemos presencialmente na Baixada Santista.",
     "buttonText": "Falar no WhatsApp agora",
     "buttonHref": "https://wa.me/55?text=Olá!%20Quero%20um%20diagnóstico%20gratuito%20da%20Vuno%20Studio"
-  }
+  },
+  "projects": [
+    {
+      "id": "vunourbano",
+      "title": "Vuno Urbano",
+      "url": "https://www.vunourbano.com.br",
+      "desc": "Presença digital e comunicação visual para o setor urbano",
+      "tag": "Site institucional",
+      "image": ""
+    },
+    {
+      "id": "barmate",
+      "title": "Barmate",
+      "url": "https://barmate.vercel.app/",
+      "desc": "Plataforma de gestão para bares e restaurantes",
+      "tag": "Aplicativo web",
+      "image": ""
+    },
+    {
+      "id": "vunotrader",
+      "title": "Vuno Trader",
+      "url": "https://vunotrader.vercel.app/",
+      "desc": "Plataforma de análise e operações de trading",
+      "tag": "Plataforma",
+      "image": ""
+    }
+  ]
 }

@@ -148,8 +148,9 @@ function loadAll() {
     _blog = d;
     populateBlogPosts((d && d.posts) || []);
   });
-}
 
+  // Projetos carregados junto com o hero via loadHeroData() acima
+}
 /**
  * Coletar dados do formulário: Contato
  */
@@ -336,6 +337,7 @@ function loadHeroData() {
   loadFromSupabase('index', 'data/index.json', 'statusHero', function(d) {
     _index = d;
     populateHero(d);
+    populateProjects((d && d.projects) || []);
   });
 }
 
@@ -369,12 +371,43 @@ function collectHero() {
         secondaryHref: (document.getElementById('hero_btn_secondary_href')|| {}).value || ''
       }
     },
-    cta: _index?.cta || {}
+    cta: _index?.cta || {},
+    projects: (_index && _index.projects) || []
   };
 }
 
 /** Alias para compatibilidade */
 function collectHeroSlides() { return collectHero(); }
+
+/**
+ * Coletar lista de projetos do formulário
+ */
+function collectProjectsList() {
+  return Array.from(document.querySelectorAll('#proj-list .gal-row')).map(function(row) {
+    var urlVal = (row.querySelector('.proj-url') || {}).value || '';
+    var domain = '';
+    try { domain = new URL(urlVal).hostname.replace(/^www\./, ''); } catch(e) { domain = urlVal; }
+    var id = domain.replace(/[^a-z0-9]/gi, '');
+    return {
+      id: id,
+      title: (row.querySelector('.proj-title') || {}).value || '',
+      url: urlVal,
+      desc: (row.querySelector('.proj-desc') || {}).value || '',
+      tag: (row.querySelector('.proj-tag') || {}).value || '',
+      image: (row.querySelector('.proj-image') || {}).value || ''
+    };
+  });
+}
+
+/**
+ * Salvar hero + projetos juntos no banco
+ */
+async function saveProjetos() {
+  const current = collectHero();
+  current.projects = collectProjectsList();
+  await saveToSupabase('index', current);
+  toast('✅ Sites em destaque salvos! Recarregue a home para ver.');
+}
 
 /**
  * Salvar hero
@@ -461,21 +494,7 @@ async function saveServicosCopy() {
  * Coletar dados do formulario: Blog
  */
 function collectBlog() {
-  var posts = Array.from(document.querySelectorAll('#blog-posts-wrap .blog-post-card')).map(function(card) {
-    return {
-      slug:        (card.querySelector('.bp-slug')     || {}).value || '',
-      title:       (card.querySelector('.bp-title')    || {}).value || '',
-      excerpt:     (card.querySelector('.bp-excerpt')  || {}).value || '',
-      content:     (card.querySelector('.bp-content')  || {}).value || '',
-      cover:       (card.querySelector('.bp-cover')    || {}).value || '',
-      category:    (card.querySelector('.bp-category') || {}).value || 'Presenca Digital',
-      author:      (card.querySelector('.bp-author')   || {}).value || 'Vuno Studio',
-      publishedAt: (card.querySelector('.bp-date')     || {}).value || '',
-      readTime:    (card.querySelector('.bp-readtime') || {}).value || '',
-      featured:    (card.querySelector('.bp-featured') || {}).checked || false
-    };
-  });
-  return { posts: posts };
+  return { posts: (typeof _blogPosts !== 'undefined' ? _blogPosts : []).slice() };
 }
 
 async function saveBlog() {

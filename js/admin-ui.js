@@ -604,53 +604,197 @@ function addFaqItem() {
 // ==========================================================
 
 var BLOG_CATEGORIES = ['Presenca Digital', 'Comunicacao Visual', 'Trafego Pago', 'Dicas Gerais'];
+var _blogPosts = [];
+var _quill = null;
+
+function _getQuill() {
+  if (_quill) return _quill;
+  if (typeof Quill === 'undefined') return null;
+  _quill = new Quill('#quill-editor', {
+    theme: 'snow',
+    placeholder: 'Escreva o conteúdo do artigo aqui...',
+    modules: {
+      toolbar: [
+        [{ heading: [2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['blockquote', 'link'],
+        ['clean']
+      ]
+    }
+  });
+  return _quill;
+}
 
 function populateBlogPosts(posts) {
-  var wrap = document.getElementById('blog-posts-wrap');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  (posts || []).forEach(function(post) { wrap.appendChild(buildBlogPostCard(post)); });
+  _blogPosts = (posts || []).slice();
+  _initBlogEditorCats();
+  renderBlogList();
   setStatus('statusBlog', true);
 }
 
-function buildBlogPostCard(post) {
-  post = post || {};
-  var d = document.createElement('div');
-  d.className = 'card blog-post-card';
-  var catOpts = BLOG_CATEGORIES.map(function(c) {
-    return '<option value="' + c + '"' + (post.category === c ? ' selected' : '') + '>' + c + '</option>';
-  }).join('');
-  d.innerHTML =
-    '<div class="card-head">' +
-      '<div class="card-label">' + esc(post.title || 'Novo Artigo') + '</div>' +
-      (post.featured ? '<span class="badge badge-green">Destaque</span>' : '') +
-    '</div>' +
-    '<div class="g2">' +
-      fld('Titulo do artigo', 'bp-title', post.title, 'Como aparecer no Google Maps...') +
-      fld('Slug (URL)', 'bp-slug', post.slug, 'como-aparecer-google-maps') +
-    '</div>' +
-    '<div class="g1"><div class="field"><label>Resumo / excerpt</label>' +
-      '<textarea class="bp-excerpt" rows="2">' + esc(post.excerpt || '') + '</textarea></div></div>' +
-    '<div class="g1"><div class="field"><label>Conteudo HTML (use &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;strong&gt;, &lt;a&gt;, &lt;blockquote&gt;)</label>' +
-      '<textarea class="bp-content" rows="12">' + esc(post.content || '') + '</textarea></div></div>' +
-    '<div class="g3">' +
-      fld('Imagem de capa (URL ou caminho)', 'bp-cover', post.cover, 'images/blog/nome.jpg') +
-      '<div class="field"><label>Categoria</label><select class="bp-category">' + catOpts + '</select></div>' +
-      fld('Tempo de leitura', 'bp-readtime', post.readTime, '4 min') +
-    '</div>' +
-    '<div class="g3">' +
-      fld('Autor', 'bp-author', post.author || 'Vuno Studio', 'Vuno Studio') +
-      fld('Data de publicacao', 'bp-date', post.publishedAt, '2026-03-24', 'date') +
-      '<div class="field" style="display:flex;align-items:center;gap:.6rem;padding-top:1.4rem">' +
-        '<input type="checkbox" class="bp-featured" id="bpf-' + Math.random().toString(36).slice(2) + '"' + (post.featured ? ' checked' : '') + ' style="width:18px;flex-shrink:0">' +
-        '<label style="font-size:.8rem;font-weight:600;cursor:pointer;margin:0">Artigo em destaque</label>' +
-      '</div>' +
-    '</div>' +
-    '<button class="btn-remove" style="margin-top:.5rem" onclick="this.closest(\'.card\').remove()">Remover artigo</button>';
-  return d;
+function _initBlogEditorCats() {
+  var sel = document.querySelector('#blog-editor .bp-category');
+  if (!sel || sel.options.length) return;
+  BLOG_CATEGORIES.forEach(function(c) {
+    var o = document.createElement('option');
+    o.value = o.textContent = c;
+    sel.appendChild(o);
+  });
+}
+
+function renderBlogList() {
+  var wrap = document.getElementById('blog-posts-wrap');
+  if (!wrap) return;
+  if (!_blogPosts.length) {
+    wrap.innerHTML = '<div class="blog-empty">Nenhum artigo ainda. Clique em <strong>+ Novo artigo</strong> para começar.</div>';
+    return;
+  }
+  wrap.innerHTML = '<div class="blog-list">' +
+    _blogPosts.map(function(post, idx) {
+      var dateStr = '—';
+      if (post.publishedAt) {
+        var d = new Date(post.publishedAt + 'T00:00:00');
+        dateStr = d.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
+      }
+      return '<div class="blog-list-row">' +
+        '<span class="blr-date">' + dateStr + '</span>' +
+        '<span class="blr-title">' + esc(post.title || '(sem título)') + '</span>' +
+        (post.featured ? '<span class="badge badge-green">Destaque</span>' : '<span></span>') +
+        '<span class="blr-cat">' + esc(post.category || '') + '</span>' +
+        '<button class="btn-edit-mini" onclick="openBlogEditor(' + idx + ')">✏ Editar</button>' +
+        '<button class="btn-remove-mini" onclick="deleteBlogPost(' + idx + ')">🗑 Excluir</button>' +
+      '</div>';
+    }).join('') +
+  '</div>';
+}
+
+function openBlogEditor(idx) {
+  var ed = document.getElementById('blog-editor');
+  if (!ed) return;
+  _initBlogEditorCats();
+  var post = idx === -1 ? {} : (_blogPosts[idx] || {});
+  document.getElementById('blog-editor-label').textContent = idx === -1 ? 'Novo Artigo' : 'Editando: ' + (post.title || 'Artigo');
+  document.getElementById('blog-editor-idx').value = idx;
+  ed.querySelector('.bp-title').value    = post.title || '';
+  ed.querySelector('.bp-slug').value     = post.slug || '';
+  ed.querySelector('.bp-excerpt').value  = post.excerpt || '';
+  ed.querySelector('.bp-cover').value    = post.cover || '';
+  ed.querySelector('.bp-category').value = post.category || 'Presenca Digital';
+  ed.querySelector('.bp-readtime').value = post.readTime || '';
+  ed.querySelector('.bp-author').value   = post.author || 'Vuno Studio';
+  ed.querySelector('.bp-date').value     = post.publishedAt || new Date().toISOString().slice(0, 10);
+  ed.querySelector('.bp-featured').checked = !!post.featured;
+  ed.style.display = '';
+
+  // Quill — inicia depois que o editor fica visível
+  var q = _getQuill();
+  if (q) {
+    q.root.innerHTML = post.content || '';
+  } else {
+    // fallback: textarea visível se Quill não carregou
+    var ta = ed.querySelector('.bp-content');
+    if (ta) { ta.style.display = ''; ta.rows = 12; ta.value = post.content || ''; }
+  }
+
+  ed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeBlogEditor() {
+  var ed = document.getElementById('blog-editor');
+  if (ed) ed.style.display = 'none';
+}
+
+function saveBlogEditor() {
+  var ed = document.getElementById('blog-editor');
+  if (!ed) return;
+  var idx  = parseInt(document.getElementById('blog-editor-idx').value, 10);
+
+  // pega conteúdo do Quill ou do textarea fallback
+  var content = '';
+  var q = _quill;
+  if (q) {
+    content = q.root.innerHTML.trim();
+    // Quill insere <p><br></p> quando vazio
+    if (content === '<p><br></p>') content = '';
+  } else {
+    var ta = ed.querySelector('.bp-content');
+    content = ta ? ta.value.trim() : '';
+  }
+
+  var post = {
+    title:       ed.querySelector('.bp-title').value.trim(),
+    slug:        ed.querySelector('.bp-slug').value.trim(),
+    excerpt:     ed.querySelector('.bp-excerpt').value.trim(),
+    content:     content,
+    cover:       ed.querySelector('.bp-cover').value.trim(),
+    category:    ed.querySelector('.bp-category').value,
+    readTime:    ed.querySelector('.bp-readtime').value.trim(),
+    author:      ed.querySelector('.bp-author').value.trim() || 'Vuno Studio',
+    publishedAt: ed.querySelector('.bp-date').value,
+    featured:    ed.querySelector('.bp-featured').checked
+  };
+  if (!post.title) { alert('O título é obrigatório.'); return; }
+  if (idx === -1) {
+    _blogPosts.unshift(post);
+  } else {
+    _blogPosts[idx] = post;
+  }
+  closeBlogEditor();
+  renderBlogList();
+  toast(idx === -1 ? '✅ Artigo adicionado — clique em Salvar no Banco.' : '✅ Artigo atualizado — clique em Salvar no Banco.');
+}
+
+function deleteBlogPost(idx) {
+  var title = (_blogPosts[idx] && _blogPosts[idx].title) || 'este artigo';
+  if (!confirm('Excluir "' + title + '"? Esta ação não pode ser desfeita.')) return;
+  _blogPosts.splice(idx, 1);
+  renderBlogList();
+  toast('🗑 Artigo removido — clique em Salvar no Banco para confirmar.');
 }
 
 function addBlogPost() {
-  var wrap = document.getElementById('blog-posts-wrap');
-  if (wrap) wrap.prepend(buildBlogPostCard({ title: '', slug: '', excerpt: '', content: '', cover: '', category: 'Presenca Digital', author: 'Vuno Studio', publishedAt: new Date().toISOString().slice(0,10), readTime: '3 min', featured: false }));
+  openBlogEditor(-1);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: PROJETOS (carrossel de sites)
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateProjects(projects) {
+  const list = document.getElementById('proj-list');
+  if (!list) return;
+  list.innerHTML = '';
+  (projects || []).forEach(p => list.appendChild(buildProjRow(p)));
+  setStatus('statusProjetos', true);
+}
+
+function buildProjRow(p) {
+  const d = document.createElement('div');
+  d.className = 'gal-row';
+  d.innerHTML =
+    '<div class="field"><label>Nome do site</label>' +
+      '<input type="text" class="proj-title" value="' + esc(p.title || '') + '" placeholder="Vuno Urbano">' +
+    '</div>' +
+    '<div class="field"><label>URL</label>' +
+      '<input type="url" class="proj-url" value="' + esc(p.url || '') + '" placeholder="https://www.exemplo.com.br">' +
+    '</div>' +
+    '<div class="field"><label>Descrição</label>' +
+      '<input type="text" class="proj-desc" value="' + esc(p.desc || '') + '" placeholder="Breve descrição do projeto">' +
+    '</div>' +
+    '<div class="gal-row-bottom">' +
+      '<div class="field"><label>Tag / categoria</label>' +
+        '<input type="text" class="proj-tag" value="' + esc(p.tag || '') + '" placeholder="Site institucional">' +
+      '</div>' +
+      '<div class="field"><label>Imagem (URL ou caminho — opcional)</label>' +
+        '<input type="text" class="proj-image" value="' + esc(p.image || '') + '" placeholder="Deixe vazio para screenshot automático">' +
+      '</div>' +
+      '<button class="btn-remove-row" style="margin-bottom:0" onclick="this.closest(\'.gal-row\').remove()">✕</button>' +
+    '</div>';
+  return d;
+}
+
+function addProjItem() {
+  const list = document.getElementById('proj-list');
+  if (list) list.appendChild(buildProjRow({ title: '', url: '', desc: '', tag: '', image: '' }));
 }
