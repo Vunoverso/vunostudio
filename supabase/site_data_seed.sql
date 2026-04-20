@@ -47,32 +47,6 @@ values
   'planos',
   $$
   {
-    "faq": [
-      {
-        "q": "O que está incluso no setup único?",
-        "a": "O setup cobre todo o trabalho de implantação inicial: configuração do Google Meu Negócio, criação e configuração das redes sociais, criação da landing page (nos planos que incluem), instalação do Pixel de rastreamento e estrutura inicial das campanhas. É um trabalho de 6-10 horas cobrado uma única vez — diferente da mensalidade que cobre o trabalho contínuo."
-      },
-      {
-        "q": "Posso cancelar a qualquer momento?",
-        "a": "Para planos de presença digital, o contrato mínimo é de 3 meses. Isso existe porque presença digital leva tempo para gerar resultado — cancelar no mês 1 seria como desistir de uma semente antes de germinar. Após os 3 meses iniciais, o contrato vira mês a mês e você pode cancelar com 30 dias de aviso prévio."
-      },
-      {
-        "q": "A verba de anúncio está inclusa nos planos de tráfego?",
-        "a": "Não — e isso é proposital. A verba de anúncio é paga por você diretamente ao Google ou ao Meta, no cartão da sua empresa. Isso garante que você tem controle total do seu investimento e nunca perdemos a transparência. Nossa taxa é exclusivamente de gestão — o trabalho de criar, configurar, otimizar e reportar as campanhas."
-      },
-      {
-        "q": "Quanto tempo leva para ver resultado?",
-        "a": "Depende do serviço. Google Meu Negócio começa a aparecer nos resultados locais em 1-2 semanas após a configuração completa. Redes sociais levam 60-90 dias para construir uma audiência local relevante. Tráfego pago tem retorno mais rápido — em 2-4 semanas você já vê os primeiros contatos chegando, mas a otimização real acontece depois de 30 dias de dados."
-      },
-      {
-        "q": "Vocês atendem apenas Praia Grande ou toda a Baixada Santista?",
-        "a": "Atendemos toda a Baixada Santista — Praia Grande, Santos, São Vicente, Guarujá, Cubatão, Itanhaém e cidades vizinhas. As visitas presenciais são feitas na empresa do cliente. Para serviços digitais e tráfego pago, atendemos de qualquer lugar com suporte 100% remoto pelo WhatsApp."
-      },
-      {
-        "q": "Posso mudar de plano depois de assinar?",
-        "a": "Sim. Upgrade a qualquer momento — você passa para o plano superior no próximo ciclo de cobrança. Para downgrade, aguardamos o fim do trimestre mínimo. Adicionais podem ser incluídos ou removidos a cada mês conforme sua necessidade."
-      }
-    ],
     "digital": {
       "plans": [
         {
@@ -297,7 +271,42 @@ values
         { "label": "Setup incluso", "title": "Sem taxa extra", "desc": "Configuração de conta, Pixel e estrutura de campanha estão inclusos no primeiro mês." },
         { "label": "Verba mínima", "title": "R$ 15-20/dia", "desc": "Abaixo disso o algoritmo não tem dados suficientes para otimizar. Abaixo = dinheiro perdido." }
       ]
-    }
+    },
+    "cta": {
+      "label": "Pronto para começar?",
+      "titleHtml": "Diagnóstico gratuito,<br><em>sem compromisso.</em>",
+      "sub": "Analisamos sua presença digital atual e mostramos exatamente o que está custando clientes. Em 30 minutos você sabe por onde começar.",
+      "whatsappText": "Peça sua cotação",
+      "whatsappHref": "https://wa.me/55?text=Quero%20um%20diagn%C3%B3stico%20gratuito",
+      "emailText": "Enviar e-mail",
+      "emailHref": "mailto:contato@vunostudio.com.br"
+    },
+    "faq": [
+      {
+        "q": "O que está incluso no setup único?",
+        "a": "O setup cobre todo o trabalho de implantação inicial: configuração do Google Meu Negócio, criação e configuração das redes sociais, criação da landing page (nos planos que incluem), instalação do Pixel de rastreamento e estrutura inicial das campanhas. É um trabalho de 6-10 horas cobrado uma única vez — diferente da mensalidade que cobre o trabalho contínuo."
+      },
+      {
+        "q": "Posso cancelar a qualquer momento?",
+        "a": "Para planos de presença digital, o contrato mínimo é de 3 meses. Isso existe porque presença digital leva tempo para gerar resultado — cancelar no mês 1 seria como desistir de uma semente antes de germinar. Após os 3 meses iniciais, o contrato vira mês a mês e você pode cancelar com 30 dias de aviso prévio."
+      },
+      {
+        "q": "A verba de anúncio está inclusa nos planos de tráfego?",
+        "a": "Não — e isso é proposital. A verba de anúncio é paga por você diretamente ao Google ou ao Meta, no cartão da sua empresa. Isso garante que você tem controle total do seu investimento e nunca perdemos a transparência. Nossa taxa é exclusivamente de gestão — o trabalho de criar, configurar, otimizar e reportar as campanhas."
+      },
+      {
+        "q": "Quanto tempo leva para ver resultado?",
+        "a": "Depende do serviço. Google Meu Negócio começa a aparecer nos resultados locais em 1-2 semanas após a configuração completa. Redes sociais levam 60-90 dias para construir uma audiência local relevante. Tráfego pago tem retorno mais rápido — em 2-4 semanas você já vê os primeiros contatos chegando, mas a otimização real acontece depois de 30 dias de dados."
+      },
+      {
+        "q": "Vocês atendem apenas Praia Grande ou toda a Baixada Santista?",
+        "a": "Atendemos toda a Baixada Santista — Praia Grande, Santos, São Vicente, Guarujá, Cubatão, Itanhaém e cidades vizinhas. As visitas presenciais são feitas na empresa do cliente. Para serviços digitais e tráfego pago, atendemos de qualquer lugar com suporte 100% remoto pelo WhatsApp."
+      },
+      {
+        "q": "Posso mudar de plano depois de assinar?",
+        "a": "Sim. Upgrade a qualquer momento — você passa para o plano superior no próximo ciclo de cobrança. Para downgrade, aguardamos o fim do trimestre mínimo. Adicionais podem ser incluídos ou removidos a cada mês conforme sua necessidade."
+      }
+    ]
   }
   $$::jsonb,
   now()
