@@ -131,6 +131,7 @@ function loadAll() {
     populateDigital(d.digital);
     populateVisual(d.visual);
     populateTrafego(d.trafego);
+    populatePlanosCta(d.cta || {});
     populateFaq(d.faq || []);
   });
 
@@ -142,6 +143,11 @@ function loadAll() {
   loadFromSupabase('servicos', 'data/servicos.json', 'statusServicosCopy', function(d) {
     _servicos = d;
     populateServicosCopy((d && d.copy) || {});
+    populateServicosVisualProducts(d && d.visual ? d.visual : {});
+    populateServicosDigitalPlans(d && d.digital ? d.digital : {});
+    populateServicosDigitalAddons((d && d.digital && d.digital.addons) || []);
+    populateServicosTrafegoCards(d && d.trafego ? d.trafego : {});
+    populateServicosTrafegoCombo((d && d.trafego && d.trafego.combo) || {});
     populateProcesso((d && d.processo && d.processo.steps) || []);
   });
   loadFromSupabase('blog', 'data/blog.json', 'statusBlog', function(d) {
@@ -283,6 +289,15 @@ function collectPlanos() {
     digital: { plans, addons, compare },
     visual: { products },
     trafego: { plans: trafPlans },
+    cta: {
+      label: gv('planos_cta_label'),
+      titleHtml: gv('planos_cta_title'),
+      sub: gv('planos_cta_sub'),
+      whatsappText: gv('planos_cta_whatsapp_text'),
+      whatsappHref: gv('planos_cta_whatsapp_href'),
+      emailText: gv('planos_cta_email_text'),
+      emailHref: gv('planos_cta_email_href')
+    },
     faq: Array.from(document.querySelectorAll('#faq-edit-list .faq-edit-row')).map(function(row) {
       return { q: (row.querySelector('.faq-q-input') || {}).value || '', a: (row.querySelector('.faq-a-input') || {}).value || '' };
     })
@@ -490,9 +505,85 @@ function collectServicos() {
     };
   });
 
-  // Preserva o restante do objeto servicos original (digital, visual, trafego)
+  const visualProducts = Array.from(
+    document.querySelectorAll('#sv-visual-products-wrap [data-svvi]')
+  ).map(function(card) {
+    const tagsRaw = ((card.querySelector('.sv-vprod-tags') || {}).value || '').split(',');
+    return {
+      iconKey: ((card.querySelector('.sv-vprod-iconkey') || {}).value || '').trim(),
+      imageLabel: ((card.querySelector('.sv-vprod-imagelabel') || {}).value || '').trim(),
+      name: ((card.querySelector('.sv-vprod-name') || {}).value || '').trim(),
+      desc: ((card.querySelector('.sv-vprod-desc') || {}).value || '').trim(),
+      items: Array.from(card.querySelectorAll('.sv-vprod-item')).map(function(item) {
+        return item.value.trim();
+      }).filter(Boolean),
+      tags: tagsRaw.map(function(tag) { return tag.trim(); }).filter(Boolean),
+      premium: !!((card.querySelector('.sv-vprod-premium') || {}).checked),
+      badge: ((card.querySelector('.sv-vprod-badge') || {}).value || '').trim()
+    };
+  }).filter(function(product) {
+    return product.name || product.desc || product.items.length;
+  });
+
+  const digitalPlans = Array.from(
+    document.querySelectorAll('#sv-digital-plans-wrap [data-svdp]')
+  ).map(function(card) {
+    return {
+      name: ((card.querySelector('.sv-dplan-name') || {}).value || '').trim(),
+      desc: ((card.querySelector('.sv-dplan-desc') || {}).value || '').trim(),
+      featured: !!((card.querySelector('.sv-dplan-featured') || {}).checked),
+      tag: ((card.querySelector('.sv-dplan-tag') || {}).value || '').trim(),
+      ctaText: ((card.querySelector('.sv-dplan-ctatext') || {}).value || '').trim(),
+      ctaHref: ((card.querySelector('.sv-dplan-ctahref') || {}).value || '').trim(),
+      features: Array.from(card.querySelectorAll('.sv-dplan-feat')).map(function(el) {
+        return el.value.trim();
+      }).filter(Boolean)
+    };
+  }).filter(function(p) { return p.name || p.desc; });
+
+  const digitalAddons = Array.from(
+    document.querySelectorAll('#sv-digital-addons-wrap [data-svda]')
+  ).map(function(row) {
+    return {
+      icon: ((row.querySelector('.sv-addon-icon') || {}).value || '').trim(),
+      name: ((row.querySelector('.sv-addon-name') || {}).value || '').trim(),
+      desc: ((row.querySelector('.sv-addon-desc') || {}).value || '').trim()
+    };
+  }).filter(function(a) { return a.name || a.desc; });
+
+  const trafegoCards = Array.from(
+    document.querySelectorAll('#sv-trafego-cards-wrap [data-svtc]')
+  ).map(function(card) {
+    return {
+      variant: ((card.querySelector('.sv-traf-variant') || {}).value || '').trim(),
+      platform: ((card.querySelector('.sv-traf-platform') || {}).value || '').trim(),
+      name: ((card.querySelector('.sv-traf-name') || {}).value || '').trim(),
+      desc: ((card.querySelector('.sv-traf-desc') || {}).value || '').trim(),
+      features: Array.from(card.querySelectorAll('.sv-traf-feat')).map(function(el) {
+        return el.value.trim();
+      }).filter(Boolean)
+    };
+  }).filter(function(c) { return c.platform || c.name; });
+
+  const trafegoCombo = {
+    label: gv('sv_trafego_combo_label'),
+    name: gv('sv_trafego_combo_name'),
+    desc: (document.getElementById('sv_trafego_combo_desc') || {}).value || '',
+    buttonText: gv('sv_trafego_combo_btn_text'),
+    buttonHref: gv('sv_trafego_combo_btn_href')
+  };
+
   return Object.assign({}, _servicos || {}, {
     copy: copy,
+    digital: Object.assign({}, (_servicos && _servicos.digital) || {}, {
+      plans: digitalPlans,
+      addons: digitalAddons
+    }),
+    visual: Object.assign({}, (_servicos && _servicos.visual) || {}, { products: visualProducts }),
+    trafego: Object.assign({}, (_servicos && _servicos.trafego) || {}, {
+      cards: trafegoCards,
+      combo: trafegoCombo
+    }),
     processo: Object.assign({}, (_servicos && _servicos.processo) || {}, { steps: steps })
   });
 }

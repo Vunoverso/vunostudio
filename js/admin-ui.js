@@ -524,6 +524,253 @@ function populateServicosCopy(copy) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: SERVIÇOS — VISUAL PRODUCTS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateServicosVisualProducts(visual) {
+  const wrap = document.getElementById('sv-visual-products-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  ((visual && visual.products) || []).forEach(function(product, i) {
+    wrap.appendChild(buildServicosVisualProductCard(product, i));
+  });
+
+  if (!wrap.children.length) {
+    wrap.innerHTML = '<div class="card"><div class="card-label">Nenhum produto visual carregado</div><p style="margin:.5rem 0 0;opacity:.7">Use o botão abaixo para adicionar cards desta seção e depois salvar.</p></div>';
+  }
+}
+
+function buildServicosVisualProductCard(product, i) {
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.dataset.svvi = i;
+  const itemsHtml = (product.items || []).map(function(item) {
+    return '<div class="item-row"><input type="text" class="sv-vprod-item" value="' + esc(item || '') + '">' +
+      '<button class="btn-remove" onclick="this.parentElement.remove()">✕</button></div>';
+  }).join('');
+
+  d.innerHTML =
+    '<div class="card-head">' +
+      '<div class="card-label">' + esc(product.name || ('Produto visual ' + (i + 1))) + '</div>' +
+      (product.premium ? '<span class="badge badge-orange">Premium</span>' : '') +
+    '</div>' +
+    '<div class="g3">' +
+      fld('Nome', 'sv-vprod-name', product.name, 'Fachada ACM') +
+      fld('Chave do ícone', 'sv-vprod-iconkey', product.iconKey, 'acm') +
+      fld('Label da imagem', 'sv-vprod-imagelabel', product.imageLabel, 'Fachada ACM') +
+    '</div>' +
+    '<div class="g1">' +
+      '<div class="field"><label>Descrição</label><textarea class="sv-vprod-desc" rows="2">' + esc(product.desc || '') + '</textarea></div>' +
+    '</div>' +
+    '<div class="g2">' +
+      fld('Badge premium', 'sv-vprod-badge', product.badge || '', 'Premium') +
+      '<div class="field"><label>Tags (separadas por vírgula)</label><input type="text" class="sv-vprod-tags" value="' + esc((product.tags || []).join(', ')) + '" placeholder="Arte inclusa, Entrega rápida"></div>' +
+    '</div>' +
+    '<div class="field" style="margin:.4rem 0 .2rem">' +
+      '<label style="display:flex;align-items:center;gap:.5rem"><input type="checkbox" class="sv-vprod-premium"' + (product.premium ? ' checked' : '') + '> Produto premium</label>' +
+    '</div>' +
+    '<div style="margin-top:.2rem">' +
+      '<label style="margin-bottom:.5rem">Itens da lista</label>' +
+      '<div class="items-list" id="sv-vprod-items-' + i + '">' + itemsHtml + '</div>' +
+      '<button class="btn-add" onclick="addServicosVisualItem(' + i + ')">+ Adicionar item</button>' +
+      '<button class="btn-remove" style="margin-top:.6rem" onclick="this.closest(\'.card\').remove()">Remover produto</button>' +
+    '</div>';
+  return d;
+}
+
+function addServicosVisualItem(i) {
+  const list = document.getElementById('sv-vprod-items-' + i);
+  if (!list) return;
+  list.insertAdjacentHTML('beforeend',
+    '<div class="item-row"><input type="text" class="sv-vprod-item" placeholder="novo item">' +
+    '<button class="btn-remove" onclick="this.parentElement.remove()">✕</button></div>');
+}
+
+function addServicosVisualProduct() {
+  const wrap = document.getElementById('sv-visual-products-wrap');
+  if (!wrap) return;
+  if (wrap.children.length === 1 && wrap.firstElementChild && !wrap.querySelector('.sv-vprod-name')) {
+    wrap.innerHTML = '';
+  }
+  wrap.appendChild(buildServicosVisualProductCard({
+    iconKey: '',
+    imageLabel: '',
+    name: '',
+    desc: '',
+    items: [],
+    tags: [],
+    premium: false,
+    badge: ''
+  }, wrap.querySelectorAll('[data-svvi]').length));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: SERVIÇOS — DIGITAL PLANS & ADDONS
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateServicosDigitalPlans(digital) {
+  const wrap = document.getElementById('sv-digital-plans-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  ((digital && digital.plans) || []).forEach(function(plan, i) {
+    wrap.appendChild(buildServicosDigitalPlanCard(plan, i));
+  });
+  if (!wrap.children.length) {
+    wrap.innerHTML = '<p style="opacity:.6;margin:.4rem 0">Nenhum plano carregado. Use o botão abaixo para adicionar.</p>';
+  }
+}
+
+function buildServicosDigitalPlanCard(plan, i) {
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.dataset.svdp = i;
+  const featsHtml = (plan.features || []).map(function(f) {
+    return '<div class="item-row"><input type="text" class="sv-dplan-feat" value="' + esc(f || '') + '" placeholder="Inclui..."><button class="btn-remove" onclick="this.parentElement.remove()">✕</button></div>';
+  }).join('');
+  d.innerHTML =
+    '<div class="card-head">' +
+      '<div class="card-label">Plano ' + (i + 1) + (plan.name ? ' — ' + esc(plan.name) : '') + '</div>' +
+      (plan.featured ? '<span class="badge badge-green">Destaque</span>' : '') +
+    '</div>' +
+    '<div class="g3">' +
+      fld('Nome', 'sv-dplan-name', plan.name, 'Básico') +
+      fld('Tag (ex: Mais escolhido)', 'sv-dplan-tag', plan.tag || '', 'Mais escolhido') +
+      fld('Link botão CTA', 'sv-dplan-ctahref', plan.ctaHref || '', 'https://wa.me/55?text=...', 'url') +
+    '</div>' +
+    '<div class="g2">' +
+      fld('Texto do botão CTA', 'sv-dplan-ctatext', plan.ctaText || '', 'Quero saber mais') +
+      '<div class="field"><label>Plano em destaque</label><label style="display:flex;align-items:center;gap:.5rem;margin-top:.4rem"><input type="checkbox" class="sv-dplan-featured"' + (plan.featured ? ' checked' : '') + '> Destacar este plano</label></div>' +
+    '</div>' +
+    '<div class="g1"><div class="field"><label>Descrição</label><textarea class="sv-dplan-desc" rows="2">' + esc(plan.desc || '') + '</textarea></div></div>' +
+    '<div style="margin-top:.2rem">' +
+      '<label style="margin-bottom:.5rem">Features (lista)</label>' +
+      '<div class="items-list" id="sv-dplan-feats-' + i + '">' + featsHtml + '</div>' +
+      '<button class="btn-add" onclick="addServicosDigitalPlanFeature(' + i + ')">+ Adicionar feature</button>' +
+      '<button class="btn-remove" style="margin-top:.6rem" onclick="this.closest(\'.card\').remove()">Remover plano</button>' +
+    '</div>';
+  return d;
+}
+
+function addServicosDigitalPlanFeature(i) {
+  const list = document.getElementById('sv-dplan-feats-' + i);
+  if (!list) return;
+  list.insertAdjacentHTML('beforeend',
+    '<div class="item-row"><input type="text" class="sv-dplan-feat" placeholder="nova feature"><button class="btn-remove" onclick="this.parentElement.remove()">✕</button></div>');
+}
+
+function addServicosDigitalPlan() {
+  const wrap = document.getElementById('sv-digital-plans-wrap');
+  if (!wrap) return;
+  if (wrap.children.length === 1 && wrap.firstElementChild && !wrap.querySelector('.sv-dplan-name')) {
+    wrap.innerHTML = '';
+  }
+  wrap.appendChild(buildServicosDigitalPlanCard({ name: '', desc: '', featured: false, tag: '', features: [], ctaText: '', ctaHref: '' }, wrap.querySelectorAll('[data-svdp]').length));
+}
+
+function populateServicosDigitalAddons(addons) {
+  const wrap = document.getElementById('sv-digital-addons-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  (addons || []).forEach(function(addon, i) {
+    wrap.appendChild(buildServicosDigitalAddonRow(addon, i));
+  });
+  if (!wrap.children.length) {
+    wrap.innerHTML = '<p style="opacity:.6;margin:.4rem 0">Nenhum add-on carregado.</p>';
+  }
+}
+
+function buildServicosDigitalAddonRow(addon, i) {
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.dataset.svda = i;
+  d.style.cssText = 'padding:.85rem 1.2rem;margin-bottom:.6rem';
+  d.innerHTML =
+    '<div style="display:grid;grid-template-columns:2rem 2fr 3fr 28px;gap:.5rem;align-items:end">' +
+    fld('Ícone', 'sv-addon-icon', addon.icon || '', '📱') +
+    fld('Nome', 'sv-addon-name', addon.name || '', 'Stories diários') +
+    fld('Descrição', 'sv-addon-desc', addon.desc || '', '20 stories/mês...') +
+    '<button class="btn-remove-row" onclick="this.closest(\'.card\').remove()" style="margin-bottom:0">✕</button>' +
+    '</div>';
+  return d;
+}
+
+function addServicosDigitalAddon() {
+  const wrap = document.getElementById('sv-digital-addons-wrap');
+  if (!wrap) return;
+  if (wrap.children.length === 1 && wrap.firstElementChild && !wrap.querySelector('.sv-addon-name')) {
+    wrap.innerHTML = '';
+  }
+  wrap.appendChild(buildServicosDigitalAddonRow({ icon: '', name: '', desc: '' }, wrap.querySelectorAll('[data-svda]').length));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: SERVIÇOS — TRÁFEGO CARDS & COMBO
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateServicosTrafegoCards(trafego) {
+  const wrap = document.getElementById('sv-trafego-cards-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  ((trafego && trafego.cards) || []).forEach(function(card, i) {
+    wrap.appendChild(buildServicosTrafegoCardEl(card, i));
+  });
+  if (!wrap.children.length) {
+    wrap.innerHTML = '<p style="opacity:.6;margin:.4rem 0">Nenhum card carregado.</p>';
+  }
+}
+
+function buildServicosTrafegoCardEl(card, i) {
+  const d = document.createElement('div');
+  d.className = 'card';
+  d.dataset.svtc = i;
+  const featsHtml = (card.features || []).map(function(f) {
+    return '<div class="item-row"><input type="text" class="sv-traf-feat" value="' + esc(f || '') + '" placeholder="Configuração de campanha..."><button class="btn-remove" onclick="this.parentElement.remove()">✕</button></div>';
+  }).join('');
+  d.innerHTML =
+    '<div class="card-head">' +
+      '<div class="card-label">' + esc(card.platform || ('Card ' + (i + 1))) + '</div>' +
+    '</div>' +
+    '<div class="g3">' +
+      fld('Variante (google | meta)', 'sv-traf-variant', card.variant || '', 'google') +
+      fld('Plataforma', 'sv-traf-platform', card.platform || '', 'Google Ads') +
+      fld('Nome', 'sv-traf-name', card.name || '', 'Rede de Pesquisa + Maps') +
+    '</div>' +
+    '<div class="g1"><div class="field"><label>Descrição</label><textarea class="sv-traf-desc" rows="2">' + esc(card.desc || '') + '</textarea></div></div>' +
+    '<div style="margin-top:.2rem">' +
+      '<label style="margin-bottom:.5rem">Features (lista)</label>' +
+      '<div class="items-list" id="sv-traf-feats-' + i + '">' + featsHtml + '</div>' +
+      '<button class="btn-add" onclick="addServicosTrafegoFeature(' + i + ')">+ Adicionar feature</button>' +
+      '<button class="btn-remove" style="margin-top:.6rem" onclick="this.closest(\'.card\').remove()">Remover card</button>' +
+    '</div>';
+  return d;
+}
+
+function addServicosTrafegoFeature(i) {
+  const list = document.getElementById('sv-traf-feats-' + i);
+  if (!list) return;
+  list.insertAdjacentHTML('beforeend',
+    '<div class="item-row"><input type="text" class="sv-traf-feat" placeholder="nova feature"><button class="btn-remove" onclick="this.parentElement.remove()">✕</button></div>');
+}
+
+function addServicosTrafegoCard() {
+  const wrap = document.getElementById('sv-trafego-cards-wrap');
+  if (!wrap) return;
+  if (wrap.children.length === 1 && wrap.firstElementChild && !wrap.querySelector('.sv-traf-platform')) {
+    wrap.innerHTML = '';
+  }
+  wrap.appendChild(buildServicosTrafegoCardEl({ variant: '', platform: '', name: '', desc: '', features: [] }, wrap.querySelectorAll('[data-svtc]').length));
+}
+
+function populateServicosTrafegoCombo(combo) {
+  sv('sv_trafego_combo_label', (combo && combo.label) || '');
+  sv('sv_trafego_combo_name', (combo && combo.name) || '');
+  const descEl = document.getElementById('sv_trafego_combo_desc');
+  if (descEl) descEl.value = (combo && combo.desc) || '';
+  sv('sv_trafego_combo_btn_text', (combo && combo.buttonText) || '');
+  sv('sv_trafego_combo_btn_href', (combo && combo.buttonHref) || '');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // POPULATE: PROCESSO
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -563,6 +810,21 @@ function buildProcessoRow(step) {
 function addProcessoStep() {
   const list = document.getElementById('processo-steps-list');
   if (list) list.appendChild(buildProcessoRow({ num: '', icon: '', name: '', desc: '', time: '' }));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPULATE: PLANOS CTA
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populatePlanosCta(cta) {
+  const data = cta || {};
+  sv('planos_cta_label', data.label || '');
+  sv('planos_cta_title', data.titleHtml || '');
+  sv('planos_cta_sub', data.sub || '');
+  sv('planos_cta_whatsapp_text', data.whatsappText || '');
+  sv('planos_cta_whatsapp_href', data.whatsappHref || '');
+  sv('planos_cta_email_text', data.emailText || '');
+  sv('planos_cta_email_href', data.emailHref || '');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
