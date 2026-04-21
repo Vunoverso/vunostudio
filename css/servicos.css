@@ -129,7 +129,7 @@
 .visual { background: var(--ink); }
 .visual-inner { max-width: 1200px; margin: 0 auto; }
 .visual .section-title { color: white; }
-.visual .section-sub { color: rgba(255,255,255,.45); }
+.visual .section-sub { color: rgba(255,255,255,.62); }
 
 .produtos-grid {
   display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5px;
@@ -175,13 +175,13 @@
   font-size: 1.4rem; color: white; margin-bottom: .6rem;
 }
 .prod-desc {
-  font-size: .88rem; color: rgba(255,255,255,.45);
+  font-size: .88rem; color: rgba(255,255,255,.72);
   line-height: 1.65; margin-bottom: 1.2rem;
 }
 .prod-itens { list-style: none; margin-bottom: 1.5rem; }
 .prod-itens li {
-  font-size: .82rem; color: rgba(255,255,255,.45); padding: .35rem 0;
-  border-bottom: 1px solid rgba(255,255,255,.05);
+  font-size: .82rem; color: rgba(255,255,255,.68); padding: .35rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
   display: flex; gap: .5rem;
 }
 .prod-itens li:last-child { border-bottom: none; }
