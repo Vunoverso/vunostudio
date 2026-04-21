@@ -149,10 +149,10 @@ label {
 }
 .sidebar-nav { flex: 1; padding: .6rem 0; }
 .nav-section {
-  font-size: .6rem;
+  font-size: .65rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  opacity: .28;
+  opacity: .5;
   padding: .9rem 1.5rem .3rem;
 }
 .nav-item {
@@ -160,8 +160,8 @@ label {
   align-items: center;
   gap: .55rem;
   padding: .6rem 1.5rem;
-  font-size: .84rem;
-  color: rgba(255,255,255,.45);
+  font-size: .9rem;
+  color: rgba(255,255,255,.72);
   cursor: pointer;
   border-left: 3px solid transparent;
   transition: all .14s;
@@ -565,6 +565,135 @@ label {
 }
 .numbers-list { display: flex; flex-direction: column; gap: .5rem; margin-bottom: .7rem; }
 
+/* ── BLOG EDITOR ─────────────────────────────────────────────────────────── */
+#blog-editor {
+  background: #fff;
+  border: 1.5px solid var(--green);
+  border-radius: 13px;
+  padding: 1.4rem 1.5rem 1.1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 0 4px rgba(29,158,117,.07);
+}
+.blog-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid var(--border);
+}
+#blog-editor-label {
+  font-size: .95rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+/* Quill overrides */
+#quill-editor-wrap {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid rgba(10,10,10,.18);
+  transition: border-color .15s, box-shadow .15s;
+}
+#quill-editor-wrap:focus-within {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(29,158,117,.1);
+}
+#quill-editor-wrap .ql-toolbar {
+  background: var(--cream);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  padding: .45rem .65rem;
+}
+#quill-editor-wrap .ql-container {
+  border: none;
+  font-family: inherit;
+  font-size: .9rem;
+}
+#quill-editor-wrap .ql-editor {
+  min-height: 220px;
+  padding: .85rem 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+#quill-editor-wrap .ql-editor.ql-blank::before {
+  color: rgba(10,10,10,.28);
+  font-style: normal;
+  font-size: .88rem;
+}
+#quill-editor-wrap .ql-toolbar button:hover,
+#quill-editor-wrap .ql-toolbar button.ql-active,
+#quill-editor-wrap .ql-toolbar .ql-picker-label:hover {
+  color: var(--green) !important;
+}
+#quill-editor-wrap .ql-toolbar button:hover .ql-stroke,
+#quill-editor-wrap .ql-toolbar button.ql-active .ql-stroke {
+  stroke: var(--green) !important;
+}
+#quill-editor-wrap .ql-toolbar button:hover .ql-fill,
+#quill-editor-wrap .ql-toolbar button.ql-active .ql-fill {
+  fill: var(--green) !important;
+}
+
+/* ── BLOG LIST ───────────────────────────────────────────────────────────── */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  margin-bottom: 1rem;
+}
+.blog-list-row {
+  display: grid;
+  grid-template-columns: 72px 1fr auto auto 78px 80px;
+  gap: .5rem .75rem;
+  align-items: center;
+  background: #fff;
+  padding: .65rem 1rem;
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  transition: border-color .14s;
+}
+.blog-list-row:hover { border-color: rgba(29,158,117,.38); }
+.blr-date {
+  font-size: .72rem;
+  opacity: .45;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.blr-title {
+  font-size: .84rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blr-cat {
+  font-size: .71rem;
+  opacity: .45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-edit-mini {
+  background: none;
+  border: 1px solid var(--green);
+  color: var(--green);
+  border-radius: 6px;
+  padding: .32rem .6rem;
+  font-size: .73rem;
+  cursor: pointer;
+  transition: all .14s;
+  white-space: nowrap;
+  line-height: 1;
+}
+.btn-edit-mini:hover { background: var(--greenl); }
+.blog-empty {
+  font-size: .84rem;
+  opacity: .45;
+  padding: 2rem 0;
+  text-align: center;
+}
+
 /* ── MOBILE ──────────────────────────────────────────────────────────────── */
 @media (max-width: 760px) {
   .sidebar { display: none; }
@@ -576,4 +705,6 @@ label {
   .feat-row input.feat-highlight { display: none; }
   .processo-row { grid-template-columns: 52px 52px 1fr; }
   .num-row { grid-template-columns: 1fr 2fr; }
+  .blog-list-row { grid-template-columns: 1fr auto auto; }
+  .blr-date, .blr-cat { display: none; }
 }
