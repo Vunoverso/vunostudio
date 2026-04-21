@@ -65,10 +65,25 @@
         <div class="nav-dot"></div>
         Textos das Seções
       </div>
+      <div class="nav-item" onclick="showPanel('sv-digital', this)">
+        <span class="nav-icon">📱</span>
+        <div class="nav-dot"></div>
+        Presença Digital
+      </div>
+      <div class="nav-item" onclick="showPanel('sv-visual', this)">
+        <span class="nav-icon">🖼️</span>
+        <div class="nav-dot"></div>
+        Comunicação Visual
+      </div>
+      <div class="nav-item" onclick="showPanel('sv-trafego', this)">
+        <span class="nav-icon">📈</span>
+        <div class="nav-dot"></div>
+        Tráfego Pago
+      </div>
       <div class="nav-item" onclick="showPanel('processo', this)">
         <span class="nav-icon">🔄</span>
         <div class="nav-dot"></div>
-        Passos do Processo
+        Como Funciona
       </div>
       <div class="nav-section" style="margin-top:.5rem">Planos &amp; Produtos</div>
       <div class="nav-item" onclick="showPanel('digital', this)">
@@ -369,28 +384,10 @@
       </div>
 
       <div class="card">
-        <div class="card-head"><div class="card-label">01 — Presença Digital — Planos da Página</div></div>
-        <div id="sv-digital-plans-wrap"></div>
-        <button class="btn-add" onclick="addServicosDigitalPlan()">+ Adicionar plano digital</button>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><div class="card-label">01 — Presença Digital — Add-ons da Página</div></div>
-        <div id="sv-digital-addons-wrap"></div>
-        <button class="btn-add" onclick="addServicosDigitalAddon()">+ Adicionar add-on</button>
-      </div>
-
-      <div class="card">
         <div class="card-head"><div class="card-label">02 — Comunicação Visual</div></div>
         <div class="g1"><div class="field"><label>Label</label><input type="text" id="sv_visual_label"></div></div>
         <div class="g1"><div class="field"><label>Título da seção</label><input type="text" id="sv_visual_title"></div></div>
         <div class="g1"><div class="field"><label>Subtítulo</label><textarea id="sv_visual_sub" rows="2"></textarea></div></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><div class="card-label">02 — Comunicação Visual — Produtos da Página</div></div>
-        <div id="sv-visual-products-wrap"></div>
-        <button class="btn-add" onclick="addServicosVisualProduct()">+ Adicionar produto visual da página</button>
       </div>
 
       <div class="card">
@@ -405,25 +402,6 @@
         <div class="g1"><div class="field"><label>Label</label><input type="text" id="sv_trafego_label"></div></div>
         <div class="g1"><div class="field"><label>Título da seção</label><input type="text" id="sv_trafego_title"></div></div>
         <div class="g1"><div class="field"><label>Subtítulo</label><textarea id="sv_trafego_sub" rows="2"></textarea></div></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><div class="card-label">03 — Tráfego Pago — Cards da Página</div></div>
-        <div id="sv-trafego-cards-wrap"></div>
-        <button class="btn-add" onclick="addServicosTrafegoCard()">+ Adicionar card de tráfego</button>
-      </div>
-
-      <div class="card">
-        <div class="card-head"><div class="card-label">03 — Tráfego Pago — Combo</div></div>
-        <div class="g2">
-          <div class="field"><label>Label</label><input type="text" id="sv_trafego_combo_label" placeholder="Combo recomendado"></div>
-          <div class="field"><label>Nome</label><input type="text" id="sv_trafego_combo_name" placeholder="Google + Meta — Presença Completa"></div>
-        </div>
-        <div class="g1"><div class="field"><label>Descrição</label><textarea id="sv_trafego_combo_desc" rows="2"></textarea></div></div>
-        <div class="g2">
-          <div class="field"><label>Texto do botão</label><input type="text" id="sv_trafego_combo_btn_text" placeholder="Quero o combo"></div>
-          <div class="field"><label>Link do botão</label><input type="url" id="sv_trafego_combo_btn_href" placeholder="https://wa.me/55?text=..."></div>
-        </div>
       </div>
 
       <div class="card">
@@ -453,6 +431,74 @@
       <div class="actions-bar">
         <button class="btn-download" onclick="saveServicosCopy()">💾 Salvar no Banco</button>
         <div class="actions-hint">Atualiza todos os títulos e subtítulos da página de Serviços automaticamente.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SERVIÇOS — PRESENÇA DIGITAL ══════════════════ -->
+    <div id="panel-sv-digital" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Serviços — Presença Digital</div>
+        <div class="panel-sub">Planos e serviços adicionais exibidos na seção de Presença Digital de servicos.html.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Planos</div></div>
+        <div id="sv-digital-plans-wrap"></div>
+        <button class="btn-add" onclick="addServicosDigitalPlan()">+ Adicionar plano</button>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Serviços Adicionais (Add-ons)</div></div>
+        <div id="sv-digital-addons-wrap"></div>
+        <button class="btn-add" onclick="addServicosDigitalAddon()">+ Adicionar add-on</button>
+      </div>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveServicosCopy()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Salva planos e add-ons da página de Serviços no Supabase.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SERVIÇOS — COMUNICAÇÃO VISUAL ══════════════════ -->
+    <div id="panel-sv-visual" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Serviços — Comunicação Visual</div>
+        <div class="panel-sub">Produtos visuais (impressos, adesivos, banners, ACM) exibidos em servicos.html.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Produtos</div></div>
+        <div id="sv-visual-products-wrap"></div>
+        <button class="btn-add" onclick="addServicosVisualProduct()">+ Adicionar produto</button>
+      </div>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveServicosCopy()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Salva os produtos visuais da página de Serviços no Supabase.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SERVIÇOS — TRÁFEGO PAGO ══════════════════ -->
+    <div id="panel-sv-trafego" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Serviços — Tráfego Pago</div>
+        <div class="panel-sub">Cards de Google Ads e Meta Ads e o Combo exibidos em servicos.html.</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Cards de Plataformas</div></div>
+        <div id="sv-trafego-cards-wrap"></div>
+        <button class="btn-add" onclick="addServicosTrafegoCard()">+ Adicionar card</button>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Combo Recomendado</div></div>
+        <div class="g2">
+          <div class="field"><label>Label</label><input type="text" id="sv_trafego_combo_label" placeholder="Combo recomendado"></div>
+          <div class="field"><label>Nome</label><input type="text" id="sv_trafego_combo_name" placeholder="Google + Meta — Presença Completa"></div>
+        </div>
+        <div class="g1"><div class="field"><label>Descrição</label><textarea id="sv_trafego_combo_desc" rows="2"></textarea></div></div>
+        <div class="g2">
+          <div class="field"><label>Texto do botão</label><input type="text" id="sv_trafego_combo_btn_text" placeholder="Quero o combo"></div>
+          <div class="field"><label>Link do botão</label><input type="url" id="sv_trafego_combo_btn_href" placeholder="https://wa.me/55?text=..."></div>
+        </div>
+      </div>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveServicosCopy()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Salva os cards e combo de Tráfego da página de Serviços no Supabase.</div>
       </div>
     </div>
 
