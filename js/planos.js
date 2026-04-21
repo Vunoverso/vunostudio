@@ -2,6 +2,24 @@
 
 let planosData = null;
 
+function setText(selector, value) {
+  if (typeof value !== 'string') return;
+  const el = document.querySelector(selector);
+  if (el) el.textContent = value;
+}
+
+function setHtml(selector, value) {
+  if (typeof value !== 'string') return;
+  const el = document.querySelector(selector);
+  if (el) el.innerHTML = value;
+}
+
+function setHref(selector, value) {
+  if (typeof value !== 'string') return;
+  const el = document.querySelector(selector);
+  if (el) el.setAttribute('href', value);
+}
+
 // Carregar dados
 async function loadPlanosData() {
   try {
@@ -16,12 +34,39 @@ async function loadPlanosData() {
 // ==================== RENDERIZAÇÃO ====================
 
 function renderPlans() {
-  renderDigitalPlans();
-  renderVisualProducts();
-  renderTrafficPlans();
-  renderFaq();
+  try { renderDigitalPlans(); } catch(e) { console.error('renderDigitalPlans', e); }
+  try { renderVisualProducts(); } catch(e) { console.error('renderVisualProducts', e); }
+  try { renderTrafficPlans(); } catch(e) { console.error('renderTrafficPlans', e); }
+  try { renderFaq(); } catch(e) { console.error('renderFaq', e); }
+  try { renderCta(); } catch(e) { console.error('renderCta', e); }
   setupEventListeners();
   handleDeepLink();
+  reobserveReveal();
+}
+
+// Re-observa elementos .reveal criados dinamicamente pelo JS
+function reobserveReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+}
+
+function renderCta() {
+  if (!planosData || !planosData.cta) return;
+
+  setText('.cta-section .cta-label', planosData.cta.label);
+  setHtml('.cta-section .cta-title', planosData.cta.titleHtml);
+  setText('.cta-section .cta-sub', planosData.cta.sub);
+  setText('.cta-section .btn-w .cta-btn-text', planosData.cta.whatsappText);
+  setHref('.cta-section .btn-w', planosData.cta.whatsappHref);
+  setText('.cta-section .btn-g', planosData.cta.emailText);
+  setHref('.cta-section .btn-g', planosData.cta.emailHref);
 }
 
 // ─── DIGITAL PLANS ───
@@ -40,9 +85,9 @@ function renderDigitalPlans() {
       <div class="plan-name">${plan.name}</div>
       <div class="plan-tagline">${plan.tagline}</div>
       <div class="price-area">
-        <div class="setup-tag">+ R$ ${plan.setup.toLocaleString('pt-BR')} setup único</div>
+        <div class="setup-tag">+ R$ ${Number(plan.setup).toLocaleString('pt-BR')} setup único</div>
         <div class="price-row">
-          <div class="price-val">R$ ${plan.price.toLocaleString('pt-BR')}</div>
+          <div class="price-val">R$ ${Number(plan.price).toLocaleString('pt-BR')}</div>
           <div class="price-mo">/mês</div>
         </div>
       </div>
@@ -55,7 +100,7 @@ function renderDigitalPlans() {
           </li>
         `).join('')}
       </ul>
-      <a href="https://wa.me/55?text=Quero%20cotação%20do%20plano%20${encodeURIComponent(plan.name)}" class="plan-btn" target="_blank" rel="noopener">Peça sua cotação</a>
+      <a href="${plan.waHref || (planosData.cta && planosData.cta.whatsappHref) || 'https://wa.me/55'}" class="plan-btn" target="_blank" rel="noopener">Peça sua cotação</a>
     </div>
   `).join('');
   
@@ -162,7 +207,7 @@ function renderVisualProducts() {
       <ul class="vprod-list">
         ${prod.items.map(item => `<li>${item}</li>`).join('')}
       </ul>
-      <a href="https://wa.me/55?text=Quero%20cotação%20de%20${encodeURIComponent(prod.name)}" class="vprod-cta" target="_blank" rel="noopener">Peça sua cotação</a>
+      <a href="${prod.waHref || (planosData.cta && planosData.cta.whatsappHref) || 'https://wa.me/55'}" class="vprod-cta" target="_blank" rel="noopener">Peça sua cotação</a>
     </div>
   `).join('');
 }
@@ -182,7 +227,7 @@ function renderTrafficPlans() {
         <div class="tplan-name">${plan.name}</div>
         <div class="tplan-desc">${plan.desc}</div>
         ${plan.save ? `<div class="tplan-save">${plan.save}</div>` : ''}
-        <div class="tplan-price">R$ ${plan.price.toLocaleString('pt-BR')}</div>
+        <div class="tplan-price">R$ ${Number(plan.price).toLocaleString('pt-BR')}</div>
         <div class="tplan-mo">/mês de gestão${plan.combo ? ' total' : ''}</div>
         <div class="tplan-verba">+ verba de anúncio paga por você<br>${plan.verba}</div>
         <div class="tplan-div"></div>
@@ -191,7 +236,7 @@ function renderTrafficPlans() {
             <li ${feat.color ? `style="color:${feat.color}"` : ''}>${feat.text}</li>
           `).join('')}
         </ul>
-        <a href="https://wa.me/55?text=Quero%20cotação%20de%20${encodeURIComponent(plan.name)}" class="tplan-btn" target="_blank" rel="noopener">Peça sua cotação</a>
+        <a href="${plan.waHref || (planosData.cta && planosData.cta.whatsappHref) || 'https://wa.me/55'}" class="tplan-btn" target="_blank" rel="noopener">Peça sua cotação</a>
       </div>
     `).join('');
   }
