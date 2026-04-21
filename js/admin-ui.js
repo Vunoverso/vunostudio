@@ -74,7 +74,7 @@ function triggerImageUpload(btnEl, folder, inputClass) {
   picker.accept = 'image/*';
   picker.onchange = function() {
     if (!picker.files || !picker.files[0]) return;
-    const container = btnEl.closest('.card') || btnEl.closest('.gal-row') || document;
+    const container = btnEl.closest('.gal-row') || btnEl.closest('.card') || document;
     const targetInput = container.querySelector('.' + inputClass);
     uploadImageAdmin(picker.files[0], folder, targetInput, btnEl);
   };
