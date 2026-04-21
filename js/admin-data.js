@@ -529,6 +529,7 @@ function collectServicos() {
     return {
       iconKey: ((card.querySelector('.sv-vprod-iconkey') || {}).value || '').trim(),
       imageLabel: ((card.querySelector('.sv-vprod-imagelabel') || {}).value || '').trim(),
+      imageSrc: ((card.querySelector('.sv-vprod-imagesrc') || {}).value || '').trim(),
       name: ((card.querySelector('.sv-vprod-name') || {}).value || '').trim(),
       desc: ((card.querySelector('.sv-vprod-desc') || {}).value || '').trim(),
       items: Array.from(card.querySelectorAll('.sv-vprod-item')).map(function(item) {

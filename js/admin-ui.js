@@ -572,6 +572,10 @@ function buildServicosVisualProductCard(product, i) {
       fld('Label da imagem', 'sv-vprod-imagelabel', product.imageLabel, 'Fachada ACM') +
     '</div>' +
     '<div class="g1">' +
+      '<div class="field"><label>Foto do produto (URL ou caminho) — deixe vazio para usar ícone SVG</label>' +
+      '<input type="text" class="sv-vprod-imagesrc" value="' + esc(product.imageSrc || '') + '" placeholder="images/servicos/fachada-acm.jpg"></div>' +
+    '</div>' +
+    '<div class="g1">' +
       '<div class="field"><label>Descrição</label><textarea class="sv-vprod-desc" rows="2">' + esc(product.desc || '') + '</textarea></div>' +
     '</div>' +
     '<div class="g2">' +

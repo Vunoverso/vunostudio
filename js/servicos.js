@@ -97,12 +97,15 @@ function renderVisualSection(visual) {
     const items = (product.items || []).map((item) => `<li>${item}</li>`).join('');
     const tags = (product.tags || []).map((tag) => `<span class="prod-tag">${tag}</span>`).join('');
     const svg = VISUAL_SVGS[product.iconKey] || VISUAL_SVGS.impressos;
+    const imgContent = product.imageSrc
+      ? `<img src="${product.imageSrc}" alt="${product.imageLabel || product.name}" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">`
+      : svg;
 
     return `<div class="produto${product.premium ? ' premium' : ''}">
       ${product.premium && product.badge ? `<div class="prod-badge">${product.badge}</div>` : ''}
       <div class="prod-img">
-        ${svg}
-        <span class="prod-img-label">${product.imageLabel}</span>
+        ${imgContent}
+        ${!product.imageSrc ? `<span class="prod-img-label">${product.imageLabel}</span>` : ''}
       </div>
       <div class="prod-body">
         <div class="prod-name">${product.name}</div>
