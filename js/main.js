@@ -125,7 +125,9 @@ function renderGaleria(images) {
     var imgContent = item.src
       ? '<img src="' + item.src + '" alt="' + item.caption + ' — ' + item.client + '" loading="lazy">'
       : (CATEGORY_SVG[item.category] || CATEGORY_SVG.digital);
-    return '<div class="' + cls + '">' +
+    var dataSrc = item.src ? ' data-src="' + item.src + '"' : '';
+    var dataCap = ' data-caption="' + (item.caption || '') + '" data-client="' + (item.client || '') + '"';
+    return '<div class="' + cls + '" role="button" tabindex="0"' + dataSrc + dataCap + '>' +
       '<div class="galeria-img">' + imgContent + '</div>' +
       '<div class="galeria-overlay">' +
         '<div class="galeria-caption">' + item.caption +
@@ -134,6 +136,12 @@ function renderGaleria(images) {
       '</div>' +
     '</div>';
   }).join('');
+
+  // Lightbox
+  grid.querySelectorAll('.galeria-item[data-src]').forEach(function(el) {
+    el.addEventListener('click', function() { openLightbox(el); });
+    el.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') openLightbox(el); });
+  });
 }
 
 async function loadGaleria() {
@@ -147,3 +155,31 @@ async function loadGaleria() {
   }
 }
 loadGaleria();
+
+// ─── LIGHTBOX ─────────────────────────────────────────────────────────────────
+function openLightbox(el) {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  document.getElementById('lightbox-img').src = el.dataset.src;
+  document.getElementById('lightbox-img').alt = el.dataset.caption || '';
+  document.getElementById('lightbox-caption').textContent = el.dataset.caption || '';
+  document.getElementById('lightbox-client').textContent = el.dataset.client || '';
+  lb.setAttribute('aria-hidden', 'false');
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  lb.classList.remove('open');
+  lb.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  setTimeout(function() { document.getElementById('lightbox-img').src = ''; }, 300);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
+  lb.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+  lb.querySelector('.lightbox-backdrop').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+});
