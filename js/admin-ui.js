@@ -4,6 +4,84 @@
  */
 
 // ═══════════════════════════════════════════════════════════════════════════
+// IMAGE UPLOAD — Supabase Storage
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Redimensiona e comprime uma imagem via canvas.
+ * Retorna Promise<Blob> JPEG com max largura `maxWidth` e qualidade `quality`.
+ */
+function compressImage(file, maxWidth, quality) {
+  return new Promise(function(resolve) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const img = new Image();
+      img.onload = function() {
+        const ratio = Math.min(maxWidth / img.width, 1);
+        const w = Math.round(img.width * ratio);
+        const h = Math.round(img.height * ratio);
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        canvas.toBlob(resolve, 'image/jpeg', quality || 0.85);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
+ * Faz upload de uma imagem para o Supabase Storage (bucket: site-images).
+ * Comprime para max 1200px / JPEG 85% antes de enviar.
+ * Após o upload, preenche `targetInput.value` com a URL pública.
+ */
+async function uploadImageAdmin(file, folder, targetInput, btnEl) {
+  if (!file) return;
+  const origText = btnEl ? btnEl.textContent : '';
+  if (btnEl) { btnEl.textContent = '⏳ Comprimindo…'; btnEl.disabled = true; }
+  try {
+    const blob = await compressImage(file, 1200, 0.85);
+    const safeName = file.name.replace(/\.[^.]+$/, '').replace(/[^a-z0-9]/gi, '-').toLowerCase();
+    const path = folder + '/' + Date.now() + '-' + safeName + '.jpg';
+    if (btnEl) btnEl.textContent = '⏳ Enviando…';
+    const client = window.supabaseClient;
+    if (!client) throw new Error('Supabase não inicializado');
+    const { error } = await client.storage.from('site-images').upload(path, blob, {
+      contentType: 'image/jpeg',
+      upsert: true
+    });
+    if (error) throw error;
+    const { data: urlData } = client.storage.from('site-images').getPublicUrl(path);
+    if (targetInput) targetInput.value = urlData.publicUrl;
+    toast('✅ Imagem enviada! Clique em "Salvar no Banco" para confirmar.');
+  } catch (err) {
+    console.error(err);
+    toast('❌ Erro no upload: ' + (err.message || err));
+  } finally {
+    if (btnEl) { btnEl.textContent = origText; btnEl.disabled = false; }
+  }
+}
+
+/**
+ * Abre o seletor de arquivo e dispara o upload.
+ * folder: pasta dentro do bucket (ex: 'servicos', 'galeria')
+ * inputClass: classe CSS do <input type="text"> de destino (dentro do .card ou .gal-row)
+ */
+function triggerImageUpload(btnEl, folder, inputClass) {
+  const picker = document.createElement('input');
+  picker.type = 'file';
+  picker.accept = 'image/*';
+  picker.onchange = function() {
+    if (!picker.files || !picker.files[0]) return;
+    const container = btnEl.closest('.card') || btnEl.closest('.gal-row') || document;
+    const targetInput = container.querySelector('.' + inputClass);
+    uploadImageAdmin(picker.files[0], folder, targetInput, btnEl);
+  };
+  picker.click();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -349,8 +427,11 @@ function buildGalRow(item) {
   d.className = 'gal-row';
   d.dataset.featured = item.featured ? '1' : '0';
   d.innerHTML =
-    '<div class="field"><label>Foto (caminho)</label>' +
+    '<div class="field"><label>Foto</label>' +
+      '<div class="upload-row">' +
       '<input type="text" class="gal-src" value="' + esc(item.src || '') + '" placeholder="images/galeria/nome.jpg">' +
+      '<button type="button" class="btn-upload" onclick="triggerImageUpload(this, \'galeria\', \'gal-src\')">\uD83D\uDCE4 Upload</button>' +
+      '</div>' +
     '</div>' +
     '<div class="field"><label>Legenda</label>' +
       '<input type="text" class="gal-caption" value="' + esc(item.caption) + '" placeholder="Fachada ACM completa">' +
@@ -573,7 +654,10 @@ function buildServicosVisualProductCard(product, i) {
     '</div>' +
     '<div class="g1">' +
       '<div class="field"><label>Foto do produto (URL ou caminho) — deixe vazio para usar ícone SVG</label>' +
-      '<input type="text" class="sv-vprod-imagesrc" value="' + esc(product.imageSrc || '') + '" placeholder="images/servicos/fachada-acm.jpg"></div>' +
+      '<div class="upload-row">' +
+      '<input type="text" class="sv-vprod-imagesrc" value="' + esc(product.imageSrc || '') + '" placeholder="images/servicos/fachada-acm.jpg">' +
+      '<button type="button" class="btn-upload" onclick="triggerImageUpload(this, \'servicos\', \'sv-vprod-imagesrc\')">\uD83D\uDCE4 Upload</button>' +
+      '</div></div>' +
     '</div>' +
     '<div class="g1">' +
       '<div class="field"><label>Descrição</label><textarea class="sv-vprod-desc" rows="2">' + esc(product.desc || '') + '</textarea></div>' +

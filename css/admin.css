@@ -427,6 +427,27 @@ label {
   width: 100%;
 }
 .btn-add:hover { opacity: 1; border-color: var(--green); color: var(--green); }
+.upload-row {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+.upload-row input[type="text"] { flex: 1; min-width: 0; }
+.btn-upload {
+  flex-shrink: 0;
+  background: rgba(29,158,117,.12);
+  border: 1px solid rgba(29,158,117,.35);
+  color: var(--green);
+  cursor: pointer;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .42rem .85rem;
+  border-radius: 7px;
+  white-space: nowrap;
+  transition: all .14s;
+}
+.btn-upload:hover { background: rgba(29,158,117,.22); border-color: var(--green); }
+.btn-upload:disabled { opacity: .5; cursor: wait; }
 .btn-remove {
   background: none;
   border: none;
