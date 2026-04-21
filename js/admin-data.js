@@ -358,6 +358,7 @@ function loadHeroData() {
   loadFromSupabase('index', 'data/index.json', 'statusHero', function(d) {
     _index = d;
     populateHero(d);
+    populateHomeCta((d && d.cta) || {});
     // Se Supabase não tiver projetos, usa lista padrão
     var projs = (d && d.projects && d.projects.length) ? d.projects : _DEFAULT_PROJECTS;
     populateProjects(projs);
@@ -445,6 +446,22 @@ async function saveHero() {
   toast('✅ Hero salvo! Recarregue a homepage para ver as alterações.');
 }
 async function saveHeroSlides() { await saveHero(); }
+
+/**
+ * Salvar CTA final da home
+ */
+async function saveHomeCta() {
+  const data = JSON.parse(JSON.stringify(_index || {}));
+  data.cta = {
+    title:      gv('idx_cta_title'),
+    sub:        gv('idx_cta_sub'),
+    buttonText: gv('idx_cta_btn_text'),
+    buttonHref: gv('idx_cta_btn_href')
+  };
+  _index = data;
+  await saveToSupabase('index', data);
+  toast('✅ CTA da homepage salvo! Recarregue a página para ver.');
+}
 
 /**
  * Coletar dados do formulário: Serviços (copy + processo)

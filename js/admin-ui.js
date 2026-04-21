@@ -454,6 +454,18 @@ function populateHeroSlides(slides) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// HOME CTA FINAL
+// ═══════════════════════════════════════════════════════════════════════════
+
+function populateHomeCta(cta) {
+  if (!cta) return;
+  sv('idx_cta_title',    cta.title      || '');
+  sv('idx_cta_sub',      cta.sub        || '');
+  sv('idx_cta_btn_text', cta.buttonText || '');
+  sv('idx_cta_btn_href', cta.buttonHref || '');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // HERO NUMBERS
 // ═══════════════════════════════════════════════════════════════════════════
 

@@ -59,6 +59,11 @@
         <div class="nav-dot"></div>
         Hero — Conteúdo
       </div>
+      <div class="nav-item" onclick="showPanel('home-cta', this)">
+        <span class="nav-icon">📣</span>
+        <div class="nav-dot"></div>
+        CTA Final
+      </div>
       <div class="nav-section" style="margin-top:.5rem">Página Serviços</div>
       <div class="nav-item" onclick="showPanel('servicos-copy', this)">
         <span class="nav-icon">📝</span>
@@ -243,6 +248,30 @@
       <div class="actions-bar">
         <button class="btn-download" onclick="saveHero()">💾 Salvar no Banco</button>
         <div class="actions-hint">Salvo no Supabase e refletido na homepage automaticamente.</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ HOME — CTA FINAL ══════════════════ -->
+    <div id="panel-home-cta" class="panel">
+      <div class="panel-top">
+        <div class="panel-title">Home — CTA Final</div>
+        <div class="panel-sub">Bloco "Pronto para ser encontrado?" no rodapé da homepage (seção #contato).</div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Textos</div></div>
+        <div class="g1"><div class="field"><label>Título</label><input type="text" id="idx_cta_title" placeholder="Pronto para ser encontrado?"></div></div>
+        <div class="g1"><div class="field"><label>Subtítulo</label><textarea id="idx_cta_sub" rows="2" placeholder="Diagnóstico gratuito. Sem compromisso."></textarea></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div class="card-label">Botão</div></div>
+        <div class="g2">
+          <div class="field"><label>Texto do botão</label><input type="text" id="idx_cta_btn_text" placeholder="Falar no WhatsApp agora"></div>
+          <div class="field"><label>Link do botão</label><input type="url" id="idx_cta_btn_href" placeholder="https://wa.me/55?text=..."></div>
+        </div>
+      </div>
+      <div class="actions-bar">
+        <button class="btn-download" onclick="saveHomeCta()">💾 Salvar no Banco</button>
+        <div class="actions-hint">Salva o bloco CTA final da homepage no Supabase.</div>
       </div>
     </div>
 
